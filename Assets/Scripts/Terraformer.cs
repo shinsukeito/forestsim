@@ -23,7 +23,6 @@ public class Terraformer : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		map = new Acre[mapWidth, mapHeight];
 		BigBang();
 		Paint();
 	}
@@ -40,6 +39,8 @@ public class Terraformer : MonoBehaviour
 
 	void BigBang()
 	{
+		map = new Acre[mapWidth, mapHeight];
+		terrainTilemap.ClearAllTiles();
 		terrainTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
 
 		string seed = Time.time.ToString();
