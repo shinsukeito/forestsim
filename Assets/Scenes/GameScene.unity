@@ -245,6 +245,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   scrollSpeed: 25
+  maxZoom: 25
+  zoomSpeed: 2
 --- !u!1 &211119471
 GameObject:
   m_ObjectHideFlags: 0

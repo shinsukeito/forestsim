@@ -8,6 +8,10 @@ public class Watcher : MonoBehaviour
 	[Range(0, 50)]
 
 	public float scrollSpeed;
+	[Range(0, 50)]
+	public float maxZoom = 10;
+	[Range(0, 10)]
+	public int zoomSpeed = 1;
 
 	private Vector2 lastDragPosition;
 	private Vector2 speed;
@@ -16,7 +20,6 @@ public class Watcher : MonoBehaviour
 	private float zoom = 3;
 	private float trueZoom = 3;
 	private float prevZoom = 3;
-	private bool canZoom;
 	private float zoomTime = 1;
 	private float finalZoomKeyTime = 0;
 
@@ -72,14 +75,14 @@ public class Watcher : MonoBehaviour
 		if (Input.GetAxis("Mouse ScrollWheel") > 0 && zoom > 3)
 		{
 			prevZoom = trueZoom;
-			zoom -= 0.5f;
+			zoom -= zoomSpeed;
 			zoomTime = 0;
 		}
 
-		if (Input.GetAxis("Mouse ScrollWheel") < 0 && zoom < 10)
+		if (Input.GetAxis("Mouse ScrollWheel") < 0 && zoom < maxZoom)
 		{
 			prevZoom = trueZoom;
-			zoom += 0.5f;
+			zoom += zoomSpeed;
 			zoomTime = 0;
 		}
 
