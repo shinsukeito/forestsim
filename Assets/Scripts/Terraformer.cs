@@ -15,6 +15,8 @@ public class Terraformer : MonoBehaviour
 	[Range(0, 100)]
 	public int fieldSpawnPercent;
 	public int oceanSize = 0;
+	public int riverSpawnSize = 3;
+	public int riverCount = 3;
 
 	public TileBase fieldTile;
 	public TileBase barrenTile;
@@ -74,6 +76,9 @@ public class Terraformer : MonoBehaviour
 
 		for (int i = 0; i < 2; i++)
 			Smooth();
+
+		for (int i = 0; i < riverCount; i++)
+			Erode();
 	}
 
 	void Smooth()
@@ -95,6 +100,58 @@ public class Terraformer : MonoBehaviour
 			{
 				map[x, y].fieldType = newFieldTypes[x, y];
 			}
+		}
+	}
+
+	void Erode()
+	{
+		Vector2Int river = new Vector2Int(
+			Random.Range(mapWidth / 2 - riverSpawnSize, mapWidth / 2 + riverSpawnSize),
+			Random.Range(mapHeight / 2 - riverSpawnSize, mapHeight / 2 + riverSpawnSize)
+		);
+
+		map[river.x, river.y].fieldType = FieldType.Water;
+		int closestX = river.x - mapWidth / 2;
+		int closestY = river.y - mapHeight / 2;
+		Vector2Int closestBorder = new Vector2Int(0, 1);
+
+		if (Mathf.Abs(closestX) < Mathf.Abs(closestY))
+			closestBorder = closestX < 0 ? closestBorder = new Vector2Int(-1, 0) : closestBorder = new Vector2Int(1, 0);
+		else
+			closestBorder = closestY < 0 ? closestBorder = new Vector2Int(0, -1) : closestBorder = new Vector2Int(0, 1);
+
+
+		Vector2Int previousRiver = river;
+		while (true)
+		{
+			if (Random.Range(0, 1f) <= 0.5f)
+			{
+				river += closestBorder;
+			}
+			else
+			{
+				switch (Random.Range(0, 4))
+				{
+					case 0:
+						river.x++;
+						break;
+					case 1:
+						river.x--;
+						break;
+					case 2:
+						river.y++;
+						break;
+					case 3:
+						river.y--;
+						break;
+				}
+			}
+
+			if (previousRiver == river) continue;
+			if (river.x < 0 || river.x > mapWidth - 1 || river.y < 0 || river.y > mapHeight - 1) break;
+
+			map[river.x, river.y].fieldType = FieldType.Water;
+			previousRiver = river;
 		}
 	}
 

@@ -566,8 +566,10 @@ MonoBehaviour:
   mapWidth: 25
   mapHeight: 15
   terrainTilemap: {fileID: 584951631}
-  fieldSpawnPercent: 0
+  fieldSpawnPercent: 80
   oceanSize: 1
+  riverSpawnSize: 3
+  riverCount: 2
   fieldTile: {fileID: 11400000, guid: 25127c4408168f74e9faf11c2ef619e1, type: 2}
   barrenTile: {fileID: 11400000, guid: 37051be443d34c3479eacf9ac48ce2eb, type: 2}
   waterTile: {fileID: 11400000, guid: 02b16b5f2fa39f7468f492a5d3c08026, type: 2}
