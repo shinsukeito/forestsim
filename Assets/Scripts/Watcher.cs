@@ -5,6 +5,9 @@ using UnityEngine;
 public class Watcher : MonoBehaviour
 {
 	public AnimationCurve zoomCurve;
+	[Range(0, 50)]
+
+	public float scrollSpeed;
 
 	private Vector2 lastDragPosition;
 	private Vector2 speed;
@@ -44,10 +47,8 @@ public class Watcher : MonoBehaviour
 			lastDragPosition = screenMousePosition;
 		if (Input.GetMouseButton(1))
 		{
-			Vector2 nextSpeed = speed + (lastDragPosition - screenMousePosition) * 10f;
-
-			if (nextSpeed.magnitude < 10)
-				speed = nextSpeed;
+			Vector2 nextSpeed = speed + (lastDragPosition - screenMousePosition) * scrollSpeed;
+			speed = nextSpeed;
 
 			lastDragPosition = screenMousePosition;
 		}

@@ -226,14 +226,14 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 3.5015957
-      outSlope: 3.5015957
+      inSlope: 16.906013
+      outSlope: 16.906013
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.10352423
+      outWeight: 0.121145375
     - serializedVersion: 3
-      time: 1
+      time: 0.2
       value: 1
       inSlope: 0
       outSlope: 0
@@ -244,6 +244,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  scrollSpeed: 25
 --- !u!1 &211119471
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +564,7 @@ MonoBehaviour:
   mapWidth: 25
   mapHeight: 15
   terrainTilemap: {fileID: 584951631}
-  randomFillPercent: 35
+  fieldSpawnPercent: 0
   oceanSize: 1
   fieldTile: {fileID: 11400000, guid: 25127c4408168f74e9faf11c2ef619e1, type: 2}
   barrenTile: {fileID: 11400000, guid: 37051be443d34c3479eacf9ac48ce2eb, type: 2}
