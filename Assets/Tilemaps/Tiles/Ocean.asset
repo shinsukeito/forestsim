@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ocean
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 7482667652216324306, guid: 2bc823b687b7708499da9ba4c84c1d20, type: 3}
-  m_Color: {r: 0.40503737, g: 0.7193139, b: 0.7735849, a: 1}
+  m_Color: {r: 0.58526164, g: 0.8579414, b: 0.9056604, a: 1}
   m_Transform:
     e00: 1
     e01: 0
