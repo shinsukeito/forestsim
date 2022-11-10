@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rainforest
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 90b2ceac53b3bac4a816eb2b9b89c3fe, type: 3}
-  m_Color: {r: 0.51918924, g: 0.7075472, b: 0.4305358, a: 1}
+  m_Color: {r: 0.21168563, g: 0.6698113, b: 0.2678994, a: 1}
   m_Transform:
     e00: 1
     e01: 0
