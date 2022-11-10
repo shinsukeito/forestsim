@@ -86,6 +86,11 @@ public class Terraformer : MonoBehaviour
 
 		for (int i = 0; i < riverCount; i++)
 			Erode();
+
+		PlantWorldTree(mapWidth / 2, mapHeight / 2);
+		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2);
+		PlantWorldTree(mapWidth / 2, mapHeight / 2 - 1);
+		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2 - 1);
 	}
 
 	void Smooth()
@@ -161,6 +166,12 @@ public class Terraformer : MonoBehaviour
 			map[river.x, river.y].fieldType = FieldType.River;
 			previousRiver = river;
 		}
+	}
+
+	void PlantWorldTree(int x, int y)
+	{
+		map[x, y].fieldType = FieldType.Field;
+		map[x, y].forestType = ForestType.WorldTree;
 	}
 
 	FieldType DetermineFieldType(int x, int y)

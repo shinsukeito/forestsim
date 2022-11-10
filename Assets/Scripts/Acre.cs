@@ -12,6 +12,7 @@ public enum FieldType
 public enum ForestType
 {
 	None,
+	WorldTree,
 	Boreal,
 	Bushland,
 	Mangrove,
