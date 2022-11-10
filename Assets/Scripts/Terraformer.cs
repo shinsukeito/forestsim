@@ -10,6 +10,7 @@ public class Terraformer : MonoBehaviour
 	[Range(0, 50)]
 	public int mapHeight = 15;
 	public Tilemap terrainTilemap;
+	public Tilemap forestTilemap;
 	public Acre[,] map;
 
 	[Range(0, 100)]
@@ -22,6 +23,11 @@ public class Terraformer : MonoBehaviour
 	public TileBase fieldTile;
 	public TileBase oceanTile;
 	public TileBase riverTile;
+
+	public TileBase borealTile;
+	public TileBase bushlandTile;
+	public TileBase mangroveTile;
+	public TileBase rainforestTile;
 
 	// Start is called before the first frame update
 	void Start()
@@ -211,6 +217,22 @@ public class Terraformer : MonoBehaviour
 						break;
 					case FieldType.River:
 						terrainTilemap.SetTile(new Vector3Int(x, y, 0), riverTile);
+						break;
+				}
+
+				switch (map[x, y].forestType)
+				{
+					case ForestType.Boreal:
+						forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
+						break;
+					case ForestType.Bushland:
+						forestTilemap.SetTile(new Vector3Int(x, y, 0), bushlandTile);
+						break;
+					case ForestType.Mangrove:
+						forestTilemap.SetTile(new Vector3Int(x, y, 0), mangroveTile);
+						break;
+					case ForestType.Rainforest:
+						forestTilemap.SetTile(new Vector3Int(x, y, 0), rainforestTile);
 						break;
 				}
 			}

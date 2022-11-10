@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 211119474}
   - component: {fileID: 211119473}
   m_Layer: 0
-  m_Name: TreesTilemap
+  m_Name: ForestTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -320,7 +320,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -339,15 +339,45 @@ Tilemap:
   m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
+  m_TileAssetArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileMatrixArray:
+  - m_RefCount: 0
+    m_Data:
+      e00: 1e-45
+      e01: 0
+      e02: 8.081546e-39
+      e03: 8.081546e-39
+      e10: 0
+      e11: 0
+      e12: 4.75e-43
+      e13: 4.75e-43
+      e20: 1.7865659e-38
+      e21: 1e-45
+      e22: -5.0874065e-29
+      e23: -8.666956e+9
+      e30: 4.5905e-41
+      e31: 0
+      e32: 4.75e-43
+      e33: 4.78e-43
+  m_TileColorArray:
+  - m_RefCount: 0
+    m_Data: {r: 4.267e-41, g: 4.267e-41, b: 4.267e-41, a: 4.267e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Origin: {x: -10, y: -5, z: 0}
+  m_Size: {x: 17, y: 10, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -485,7 +515,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 715526311}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &715526308
 GameObject:
@@ -528,9 +558,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 584951633}
-  - {fileID: 211119472}
   - {fileID: 1305271599}
+  - {fileID: 211119472}
+  - {fileID: 584951633}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -566,6 +596,7 @@ MonoBehaviour:
   mapWidth: 25
   mapHeight: 15
   terrainTilemap: {fileID: 584951631}
+  forestTilemap: {fileID: 211119474}
   fieldSpawnPercent: 80
   oceanSize: 1
   riverSpawnSize: 3
@@ -574,6 +605,10 @@ MonoBehaviour:
   fieldTile: {fileID: 11400000, guid: 25127c4408168f74e9faf11c2ef619e1, type: 2}
   oceanTile: {fileID: 11400000, guid: 02b16b5f2fa39f7468f492a5d3c08026, type: 2}
   riverTile: {fileID: 11400000, guid: 78b42670231714c4b8dde2cf01ba59ad, type: 2}
+  borealTile: {fileID: 11400000, guid: 86e6e97cec0b2564fb87a475fc977355, type: 2}
+  bushlandTile: {fileID: 0}
+  mangroveTile: {fileID: 0}
+  rainforestTile: {fileID: 0}
 --- !u!4 &956559958
 Transform:
   m_ObjectHideFlags: 0
@@ -601,7 +636,7 @@ GameObject:
   - component: {fileID: 1305271601}
   - component: {fileID: 1305271600}
   m_Layer: 0
-  m_Name: WeatherTilemap
+  m_Name: DisasterTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -620,7 +655,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 715526311}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1305271600
 TilemapRenderer:
@@ -662,7 +697,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
