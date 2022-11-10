@@ -18,9 +18,10 @@ public class Terraformer : MonoBehaviour
 	public int riverSpawnSize = 3;
 	public int riverCount = 3;
 
-	public TileBase fieldTile;
 	public TileBase barrenTile;
-	public TileBase waterTile;
+	public TileBase fieldTile;
+	public TileBase oceanTile;
+	public TileBase riverTile;
 
 	// Start is called before the first frame update
 	void Start()
@@ -56,7 +57,7 @@ public class Terraformer : MonoBehaviour
 				Acre newAcre = new Acre();
 				if (x <= oceanSize - 1 || x >= mapWidth - oceanSize || y <= oceanSize - 1 || y >= mapHeight - oceanSize)
 				{
-					newAcre.fieldType = FieldType.Water;
+					newAcre.fieldType = FieldType.Ocean;
 				}
 				else
 				{
@@ -110,15 +111,15 @@ public class Terraformer : MonoBehaviour
 			Random.Range(mapHeight / 2 - riverSpawnSize, mapHeight / 2 + riverSpawnSize)
 		);
 
-		map[river.x, river.y].fieldType = FieldType.Water;
+		map[river.x, river.y].fieldType = FieldType.River;
 		int closestX = river.x - mapWidth / 2;
 		int closestY = river.y - mapHeight / 2;
 		Vector2Int closestBorder = new Vector2Int(0, 1);
 
 		if (Mathf.Abs(closestX) < Mathf.Abs(closestY))
-			closestBorder = closestX < 0 ? closestBorder = new Vector2Int(-1, 0) : closestBorder = new Vector2Int(1, 0);
+			closestBorder = new Vector2Int(closestX < 0 ? -1 : 1, 0);
 		else
-			closestBorder = closestY < 0 ? closestBorder = new Vector2Int(0, -1) : closestBorder = new Vector2Int(0, 1);
+			closestBorder = new Vector2Int(0, closestY < 0 ? -1 : 1);
 
 
 		Vector2Int previousRiver = river;
@@ -148,9 +149,10 @@ public class Terraformer : MonoBehaviour
 			}
 
 			if (previousRiver == river) continue;
+			if (map[river.x, river.y].fieldType == FieldType.Ocean) break;
 			if (river.x < 0 || river.x > mapWidth - 1 || river.y < 0 || river.y > mapHeight - 1) break;
 
-			map[river.x, river.y].fieldType = FieldType.Water;
+			map[river.x, river.y].fieldType = FieldType.River;
 			previousRiver = river;
 		}
 	}
@@ -169,13 +171,13 @@ public class Terraformer : MonoBehaviour
 
 				switch (map[nx, ny].fieldType)
 				{
-					case FieldType.Field:
-						fieldCount++;
-						break;
 					case FieldType.Barren:
 						barrenCount++;
 						break;
-					case FieldType.Water:
+					case FieldType.Field:
+						fieldCount++;
+						break;
+					case FieldType.Ocean:
 						waterCount++;
 						break;
 				}
@@ -183,9 +185,9 @@ public class Terraformer : MonoBehaviour
 		}
 
 		FieldType thisFieldType = map[x, y].fieldType;
-		if (thisFieldType == FieldType.Water) return FieldType.Water;
-		if (waterCount > 3) return FieldType.Water;
-		else if (waterCount > 2 && thisFieldType == FieldType.Field) return FieldType.Water;
+		if (thisFieldType == FieldType.Ocean) return FieldType.Ocean;
+		if (waterCount > 3) return FieldType.Ocean;
+		else if (waterCount > 2 && thisFieldType == FieldType.Field) return FieldType.Ocean;
 		else if (fieldCount > 6) return FieldType.Field;
 		else return thisFieldType;
 	}
@@ -198,14 +200,17 @@ public class Terraformer : MonoBehaviour
 			{
 				switch (map[x, y].fieldType)
 				{
-					case FieldType.Field:
-						terrainTilemap.SetTile(new Vector3Int(x, y, 0), fieldTile);
-						break;
 					case FieldType.Barren:
 						terrainTilemap.SetTile(new Vector3Int(x, y, 0), barrenTile);
 						break;
-					case FieldType.Water:
-						terrainTilemap.SetTile(new Vector3Int(x, y, 0), waterTile);
+					case FieldType.Field:
+						terrainTilemap.SetTile(new Vector3Int(x, y, 0), fieldTile);
+						break;
+					case FieldType.Ocean:
+						terrainTilemap.SetTile(new Vector3Int(x, y, 0), oceanTile);
+						break;
+					case FieldType.River:
+						terrainTilemap.SetTile(new Vector3Int(x, y, 0), riverTile);
 						break;
 				}
 			}

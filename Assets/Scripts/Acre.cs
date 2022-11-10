@@ -2,14 +2,15 @@ using UnityEngine.Tilemaps;
 
 public enum FieldType
 {
-	Field,
 	Barren,
-	Water
+	Field,
+	Ocean,
+	River
 }
 
 public class Acre
 {
-	public FieldType fieldType = FieldType.Water;
+	public FieldType fieldType = FieldType.Ocean;
 
 	// Start is called before the first frame update
 	void Start()
