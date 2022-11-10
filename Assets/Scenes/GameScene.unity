@@ -690,9 +690,9 @@ MonoBehaviour:
   oceanTile: {fileID: 11400000, guid: 02b16b5f2fa39f7468f492a5d3c08026, type: 2}
   riverTile: {fileID: 11400000, guid: 78b42670231714c4b8dde2cf01ba59ad, type: 2}
   borealTile: {fileID: 11400000, guid: 86e6e97cec0b2564fb87a475fc977355, type: 2}
-  bushlandTile: {fileID: 0}
-  mangroveTile: {fileID: 0}
-  rainforestTile: {fileID: 0}
+  bushlandTile: {fileID: 11400000, guid: 4e1048442db1e52468a5f4d0c20465dd, type: 2}
+  mangroveTile: {fileID: 11400000, guid: 163de4e31652c614e8e9c2ae3ac67652, type: 2}
+  rainforestTile: {fileID: 11400000, guid: f1d0ad3a425379248920588ab76b26cc, type: 2}
 --- !u!4 &956559958
 Transform:
   m_ObjectHideFlags: 0

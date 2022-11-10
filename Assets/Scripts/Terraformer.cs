@@ -33,24 +33,53 @@ public class Terraformer : MonoBehaviour
 	void Start()
 	{
 		BigBang();
-		Paint();
+		PaintWorld();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetKeyDown(KeyCode.R))
 		{
 			BigBang();
-			Paint();
+			PaintWorld();
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			Vector3Int tilePosition = forestTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+			print(tilePosition);
+			PlantForest(tilePosition.x, tilePosition.y, ForestType.Boreal);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			Vector3Int tilePosition = forestTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+			print(tilePosition);
+			PlantForest(tilePosition.x, tilePosition.y, ForestType.Bushland);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			Vector3Int tilePosition = forestTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+			print(tilePosition);
+			PlantForest(tilePosition.x, tilePosition.y, ForestType.Mangrove);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			Vector3Int tilePosition = forestTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+			print(tilePosition);
+			PlantForest(tilePosition.x, tilePosition.y, ForestType.Rainforest);
 		}
 	}
 
 	void BigBang()
 	{
 		map = new Acre[mapWidth, mapHeight];
+
 		terrainTilemap.ClearAllTiles();
 		terrainTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
+
+		forestTilemap.ClearAllTiles();
+		forestTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
 
 		string seed = Time.time.ToString();
 		System.Random randomValue = new System.Random(seed.GetHashCode());
@@ -209,44 +238,79 @@ public class Terraformer : MonoBehaviour
 		else return thisFieldType;
 	}
 
-	void Paint()
+	void PaintWorld()
 	{
 		for (int x = 0; x < mapWidth; x++)
 		{
 			for (int y = 0; y < mapHeight; y++)
 			{
-				switch (map[x, y].fieldType)
-				{
-					case FieldType.Barren:
-						terrainTilemap.SetTile(new Vector3Int(x, y, 0), barrenTile);
-						break;
-					case FieldType.Field:
-						terrainTilemap.SetTile(new Vector3Int(x, y, 0), fieldTile);
-						break;
-					case FieldType.Ocean:
-						terrainTilemap.SetTile(new Vector3Int(x, y, 0), oceanTile);
-						break;
-					case FieldType.River:
-						terrainTilemap.SetTile(new Vector3Int(x, y, 0), riverTile);
-						break;
-				}
-
-				switch (map[x, y].forestType)
-				{
-					case ForestType.Boreal:
-						forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
-						break;
-					case ForestType.Bushland:
-						forestTilemap.SetTile(new Vector3Int(x, y, 0), bushlandTile);
-						break;
-					case ForestType.Mangrove:
-						forestTilemap.SetTile(new Vector3Int(x, y, 0), mangroveTile);
-						break;
-					case ForestType.Rainforest:
-						forestTilemap.SetTile(new Vector3Int(x, y, 0), rainforestTile);
-						break;
-				}
+				PaintField(x, y);
+				PaintForest(x, y);
 			}
+		}
+	}
+
+	void PaintField(int x, int y)
+	{
+		switch (map[x, y].fieldType)
+		{
+			case FieldType.Barren:
+				terrainTilemap.SetTile(new Vector3Int(x, y, 0), barrenTile);
+				break;
+			case FieldType.Field:
+				terrainTilemap.SetTile(new Vector3Int(x, y, 0), fieldTile);
+				break;
+			case FieldType.Ocean:
+				terrainTilemap.SetTile(new Vector3Int(x, y, 0), oceanTile);
+				break;
+			case FieldType.River:
+				terrainTilemap.SetTile(new Vector3Int(x, y, 0), riverTile);
+				break;
+		}
+	}
+
+	void PaintForest(int x, int y)
+	{
+		switch (map[x, y].forestType)
+		{
+			case ForestType.Boreal:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
+				break;
+			case ForestType.Bushland:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), bushlandTile);
+				break;
+			case ForestType.Mangrove:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), mangroveTile);
+				break;
+			case ForestType.Rainforest:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), rainforestTile);
+				break;
+		}
+	}
+
+	void PlantForest(int x, int y, ForestType forestType)
+	{
+		if (map[x, y].forestType == ForestType.WorldTree) return;
+
+		map[x, y].forestType = forestType;
+		switch (map[x, y].forestType)
+		{
+			case ForestType.Boreal:
+				if (map[x, y].fieldType == FieldType.Field)
+					forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
+				break;
+			case ForestType.Bushland:
+				if (map[x, y].fieldType == FieldType.Field || map[x, y].fieldType == FieldType.Barren)
+					forestTilemap.SetTile(new Vector3Int(x, y, 0), bushlandTile);
+				break;
+			case ForestType.Mangrove:
+				if (map[x, y].fieldType == FieldType.Ocean)
+					forestTilemap.SetTile(new Vector3Int(x, y, 0), mangroveTile);
+				break;
+			case ForestType.Rainforest:
+				if (map[x, y].fieldType == FieldType.Field)
+					forestTilemap.SetTile(new Vector3Int(x, y, 0), rainforestTile);
+				break;
 		}
 	}
 
