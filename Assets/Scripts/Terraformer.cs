@@ -10,6 +10,8 @@ public class Terraformer : MonoBehaviour
 	[Range(0, 50)]
 	public int mapHeight = 15;
 	public Tilemap terrainTilemap;
+	public Tilemap forestTilemap;
+	public Tilemap forestHoverTilemap;
 	public Acre[,] map;
 
 	[Range(0, 100)]
@@ -23,28 +25,99 @@ public class Terraformer : MonoBehaviour
 	public TileBase oceanTile;
 	public TileBase riverTile;
 
+	public TileBase borealTile;
+	public TileBase bushlandTile;
+	public TileBase mangroveTile;
+	public TileBase rainforestTile;
+
+	private Vector3Int hoveredTile;
+	private ForestType selectedForestType = ForestType.None;
+
 	// Start is called before the first frame update
 	void Start()
 	{
 		BigBang();
-		Paint();
+		PaintWorld();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetKeyDown(KeyCode.R))
 		{
 			BigBang();
-			Paint();
+			PaintWorld();
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			SetSelectedForest(ForestType.Boreal);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			SetSelectedForest(ForestType.Bushland);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			SetSelectedForest(ForestType.Mangrove);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			SetSelectedForest(ForestType.Rainforest);
+		}
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			SetSelectedForest(ForestType.None);
+		}
+
+		if (selectedForestType != ForestType.None)
+		{
+			Vector3Int tilePosition = forestHoverTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+			if (tilePosition != hoveredTile)
+			{
+				forestHoverTilemap.SetTile(hoveredTile, null);
+				hoveredTile = tilePosition;
+
+				if (Plantable(hoveredTile.x, hoveredTile.y, selectedForestType))
+				{
+					switch (selectedForestType)
+					{
+						case ForestType.Boreal:
+							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), borealTile);
+							break;
+						case ForestType.Bushland:
+							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), bushlandTile);
+							break;
+						case ForestType.Mangrove:
+							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), mangroveTile);
+							break;
+						case ForestType.Rainforest:
+							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), rainforestTile);
+							break;
+					}
+				}
+			}
+
+			if (Input.GetMouseButtonDown(0))
+			{
+				PlantForest(tilePosition.x, tilePosition.y, selectedForestType);
+				selectedForestType = ForestType.None;
+			}
 		}
 	}
 
 	void BigBang()
 	{
 		map = new Acre[mapWidth, mapHeight];
+
 		terrainTilemap.ClearAllTiles();
 		terrainTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
+
+		forestTilemap.ClearAllTiles();
+		forestTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
+
+		forestHoverTilemap.ClearAllTiles();
+		forestHoverTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
 
 		string seed = Time.time.ToString();
 		System.Random randomValue = new System.Random(seed.GetHashCode());
@@ -80,6 +153,11 @@ public class Terraformer : MonoBehaviour
 
 		for (int i = 0; i < riverCount; i++)
 			Erode();
+
+		PlantWorldTree(mapWidth / 2, mapHeight / 2);
+		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2);
+		PlantWorldTree(mapWidth / 2, mapHeight / 2 - 1);
+		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2 - 1);
 	}
 
 	void Smooth()
@@ -157,6 +235,12 @@ public class Terraformer : MonoBehaviour
 		}
 	}
 
+	void PlantWorldTree(int x, int y)
+	{
+		map[x, y].fieldType = FieldType.Field;
+		map[x, y].forestType = ForestType.WorldTree;
+	}
+
 	FieldType DetermineFieldType(int x, int y)
 	{
 		int fieldCount = 0;
@@ -192,29 +276,133 @@ public class Terraformer : MonoBehaviour
 		else return thisFieldType;
 	}
 
-	void Paint()
+	void PaintWorld()
 	{
 		for (int x = 0; x < mapWidth; x++)
 		{
 			for (int y = 0; y < mapHeight; y++)
 			{
-				switch (map[x, y].fieldType)
-				{
-					case FieldType.Barren:
-						terrainTilemap.SetTile(new Vector3Int(x, y, 0), barrenTile);
-						break;
-					case FieldType.Field:
-						terrainTilemap.SetTile(new Vector3Int(x, y, 0), fieldTile);
-						break;
-					case FieldType.Ocean:
-						terrainTilemap.SetTile(new Vector3Int(x, y, 0), oceanTile);
-						break;
-					case FieldType.River:
-						terrainTilemap.SetTile(new Vector3Int(x, y, 0), riverTile);
-						break;
-				}
+				PaintField(x, y);
+				PaintForest(x, y);
 			}
 		}
+	}
+
+	void PaintField(int x, int y)
+	{
+		switch (map[x, y].fieldType)
+		{
+			case FieldType.Barren:
+				terrainTilemap.SetTile(new Vector3Int(x, y, 0), barrenTile);
+				break;
+			case FieldType.Field:
+				terrainTilemap.SetTile(new Vector3Int(x, y, 0), fieldTile);
+				break;
+			case FieldType.Ocean:
+				terrainTilemap.SetTile(new Vector3Int(x, y, 0), oceanTile);
+				break;
+			case FieldType.River:
+				terrainTilemap.SetTile(new Vector3Int(x, y, 0), riverTile);
+				break;
+		}
+	}
+
+	void PaintForest(int x, int y)
+	{
+		switch (map[x, y].forestType)
+		{
+			case ForestType.Boreal:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
+				break;
+			case ForestType.Bushland:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), bushlandTile);
+				break;
+			case ForestType.Mangrove:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), mangroveTile);
+				break;
+			case ForestType.Rainforest:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), rainforestTile);
+				break;
+		}
+	}
+
+	void SetSelectedForest(ForestType forestType)
+	{
+		selectedForestType = forestType;
+
+		if (selectedForestType == ForestType.None)
+		{
+			forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), null);
+			return;
+		}
+
+		if (Plantable(hoveredTile.x, hoveredTile.y, selectedForestType))
+			switch (selectedForestType)
+			{
+				case ForestType.Boreal:
+					forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), borealTile);
+					break;
+				case ForestType.Bushland:
+					forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), bushlandTile);
+					break;
+				case ForestType.Mangrove:
+					forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), mangroveTile);
+					break;
+				case ForestType.Rainforest:
+					forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), rainforestTile);
+					break;
+			}
+		else
+			forestHoverTilemap.SetTile(hoveredTile, null);
+	}
+
+	void PlantForest(int x, int y, ForestType forestType)
+	{
+		if (!Plantable(x, y, forestType)) return;
+
+		map[x, y].forestType = forestType;
+		switch (map[x, y].forestType)
+		{
+			case ForestType.Boreal:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
+				break;
+			case ForestType.Bushland:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), bushlandTile);
+				break;
+			case ForestType.Mangrove:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), mangroveTile);
+				break;
+			case ForestType.Rainforest:
+				forestTilemap.SetTile(new Vector3Int(x, y, 0), rainforestTile);
+				break;
+		}
+	}
+
+	bool Plantable(int x, int y, ForestType forestType)
+	{
+		if (map[x, y].forestType != ForestType.None) return false;
+
+		switch (forestType)
+		{
+			case ForestType.Boreal:
+				if (map[x, y].fieldType == FieldType.Field)
+					return true;
+				break;
+			case ForestType.Bushland:
+				if (map[x, y].fieldType == FieldType.Field || map[x, y].fieldType == FieldType.Barren)
+					return true;
+				break;
+			case ForestType.Mangrove:
+				if (map[x, y].fieldType == FieldType.Ocean)
+					return true;
+				break;
+			case ForestType.Rainforest:
+				if (map[x, y].fieldType == FieldType.Field)
+					return true;
+				break;
+		}
+
+		return false;
 	}
 
 	public Vector2 GetDimensions()

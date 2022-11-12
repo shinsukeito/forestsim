@@ -8,9 +8,21 @@ public enum FieldType
 	River
 }
 
+
+public enum ForestType
+{
+	None,
+	WorldTree,
+	Boreal,
+	Bushland,
+	Mangrove,
+	Rainforest
+}
+
 public class Acre
 {
 	public FieldType fieldType = FieldType.Ocean;
+	public ForestType forestType = ForestType.None;
 
 	// Start is called before the first frame update
 	void Start()
