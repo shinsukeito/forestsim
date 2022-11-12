@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Season
 {
@@ -15,6 +16,20 @@ public class Chronographer : MonoBehaviour
 {
 	public bool paused = true;
 	public Season[] seasonOrder;
+
+	public Image seasonImage;
+	public Sprite fairIcon;
+
+	public Sprite coldIcon;
+
+	public Sprite dryIcon;
+
+	public Sprite hotIcon;
+	public Sprite wetIcon;
+
+	public Text tickText;
+	public Text seasonText;
+	public Text cycleText;
 
 	public float tickSpan = 0;
 	public float tickLength = 1;
@@ -76,22 +91,51 @@ public class Chronographer : MonoBehaviour
 	{
 		currentTick++;
 		if (currentTick >= ticksInSeason)
+		{
+			currentTick = 0;
 			TickSeason();
+		}
 
+		// Update UI:
+		tickText.text = $"Day: {currentTick + 1}";
 	}
 
 	void TickSeason()
 	{
-		currentTick = 0;
 		currentSeason++;
-		if (currentSeason >= seasonOrder.Length) // 5
+		if (currentSeason >= seasonOrder.Length)// 5
+		{
+			currentSeason = 0;
 			TickCycle();
+		}
 
+		// Update UI:
+		seasonText.text = $"Season: {GetCurrentSeason()}";
+		switch (GetCurrentSeason())
+		{
+			case Season.Fair:
+				seasonImage.sprite = fairIcon;
+				break;
+			case Season.Cold:
+				seasonImage.sprite = coldIcon;
+				break;
+			case Season.Dry:
+				seasonImage.sprite = dryIcon;
+				break;
+			case Season.Hot:
+				seasonImage.sprite = hotIcon;
+				break;
+			case Season.Wet:
+				seasonImage.sprite = wetIcon;
+				break;
+		}
 	}
 
 	void TickCycle()
 	{
-		currentSeason = 0;
 		currentCycle++;
+
+		// Update UI:
+		cycleText.text = $"Cycle: {currentCycle + 1}";
 	}
 }
