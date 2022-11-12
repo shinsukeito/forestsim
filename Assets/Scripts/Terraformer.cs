@@ -5,13 +5,16 @@ using UnityEngine.Tilemaps;
 
 public class Terraformer : MonoBehaviour
 {
+	[Header("References")]
+	public Tilemap terrainTilemap;
+	public Tilemap forestTilemap;
+	public Tilemap forestHoverTilemap;
+
+	[Header("Configurations")]
 	[Range(0, 50)]
 	public int mapWidth = 25;
 	[Range(0, 50)]
 	public int mapHeight = 15;
-	public Tilemap terrainTilemap;
-	public Tilemap forestTilemap;
-	public Tilemap forestHoverTilemap;
 	public Acre[,] map;
 
 	[Range(0, 100)]
@@ -20,6 +23,7 @@ public class Terraformer : MonoBehaviour
 	public int riverSpawnSize = 3;
 	public int riverCount = 3;
 
+	[Header("Tiles")]
 	public TileBase barrenTile;
 	public TileBase fieldTile;
 	public TileBase oceanTile;
@@ -29,9 +33,6 @@ public class Terraformer : MonoBehaviour
 	public TileBase bushlandTile;
 	public TileBase mangroveTile;
 	public TileBase rainforestTile;
-
-	private Vector3Int hoveredTile;
-	private ForestType selectedForestType = ForestType.None;
 
 	// Start is called before the first frame update
 	void Start()
@@ -47,62 +48,6 @@ public class Terraformer : MonoBehaviour
 		{
 			BigBang();
 			PaintWorld();
-		}
-
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			SetSelectedForest(ForestType.Boreal);
-		}
-		if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			SetSelectedForest(ForestType.Bushland);
-		}
-		if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
-			SetSelectedForest(ForestType.Mangrove);
-		}
-		if (Input.GetKeyDown(KeyCode.Alpha4))
-		{
-			SetSelectedForest(ForestType.Rainforest);
-		}
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			SetSelectedForest(ForestType.None);
-		}
-
-		if (selectedForestType != ForestType.None)
-		{
-			Vector3Int tilePosition = forestHoverTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-			if (tilePosition != hoveredTile)
-			{
-				forestHoverTilemap.SetTile(hoveredTile, null);
-				hoveredTile = tilePosition;
-
-				if (Plantable(hoveredTile.x, hoveredTile.y, selectedForestType))
-				{
-					switch (selectedForestType)
-					{
-						case ForestType.Boreal:
-							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), borealTile);
-							break;
-						case ForestType.Bushland:
-							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), bushlandTile);
-							break;
-						case ForestType.Mangrove:
-							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), mangroveTile);
-							break;
-						case ForestType.Rainforest:
-							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), rainforestTile);
-							break;
-					}
-				}
-			}
-
-			if (Input.GetMouseButtonDown(0))
-			{
-				PlantForest(tilePosition.x, tilePosition.y, selectedForestType);
-				selectedForestType = ForestType.None;
-			}
 		}
 	}
 
@@ -326,37 +271,7 @@ public class Terraformer : MonoBehaviour
 		}
 	}
 
-	void SetSelectedForest(ForestType forestType)
-	{
-		selectedForestType = forestType;
-
-		if (selectedForestType == ForestType.None)
-		{
-			forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), null);
-			return;
-		}
-
-		if (Plantable(hoveredTile.x, hoveredTile.y, selectedForestType))
-			switch (selectedForestType)
-			{
-				case ForestType.Boreal:
-					forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), borealTile);
-					break;
-				case ForestType.Bushland:
-					forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), bushlandTile);
-					break;
-				case ForestType.Mangrove:
-					forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), mangroveTile);
-					break;
-				case ForestType.Rainforest:
-					forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), rainforestTile);
-					break;
-			}
-		else
-			forestHoverTilemap.SetTile(hoveredTile, null);
-	}
-
-	void PlantForest(int x, int y, ForestType forestType)
+	public void PlantForest(int x, int y, ForestType forestType)
 	{
 		if (!Plantable(x, y, forestType)) return;
 
@@ -378,8 +293,9 @@ public class Terraformer : MonoBehaviour
 		}
 	}
 
-	bool Plantable(int x, int y, ForestType forestType)
+	public bool Plantable(int x, int y, ForestType forestType)
 	{
+		if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return false;
 		if (map[x, y].forestType != ForestType.None) return false;
 
 		switch (forestType)

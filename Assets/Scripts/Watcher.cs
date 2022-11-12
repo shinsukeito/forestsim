@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Watcher : MonoBehaviour
 {
+	[Header("References")]
+	public Camera cam;
+	public Terraformer terraformer;
+
+	[Header("Configurations")]
 	public AnimationCurve zoomCurve;
 	[Range(0, 50)]
 
@@ -16,20 +21,15 @@ public class Watcher : MonoBehaviour
 	private Vector2 lastDragPosition;
 	private Vector2 speed;
 
-	private Terraformer terraformer;
 	private float zoom = 3;
 	private float trueZoom = 3;
 	private float prevZoom = 3;
 	private float zoomTime = 1;
 	private float finalZoomKeyTime = 0;
 
-	private Camera cam;
-
-
 	// Start is called before the first frame update
 	void Start()
 	{
-		terraformer = FindObjectOfType<Terraformer>();
 		cam = GetComponent<Camera>();
 		finalZoomKeyTime = zoomCurve.keys[zoomCurve.keys.Length - 1].time;
 	}

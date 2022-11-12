@@ -14,19 +14,22 @@ public enum Season
 
 public class Chronographer : MonoBehaviour
 {
+	[Header("References")]
+	public Yggdrasil yggdrasil;
+	public Text textCycle;
+	public Text textSeason;
+	public Text textDay;
+
+	[Header("Configurations")]
 	public bool paused = true;
 	public Season[] seasonOrder;
 	public SeasonIcon[] seasonIcons;
 
-	public Text tickText;
-	public Text seasonText;
-	public Text cycleText;
-
 	public float tickSpan = 0;
-	public float tickLength = 1;
-	public float ticksInSeason = 10;
+	public float dayLength = 1;
+	public float daysInSeason = 10;
 
-	public float currentTick = 0;
+	public float currentDay = 0;
 	public int currentSeason;
 	public int currentCycle;
 
@@ -43,9 +46,9 @@ public class Chronographer : MonoBehaviour
 
 		tickSpan += Time.deltaTime;
 
-		if (tickSpan > tickLength)
+		if (tickSpan > dayLength)
 		{
-			tickSpan -= tickLength;
+			tickSpan -= dayLength;
 			TickTime();
 		}
 	}
@@ -86,15 +89,15 @@ public class Chronographer : MonoBehaviour
 
 	void TickTime()
 	{
-		currentTick++;
-		if (currentTick >= ticksInSeason)
+		currentDay++;
+		if (currentDay >= daysInSeason)
 		{
-			currentTick = 0;
+			currentDay = 0;
 			TickSeason();
 		}
 
 		// Update UI:
-		tickText.text = $"Day: {currentSeason * ticksInSeason + currentTick + 1}";
+		textDay.text = $"Day: {currentSeason * daysInSeason + currentDay + 1}";
 	}
 
 	void TickSeason()
@@ -109,8 +112,10 @@ public class Chronographer : MonoBehaviour
 			TickCycle();
 		}
 
+		yggdrasil.Photosynthesise();
+
 		// Update UI:
-		seasonText.text = $"Season: {GetCurrentSeason()}";
+		textSeason.text = $"Season: {GetCurrentSeason()}";
 		seasonIcons[currentSeason].Highlight();
 	}
 
@@ -119,6 +124,6 @@ public class Chronographer : MonoBehaviour
 		currentCycle++;
 
 		// Update UI:
-		cycleText.text = $"Cycle: {currentCycle + 1}";
+		textCycle.text = $"Cycle: {currentCycle + 1}";
 	}
 }
