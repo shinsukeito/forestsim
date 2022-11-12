@@ -16,16 +16,7 @@ public class Chronographer : MonoBehaviour
 {
 	public bool paused = true;
 	public Season[] seasonOrder;
-
-	public Image seasonImage;
-	public Sprite fairIcon;
-
-	public Sprite coldIcon;
-
-	public Sprite dryIcon;
-
-	public Sprite hotIcon;
-	public Sprite wetIcon;
+	public SeasonIcon[] seasonIcons;
 
 	public Text tickText;
 	public Text seasonText;
@@ -78,6 +69,12 @@ public class Chronographer : MonoBehaviour
 		seasonOrder[0] = Season.Fair;
 		System.Array.Copy(shuffledSeasons, 0, seasonOrder, 1, shuffledSeasons.Length);
 		currentSeason = 0;
+
+		// Set icons:
+		for (int i = 0; i < seasonOrder.Length; i++)
+			seasonIcons[i].SetSeason(seasonOrder[i]);
+
+		seasonIcons[0].Highlight();
 	}
 
 
@@ -97,11 +94,14 @@ public class Chronographer : MonoBehaviour
 		}
 
 		// Update UI:
-		tickText.text = $"Day: {currentTick + 1}";
+		tickText.text = $"Day: {currentSeason * ticksInSeason + currentTick + 1}";
 	}
 
 	void TickSeason()
 	{
+		// Unhighlight season first:
+		seasonIcons[currentSeason].Unhighlight();
+
 		currentSeason++;
 		if (currentSeason >= seasonOrder.Length)// 5
 		{
@@ -111,24 +111,7 @@ public class Chronographer : MonoBehaviour
 
 		// Update UI:
 		seasonText.text = $"Season: {GetCurrentSeason()}";
-		switch (GetCurrentSeason())
-		{
-			case Season.Fair:
-				seasonImage.sprite = fairIcon;
-				break;
-			case Season.Cold:
-				seasonImage.sprite = coldIcon;
-				break;
-			case Season.Dry:
-				seasonImage.sprite = dryIcon;
-				break;
-			case Season.Hot:
-				seasonImage.sprite = hotIcon;
-				break;
-			case Season.Wet:
-				seasonImage.sprite = wetIcon;
-				break;
-		}
+		seasonIcons[currentSeason].Highlight();
 	}
 
 	void TickCycle()
