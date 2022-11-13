@@ -20,15 +20,13 @@ public class Yggdrasil : MonoBehaviour
 	public TileBase mangroveTile;
 	public TileBase rainforestTile;
 
-	public int forestCount = 0;
-
 	private Vector3Int hoveredTile;
 	private ForestType selectedForestType = ForestType.None;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		ChangeSunlight(20);
+		SetSunlight(20);
 	}
 
 	// Update is called once per frame
@@ -85,8 +83,7 @@ public class Yggdrasil : MonoBehaviour
 
 			if (Input.GetMouseButtonDown(0) && sunlight >= forestCost)
 			{
-				ChangeSunlight(-forestCost);
-				forestCount++;
+				SetSunlight(sunlight - forestCost);
 				terraformer.PlantForest(tilePosition.x, tilePosition.y, selectedForestType);
 				selectedForestType = ForestType.None;
 			}
@@ -96,7 +93,8 @@ public class Yggdrasil : MonoBehaviour
 
 	void SetSelectedForest(ForestType forestType)
 	{
-		selectedForestType = forestType;
+		if (sunlight < forestCost) selectedForestType = ForestType.None;
+		else selectedForestType = forestType;
 
 		if (selectedForestType == ForestType.None)
 		{
@@ -126,12 +124,12 @@ public class Yggdrasil : MonoBehaviour
 
 	public void Photosynthesise()
 	{
-		ChangeSunlight(2 * forestCount);
+		SetSunlight(sunlight + terraformer.GetAllSunlight());
 	}
 
-	public void ChangeSunlight(int amount)
+	void SetSunlight(int amount)
 	{
-		sunlight += amount;
+		sunlight = amount;
 		textSunlight.text = $"Sunlight: {sunlight}";
 	}
 }

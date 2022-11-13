@@ -99,10 +99,12 @@ public class Terraformer : MonoBehaviour
 		for (int i = 0; i < riverCount; i++)
 			Erode();
 
-		PlantWorldTree(mapWidth / 2, mapHeight / 2);
-		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2);
-		PlantWorldTree(mapWidth / 2, mapHeight / 2 - 1);
-		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2 - 1);
+		// Create World Tree and add it as reference to four tiles:
+		Forest worldTree = new Forest(ForestType.WorldTree);
+		PlantWorldTree(mapWidth / 2, mapHeight / 2, worldTree);
+		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2, worldTree);
+		PlantWorldTree(mapWidth / 2, mapHeight / 2 - 1, worldTree);
+		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2 - 1, worldTree);
 	}
 
 	void Smooth()
@@ -180,10 +182,10 @@ public class Terraformer : MonoBehaviour
 		}
 	}
 
-	void PlantWorldTree(int x, int y)
+	void PlantWorldTree(int x, int y, Forest worldTree)
 	{
 		map[x, y].fieldType = FieldType.Field;
-		map[x, y].forestType = ForestType.WorldTree;
+		map[x, y].forest = worldTree;
 	}
 
 	FieldType DetermineFieldType(int x, int y)
@@ -254,7 +256,9 @@ public class Terraformer : MonoBehaviour
 
 	void PaintForest(int x, int y)
 	{
-		switch (map[x, y].forestType)
+		if (map[x, y].forest == null) return;
+
+		switch (map[x, y].forest.GetForestType())
 		{
 			case ForestType.Boreal:
 				forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
@@ -275,8 +279,8 @@ public class Terraformer : MonoBehaviour
 	{
 		if (!Plantable(x, y, forestType)) return;
 
-		map[x, y].forestType = forestType;
-		switch (map[x, y].forestType)
+		map[x, y].forest = new Forest(forestType);
+		switch (forestType)
 		{
 			case ForestType.Boreal:
 				forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
@@ -296,7 +300,7 @@ public class Terraformer : MonoBehaviour
 	public bool Plantable(int x, int y, ForestType forestType)
 	{
 		if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return false;
-		if (map[x, y].forestType != ForestType.None) return false;
+		if (map[x, y].forest != null) return false;
 
 		switch (forestType)
 		{
@@ -324,5 +328,56 @@ public class Terraformer : MonoBehaviour
 	public Vector2 GetDimensions()
 	{
 		return new Vector2(mapWidth, mapHeight);
+	}
+
+	public List<Forest> GetForests()
+	{
+		List<Forest> forests = new List<Forest>();
+		for (int x = 0; x < mapWidth; x++)
+		{
+			for (int y = 0; y < mapHeight; y++)
+			{
+				if (map[x, y].forest == null) continue;
+				if (map[x, y].forest.GetForestType() == ForestType.WorldTree) continue;
+
+				forests.Add(map[x, y].forest);
+			}
+		}
+
+		return forests;
+	}
+
+	public int GetAllSunlight()
+	{
+		int sunlight = 0;
+		for (int x = 0; x < mapWidth; x++)
+		{
+			for (int y = 0; y < mapHeight; y++)
+			{
+				if (map[x, y].forest == null) continue;
+				if (map[x, y].forest.GetForestType() == ForestType.WorldTree) continue;
+
+				sunlight += map[x, y].forest.GetSunlightGeneration();
+			}
+		}
+
+		return sunlight;
+	}
+
+	public int GetForestCount()
+	{
+		int count = 0;
+		for (int x = 0; x < mapWidth; x++)
+		{
+			for (int y = 0; y < mapHeight; y++)
+			{
+				if (map[x, y].forest == null) continue;
+				if (map[x, y].forest.GetForestType() == ForestType.WorldTree) continue;
+
+				count++;
+			}
+		}
+
+		return count;
 	}
 }
