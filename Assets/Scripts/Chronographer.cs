@@ -113,6 +113,7 @@ public class Chronographer : MonoBehaviour
 		}
 
 		yggdrasil.Photosynthesise();
+		yggdrasil.GrowForests();
 
 		// Update UI:
 		textSeason.text = $"Season: {GetCurrentSeason()}";

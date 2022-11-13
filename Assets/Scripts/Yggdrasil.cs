@@ -14,6 +14,7 @@ public class Yggdrasil : MonoBehaviour
 	[Header("Configurations")]
 	public int sunlight = 0;
 	public int forestCost = 5;
+	public int expPerGrowth = 3;
 
 	public TileBase borealTile;
 	public TileBase bushlandTile;
@@ -127,6 +128,10 @@ public class Yggdrasil : MonoBehaviour
 		SetSunlight(sunlight + terraformer.GetAllSunlight());
 	}
 
+	public void GrowForests()
+	{
+		terraformer.GrowForests(expPerGrowth);
+	}
 	void SetSunlight(int amount)
 	{
 		sunlight = amount;

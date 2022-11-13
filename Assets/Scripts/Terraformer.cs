@@ -381,6 +381,20 @@ public class Terraformer : MonoBehaviour
 		return count;
 	}
 
+	public void GrowForests(int exp)
+	{
+		for (int x = 0; x < mapWidth; x++)
+		{
+			for (int y = 0; y < mapHeight; y++)
+			{
+				if (map[x, y].forest == null) continue;
+				if (map[x, y].forest.GetForestType() == ForestType.WorldTree) continue;
+
+				map[x, y].forest.AddExperience(exp);
+			}
+		}
+	}
+
 	public Acre GetAcre(int x, int y)
 	{
 		if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return null;
