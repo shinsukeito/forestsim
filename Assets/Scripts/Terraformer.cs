@@ -380,4 +380,10 @@ public class Terraformer : MonoBehaviour
 
 		return count;
 	}
+
+	public Acre GetAcre(int x, int y)
+	{
+		if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return null;
+		return map[x, y];
+	}
 }
