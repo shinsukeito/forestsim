@@ -84,8 +84,11 @@ public class Yggdrasil : MonoBehaviour
 
 			if (Input.GetMouseButtonDown(0) && sunlight >= forestCost)
 			{
-				SetSunlight(sunlight - forestCost);
-				terraformer.PlantForest(tilePosition.x, tilePosition.y, selectedForestType);
+				bool planted = terraformer.PlantForest(tilePosition.x, tilePosition.y, selectedForestType);
+
+				if (planted)
+					SetSunlight(sunlight - forestCost);
+
 				selectedForestType = ForestType.None;
 			}
 		}

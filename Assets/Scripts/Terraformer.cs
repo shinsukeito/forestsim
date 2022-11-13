@@ -275,26 +275,28 @@ public class Terraformer : MonoBehaviour
 		}
 	}
 
-	public void PlantForest(int x, int y, ForestType forestType)
+	public bool PlantForest(int x, int y, ForestType forestType)
 	{
-		if (!Plantable(x, y, forestType)) return;
+		if (!Plantable(x, y, forestType)) return false;
 
 		map[x, y].forest = new Forest(forestType);
 		switch (forestType)
 		{
 			case ForestType.Boreal:
 				forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
-				break;
+				return true;
 			case ForestType.Bushland:
 				forestTilemap.SetTile(new Vector3Int(x, y, 0), bushlandTile);
-				break;
+				return true;
 			case ForestType.Mangrove:
 				forestTilemap.SetTile(new Vector3Int(x, y, 0), mangroveTile);
-				break;
+				return true;
 			case ForestType.Rainforest:
 				forestTilemap.SetTile(new Vector3Int(x, y, 0), rainforestTile);
-				break;
+				return true;
 		}
+
+		return false;
 	}
 
 	public bool Plantable(int x, int y, ForestType forestType)
