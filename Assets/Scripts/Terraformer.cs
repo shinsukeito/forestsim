@@ -10,6 +10,7 @@ public class Terraformer : MonoBehaviour
 	public Tilemap terrainTilemap;
 	public Tilemap forestTilemap;
 	public Tilemap forestHoverTilemap;
+	public Tilemap disasterTilemap;
 
 	[Header("Configurations")]
 	[Range(0, 50)]
@@ -24,16 +25,23 @@ public class Terraformer : MonoBehaviour
 	public int riverSpawnSize = 3;
 	public int riverCount = 3;
 
-	[Header("Tiles")]
+	[Header("Field Tiles")]
 	public TileBase barrenTile;
 	public TileBase fieldTile;
 	public TileBase oceanTile;
 	public TileBase riverTile;
 
+	[Header("Forest Tiles")]
 	public TileBase borealTile;
 	public TileBase bushlandTile;
 	public TileBase mangroveTile;
 	public TileBase rainforestTile;
+
+	[Header("Disaster Tiles")]
+	public TileBase blizzardTile;
+	public TileBase bushfireTile;
+	public TileBase droughtTile;
+	public TileBase floodTile;
 
 	// Start is called before the first frame update
 	void Start()
@@ -65,6 +73,9 @@ public class Terraformer : MonoBehaviour
 		forestHoverTilemap.ClearAllTiles();
 		forestHoverTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
 
+		disasterTilemap.ClearAllTiles();
+		disasterTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
+
 		string seed = Time.time.ToString();
 		System.Random randomValue = new System.Random(seed.GetHashCode());
 
@@ -73,7 +84,7 @@ public class Terraformer : MonoBehaviour
 		{
 			for (int y = 0; y < mapHeight; y++)
 			{
-				Acre newAcre = new Acre();
+				Acre newAcre = new Acre(this, x, y);
 				if (x <= oceanSize - 1 || x >= mapWidth - oceanSize || y <= oceanSize - 1 || y >= mapHeight - oceanSize)
 				{
 					newAcre.fieldType = FieldType.Ocean;
@@ -255,7 +266,7 @@ public class Terraformer : MonoBehaviour
 		}
 	}
 
-	void PaintForest(int x, int y)
+	public void PaintForest(int x, int y)
 	{
 		if (map[x, y].forest == null) return;
 
@@ -276,26 +287,43 @@ public class Terraformer : MonoBehaviour
 		}
 	}
 
+	public void PaintDisaster(int x, int y)
+	{
+		if (map[x, y].disaster == null) return;
+
+		switch (map[x, y].disaster.GetDisasterType())
+		{
+			case DisasterType.Blizzard:
+				disasterTilemap.SetTile(new Vector3Int(x, y, 0), blizzardTile);
+				break;
+			case DisasterType.Bushfire:
+				disasterTilemap.SetTile(new Vector3Int(x, y, 0), bushfireTile);
+				break;
+			case DisasterType.Drought:
+				disasterTilemap.SetTile(new Vector3Int(x, y, 0), droughtTile);
+				break;
+			case DisasterType.Flood:
+				disasterTilemap.SetTile(new Vector3Int(x, y, 0), floodTile);
+				break;
+		}
+	}
+
+	public void EraseForest(int x, int y)
+	{
+		forestTilemap.SetTile(new Vector3Int(x, y, 0), null);
+	}
+
+	public void EraseDisaster(int x, int y)
+	{
+		disasterTilemap.SetTile(new Vector3Int(x, y, 0), null);
+	}
+
 	public bool PlantForest(int x, int y, ForestType forestType)
 	{
 		if (!Plantable(x, y, forestType)) return false;
 
 		map[x, y].forest = new Forest(yggdrasil, forestType);
-		switch (forestType)
-		{
-			case ForestType.Boreal:
-				forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
-				return true;
-			case ForestType.Bushland:
-				forestTilemap.SetTile(new Vector3Int(x, y, 0), bushlandTile);
-				return true;
-			case ForestType.Mangrove:
-				forestTilemap.SetTile(new Vector3Int(x, y, 0), mangroveTile);
-				return true;
-			case ForestType.Rainforest:
-				forestTilemap.SetTile(new Vector3Int(x, y, 0), rainforestTile);
-				return true;
-		}
+		PaintForest(x, y);
 
 		return false;
 	}
@@ -393,6 +421,13 @@ public class Terraformer : MonoBehaviour
 				map[x, y].OnEachSeason(season);
 			}
 		}
+
+		if (season == Season.Hot)
+		{
+			List<Acre> targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
+			Acre target = targets[Random.Range(0, targets.Count)];
+			Wreak(DisasterType.Bushfire, target.x, target.y);
+		}
 	}
 
 	public void OnEachCycle(int cycle)
@@ -404,5 +439,55 @@ public class Terraformer : MonoBehaviour
 				map[x, y].OnEachCycle(cycle);
 			}
 		}
+	}
+
+	public void Wreak(DisasterType disasterType, int x, int y)
+	{
+		Acre acre = map[x, y];
+		switch (disasterType)
+		{
+			case DisasterType.Bushfire:
+				if (acre.fieldType == FieldType.Ocean || acre.fieldType == FieldType.River) return;
+				if (acre.disaster != null && acre.disaster.GetDisasterType() == DisasterType.Bushfire) return;
+				break;
+		}
+
+		Disaster newDisaster = new Disaster(acre, DisasterType.Bushfire);
+		map[x, y].disaster = newDisaster;
+		PaintDisaster(x, y);
+	}
+
+	public List<Acre> GetNeighbours(int x, int y)
+	{
+		List<Acre> neighbours = new List<Acre>();
+
+		for (int nx = x - 1; nx <= x + 1; nx++)
+		{
+			for (int ny = y - 1; ny <= y + 1; ny++)
+			{
+				if (nx < 0 || nx > mapWidth - 1 || ny < 0 || ny > mapHeight - 1) continue;
+				if (nx == x && ny == y) continue;
+
+				neighbours.Add(map[nx, ny]);
+			}
+		}
+
+		print(neighbours);
+		return neighbours;
+	}
+
+	public List<Acre> GetAcresOfType(List<FieldType> types)
+	{
+		List<Acre> acres = new List<Acre>();
+
+		for (int x = 0; x < mapWidth; x++)
+		{
+			for (int y = 0; y < mapHeight; y++)
+			{
+				if (types.Contains(map[x, y].fieldType)) acres.Add(map[x, y]);
+			}
+		}
+
+		return acres;
 	}
 }

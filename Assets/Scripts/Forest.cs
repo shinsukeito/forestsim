@@ -79,4 +79,18 @@ public class Forest
 			level++;
 		}
 	}
+	public void OnEachDay(int day)
+	{
+		Photosynthesise();
+	}
+
+	public void OnEachSeason(Season season)
+	{
+		Grow();
+	}
+
+	public void OnEachCycle(int cycle)
+	{
+
+	}
 }

@@ -54,8 +54,17 @@ public class Inspector : MonoBehaviour
 				}
 			};
 
+			string disasterText;
+			if (acre.disaster == null)
+			{
+				disasterText = "Disaster: None";
+			}
+			else
+			{
+				disasterText = $"Disaster: {acre.disaster.GetDisasterType()}";
+			};
 
-			textInspector.text = $"{terrainText}\n\n---\n\n{forestText}";
+			textInspector.text = $"{terrainText}\n\n---\n\n{forestText}\n\n---\n\n{disasterText}";
 		}
 	}
 }

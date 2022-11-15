@@ -874,6 +874,7 @@ MonoBehaviour:
   terrainTilemap: {fileID: 584951631}
   forestTilemap: {fileID: 211119474}
   forestHoverTilemap: {fileID: 1145062367}
+  disasterTilemap: {fileID: 1305271601}
   mapWidth: 25
   mapHeight: 15
   fieldSpawnPercent: 80
@@ -888,6 +889,10 @@ MonoBehaviour:
   bushlandTile: {fileID: 11400000, guid: 4e1048442db1e52468a5f4d0c20465dd, type: 2}
   mangroveTile: {fileID: 11400000, guid: 163de4e31652c614e8e9c2ae3ac67652, type: 2}
   rainforestTile: {fileID: 11400000, guid: f1d0ad3a425379248920588ab76b26cc, type: 2}
+  blizzardTile: {fileID: 11400000, guid: 2178508320abd4242ab0beae78c585a1, type: 2}
+  bushfireTile: {fileID: 11400000, guid: ebcd693f3b159ea468180d8d8a8df6e9, type: 2}
+  droughtTile: {fileID: 11400000, guid: 8474b48ae0030df44ae029e16a6b9e38, type: 2}
+  floodTile: {fileID: 11400000, guid: 116110fb6d574a940acc22a12817d53a, type: 2}
 --- !u!1 &834084148
 GameObject:
   m_ObjectHideFlags: 0

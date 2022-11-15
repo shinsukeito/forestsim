@@ -90,14 +90,15 @@ public class Chronographer : MonoBehaviour
 	void TickDay()
 	{
 		currentDay++;
+
+		// Update map:
+		terraformer.OnEachDay(currentDay);
+
 		if (currentDay >= daysInSeason)
 		{
 			currentDay = 0;
 			TickSeason();
 		}
-
-		// Update map:
-		terraformer.OnEachDay(currentDay);
 
 		// Update UI:
 		textDay.text = $"Day: {currentSeason * daysInSeason + currentDay + 1}";
