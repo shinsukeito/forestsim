@@ -315,7 +315,7 @@ public class Terraformer : MonoBehaviour
 					return true;
 				break;
 			case ForestType.Mangrove:
-				if (map[x, y].fieldType == FieldType.Ocean)
+				if (map[x, y].fieldType == FieldType.Field)
 					return true;
 				break;
 			case ForestType.Rainforest:
