@@ -425,21 +425,31 @@ public class Terraformer : MonoBehaviour
 
 		// Spawn disasters:
 		List<Acre> targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
+		List<Acre> circleAcres;
 		Acre target = targets[Random.Range(0, targets.Count)];
 
 		switch (season)
 		{
-			case Season.Hot:
-				Wreak(DisasterType.Bushfire, target.x, target.y);
-				break;
-
 			case Season.Cold:
-				List<Acre> circleAcres = GetAcresInCircle(target.x, target.y, 3);
+				circleAcres = GetAcresInCircle(target.x, target.y, 3);
 				circleAcres.ForEach((a) =>
 				{
 					if (a.fieldType == FieldType.River || a.fieldType == FieldType.Ocean) return;
 					Wreak(DisasterType.Blizzard, a.x, a.y);
 				});
+				break;
+
+			case Season.Dry:
+				circleAcres = GetAcresInCircle(target.x, target.y, 3);
+				circleAcres.ForEach((a) =>
+				{
+					if (a.fieldType == FieldType.River || a.fieldType == FieldType.Ocean) return;
+					Wreak(DisasterType.Drought, a.x, a.y);
+				});
+				break;
+
+			case Season.Hot:
+				Wreak(DisasterType.Bushfire, target.x, target.y);
 				break;
 		}
 	}
