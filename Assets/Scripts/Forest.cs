@@ -25,6 +25,11 @@ public class Forest
 	{
 		this.yggdrasil = yggdrasil;
 		this.type = type;
+
+		if (type == ForestType.WorldTree)
+		{
+			sunlightGeneration = 0;
+		}
 	}
 
 	public ForestType GetForestType()

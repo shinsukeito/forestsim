@@ -79,6 +79,7 @@ public class Terraformer : MonoBehaviour
 		string seed = Time.time.ToString();
 		System.Random randomValue = new System.Random(seed.GetHashCode());
 
+		// https://www.youtube.com/watch?v=v7yyZZjF1z4
 		// Initialise all Acres and build intial map:
 		for (int x = 0; x < mapWidth; x++)
 		{
@@ -422,11 +423,24 @@ public class Terraformer : MonoBehaviour
 			}
 		}
 
-		if (season == Season.Hot)
+		// Spawn disasters:
+		List<Acre> targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
+		Acre target = targets[Random.Range(0, targets.Count)];
+
+		switch (season)
 		{
-			List<Acre> targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
-			Acre target = targets[Random.Range(0, targets.Count)];
-			Wreak(DisasterType.Bushfire, target.x, target.y);
+			case Season.Hot:
+				Wreak(DisasterType.Bushfire, target.x, target.y);
+				break;
+
+			case Season.Cold:
+				List<Acre> circleAcres = GetAcresInCircle(target.x, target.y, 3);
+				circleAcres.ForEach((a) =>
+				{
+					if (a.fieldType == FieldType.River || a.fieldType == FieldType.Ocean) return;
+					Wreak(DisasterType.Blizzard, a.x, a.y);
+				});
+				break;
 		}
 	}
 
@@ -452,7 +466,7 @@ public class Terraformer : MonoBehaviour
 				break;
 		}
 
-		Disaster newDisaster = new Disaster(acre, DisasterType.Bushfire);
+		Disaster newDisaster = new Disaster(acre, disasterType);
 		map[x, y].disaster = newDisaster;
 		PaintDisaster(x, y);
 	}
@@ -472,7 +486,6 @@ public class Terraformer : MonoBehaviour
 			}
 		}
 
-		print(neighbours);
 		return neighbours;
 	}
 
@@ -489,5 +502,55 @@ public class Terraformer : MonoBehaviour
 		}
 
 		return acres;
+	}
+
+	private List<Acre> GetAcresInCircle(int cx, int cy, int radius)
+	{
+		// https://stackoverflow.com/questions/10878209/midpoint-circle-algorithm-for-filled-circles
+		List<Acre> acres = new List<Acre>();
+
+		int error = -radius;
+		int x = radius;
+		int y = 0;
+
+		while (x >= y)
+		{
+			int lastY = y;
+
+			error += y;
+			++y;
+			error += y;
+
+			Plot4points(acres, cx, cy, x, lastY);
+
+			if (error >= 0)
+			{
+				if (x != lastY)
+					Plot4points(acres, cx, cy, lastY, x);
+
+				error -= x;
+				--x;
+				error -= x;
+			}
+		}
+
+		return acres;
+	}
+
+	private void Plot4points(List<Acre> acres, int cx, int cy, int x, int y)
+	{
+		HorizontalLine(acres, cx - x, cy + y, cx + x);
+		if (y != 0)
+			HorizontalLine(acres, cx - x, cy - y, cx + x);
+	}
+
+	private void HorizontalLine(List<Acre> acres, int x0, int y0, int x1)
+	{
+		if (y0 < 0 || y0 >= mapHeight) return;
+		for (int x = x0; x <= x1; ++x)
+		{
+			if (x < 0 || x >= mapWidth) continue;
+			acres.Add(map[x, y0]);
+		}
 	}
 }
