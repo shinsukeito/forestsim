@@ -424,15 +424,17 @@ public class Terraformer : MonoBehaviour
 		}
 
 		// Spawn disasters:
-		List<Acre> targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
-		List<Acre> circleAcres;
-		Acre target = targets[Random.Range(0, targets.Count)];
+		List<Acre> targets;
+		Acre target;
 
 		switch (season)
 		{
 			case Season.Cold:
-				circleAcres = GetAcresInCircle(target.x, target.y, 3);
-				circleAcres.ForEach((a) =>
+				targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
+				target = targets[Random.Range(0, targets.Count)];
+
+				targets = GetAcresInCircle(target.x, target.y, 3);
+				targets.ForEach((a) =>
 				{
 					if (a.fieldType == FieldType.River || a.fieldType == FieldType.Ocean) return;
 					Wreak(DisasterType.Blizzard, a.x, a.y);
@@ -440,8 +442,11 @@ public class Terraformer : MonoBehaviour
 				break;
 
 			case Season.Dry:
-				circleAcres = GetAcresInCircle(target.x, target.y, 3);
-				circleAcres.ForEach((a) =>
+				targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
+				target = targets[Random.Range(0, targets.Count)];
+
+				targets = GetAcresInCircle(target.x, target.y, 3);
+				targets.ForEach((a) =>
 				{
 					if (a.fieldType == FieldType.River || a.fieldType == FieldType.Ocean) return;
 					Wreak(DisasterType.Drought, a.x, a.y);
@@ -449,7 +454,31 @@ public class Terraformer : MonoBehaviour
 				break;
 
 			case Season.Hot:
+				targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
+				target = targets[Random.Range(0, targets.Count)];
+
 				Wreak(DisasterType.Bushfire, target.x, target.y);
+				break;
+
+			case Season.Wet:
+				targets = new List<Acre>();
+
+				List<Acre> rivers = GetAcresOfType(new List<FieldType>() { FieldType.River });
+				rivers.ForEach((r) =>
+				{
+					List<Acre> neighbours = r.GetNeighbours();
+
+					neighbours.ForEach((n) =>
+					{
+						if (n.fieldType == FieldType.Field || n.fieldType == FieldType.Barren)
+							if (!targets.Contains(n)) targets.Add(n);
+					});
+				});
+
+				targets.ForEach((t) =>
+				{
+					Wreak(DisasterType.Flood, t.x, t.y);
+				});
 				break;
 		}
 	}
