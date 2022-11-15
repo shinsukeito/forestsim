@@ -126,16 +126,7 @@ public class Yggdrasil : MonoBehaviour
 			forestHoverTilemap.SetTile(hoveredTile, null);
 	}
 
-	public void Photosynthesise()
-	{
-		SetSunlight(sunlight + terraformer.GetAllSunlight());
-	}
-
-	public void GrowForests()
-	{
-		terraformer.GrowForests(expPerGrowth);
-	}
-	void SetSunlight(int amount)
+	public void SetSunlight(int amount)
 	{
 		sunlight = amount;
 		textSunlight.text = $"Sunlight: {sunlight}";

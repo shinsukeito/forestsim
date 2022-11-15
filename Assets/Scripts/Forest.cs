@@ -10,17 +10,20 @@ public enum ForestType
 
 public class Forest
 {
+	public Yggdrasil yggdrasil;
 	private ForestType type;
 	private int level = 1;
 	private int experience = 0;
 	private int health = 20;
 	private int sunlightGeneration = 2;
+	private int expGeneration = 3;
 
 	private int expPerLevel = 20;
 	private int maxLevel = 5;
 
-	public Forest(ForestType type)
+	public Forest(Yggdrasil yggdrasil, ForestType type)
 	{
+		this.yggdrasil = yggdrasil;
 		this.type = type;
 	}
 
@@ -49,19 +52,6 @@ public class Forest
 		return sunlightGeneration;
 	}
 
-	public void AddExperience(int amount)
-	{
-		if (level >= maxLevel) return;
-
-		experience += amount;
-
-		if (experience >= expPerLevel)
-		{
-			experience -= expPerLevel;
-			level++;
-		}
-	}
-
 	public void ChangeHealth(int amount)
 	{
 		health += amount;
@@ -69,6 +59,24 @@ public class Forest
 		if (health <= 0)
 		{
 			health = 0;
+		}
+	}
+
+	public void Photosynthesise()
+	{
+		yggdrasil.SetSunlight(yggdrasil.sunlight + sunlightGeneration);
+	}
+
+	public void Grow()
+	{
+		if (level >= maxLevel) return;
+
+		experience += expGeneration;
+
+		if (experience >= expPerLevel)
+		{
+			experience -= expPerLevel;
+			level++;
 		}
 	}
 }

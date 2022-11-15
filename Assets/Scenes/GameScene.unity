@@ -870,6 +870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7536db5b1a1874092819e5717a6a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yggdrasil: {fileID: 834084151}
   terrainTilemap: {fileID: 584951631}
   forestTilemap: {fileID: 211119474}
   forestHoverTilemap: {fileID: 1145062367}
@@ -989,6 +990,7 @@ MonoBehaviour:
   textSunlight: {fileID: 1124520669}
   sunlight: 0
   forestCost: 5
+  expPerGrowth: 3
   borealTile: {fileID: 11400000, guid: 86e6e97cec0b2564fb87a475fc977355, type: 2}
   bushlandTile: {fileID: 11400000, guid: 4e1048442db1e52468a5f4d0c20465dd, type: 2}
   mangroveTile: {fileID: 11400000, guid: 163de4e31652c614e8e9c2ae3ac67652, type: 2}
@@ -1102,7 +1104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f46833ddc0a44479e1778fd9eeb208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yggdrasil: {fileID: 834084151}
+  terraformer: {fileID: 715526312}
   textCycle: {fileID: 566091814}
   textSeason: {fileID: 1173413081}
   textDay: {fileID: 993298624}

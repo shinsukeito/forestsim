@@ -15,7 +15,7 @@ public enum Season
 public class Chronographer : MonoBehaviour
 {
 	[Header("References")]
-	public Yggdrasil yggdrasil;
+	public Terraformer terraformer;
 	public Text textCycle;
 	public Text textSeason;
 	public Text textDay;
@@ -29,7 +29,7 @@ public class Chronographer : MonoBehaviour
 	public float dayLength = 1;
 	public float daysInSeason = 10;
 
-	public float currentDay = 0;
+	public int currentDay = 0;
 	public int currentSeason;
 	public int currentCycle;
 
@@ -49,7 +49,7 @@ public class Chronographer : MonoBehaviour
 		if (tickSpan > dayLength)
 		{
 			tickSpan -= dayLength;
-			TickTime();
+			TickDay();
 		}
 	}
 
@@ -87,7 +87,7 @@ public class Chronographer : MonoBehaviour
 		return seasonOrder[currentSeason];
 	}
 
-	void TickTime()
+	void TickDay()
 	{
 		currentDay++;
 		if (currentDay >= daysInSeason)
@@ -95,6 +95,9 @@ public class Chronographer : MonoBehaviour
 			currentDay = 0;
 			TickSeason();
 		}
+
+		// Update map:
+		terraformer.OnEachDay(currentDay);
 
 		// Update UI:
 		textDay.text = $"Day: {currentSeason * daysInSeason + currentDay + 1}";
@@ -112,8 +115,8 @@ public class Chronographer : MonoBehaviour
 			TickCycle();
 		}
 
-		yggdrasil.Photosynthesise();
-		yggdrasil.GrowForests();
+		// Update map:
+		terraformer.OnEachSeason(GetCurrentSeason());
 
 		// Update UI:
 		textSeason.text = $"Season: {GetCurrentSeason()}";
@@ -123,6 +126,9 @@ public class Chronographer : MonoBehaviour
 	void TickCycle()
 	{
 		currentCycle++;
+
+		// Update map:
+		terraformer.OnEachCycle(currentCycle);
 
 		// Update UI:
 		textCycle.text = $"Cycle: {currentCycle + 1}";

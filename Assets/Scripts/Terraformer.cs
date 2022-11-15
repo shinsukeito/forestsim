@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public class Terraformer : MonoBehaviour
 {
 	[Header("References")]
+	public Yggdrasil yggdrasil;
 	public Tilemap terrainTilemap;
 	public Tilemap forestTilemap;
 	public Tilemap forestHoverTilemap;
@@ -100,7 +101,7 @@ public class Terraformer : MonoBehaviour
 			Erode();
 
 		// Create World Tree and add it as reference to four tiles:
-		Forest worldTree = new Forest(ForestType.WorldTree);
+		Forest worldTree = new Forest(yggdrasil, ForestType.WorldTree);
 		PlantWorldTree(mapWidth / 2, mapHeight / 2, worldTree);
 		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2, worldTree);
 		PlantWorldTree(mapWidth / 2, mapHeight / 2 - 1, worldTree);
@@ -279,7 +280,7 @@ public class Terraformer : MonoBehaviour
 	{
 		if (!Plantable(x, y, forestType)) return false;
 
-		map[x, y].forest = new Forest(forestType);
+		map[x, y].forest = new Forest(yggdrasil, forestType);
 		switch (forestType)
 		{
 			case ForestType.Boreal:
@@ -349,23 +350,6 @@ public class Terraformer : MonoBehaviour
 		return forests;
 	}
 
-	public int GetAllSunlight()
-	{
-		int sunlight = 0;
-		for (int x = 0; x < mapWidth; x++)
-		{
-			for (int y = 0; y < mapHeight; y++)
-			{
-				if (map[x, y].forest == null) continue;
-				if (map[x, y].forest.GetForestType() == ForestType.WorldTree) continue;
-
-				sunlight += map[x, y].forest.GetSunlightGeneration();
-			}
-		}
-
-		return sunlight;
-	}
-
 	public int GetForestCount()
 	{
 		int count = 0;
@@ -383,23 +367,42 @@ public class Terraformer : MonoBehaviour
 		return count;
 	}
 
-	public void GrowForests(int exp)
+	public Acre GetAcre(int x, int y)
+	{
+		if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return null;
+		return map[x, y];
+	}
+
+	public void OnEachDay(int day)
 	{
 		for (int x = 0; x < mapWidth; x++)
 		{
 			for (int y = 0; y < mapHeight; y++)
 			{
-				if (map[x, y].forest == null) continue;
-				if (map[x, y].forest.GetForestType() == ForestType.WorldTree) continue;
-
-				map[x, y].forest.AddExperience(exp);
+				map[x, y].OnEachDay(day);
 			}
 		}
 	}
 
-	public Acre GetAcre(int x, int y)
+	public void OnEachSeason(Season season)
 	{
-		if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return null;
-		return map[x, y];
+		for (int x = 0; x < mapWidth; x++)
+		{
+			for (int y = 0; y < mapHeight; y++)
+			{
+				map[x, y].OnEachSeason(season);
+			}
+		}
+	}
+
+	public void OnEachCycle(int cycle)
+	{
+		for (int x = 0; x < mapWidth; x++)
+		{
+			for (int y = 0; y < mapHeight; y++)
+			{
+				map[x, y].OnEachCycle(cycle);
+			}
+		}
 	}
 }
