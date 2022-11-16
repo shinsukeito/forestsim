@@ -27,22 +27,30 @@ public class Disaster
 	{
 		age++;
 
-		// if (age >= 40)
-		// {
-		// 	acre.RemoveDisaster();
-		// 	return;
-		// }
-
 		switch (type)
 		{
 			case DisasterType.Bushfire:
-				List<Acre> neighbours = acre.GetNeighbours();
+				// Chance to extinguish:
+				if (acre.forest == null &&
+					age > 1 &&
+					Random.Range(0, 100) <= acre.GetBushfireExtinguishChance())
+				{
+					acre.RemoveDisaster();
+					return;
+				}
+
+				// If not extinguished, spread:
+				List<Acre> neighbours = acre.GetNeighbours(1, false);
 				List<Acre> matched = neighbours.FindAll((n) =>
 				{
-					return n.fieldType == FieldType.Field || n.fieldType == FieldType.Barren;
+					if (n.fieldType != FieldType.Barren && n.fieldType != FieldType.Field) return false;
+					if (n.disaster != null && n.disaster.GetDisasterType() == DisasterType.Bushfire) return false;
+					return true;
 				});
 
-				matched[Random.Range(0, matched.Count)].Wreak(DisasterType.Bushfire);
+				if (matched.Count > 0)
+					matched[Random.Range(0, matched.Count)].Wreak(DisasterType.Bushfire);
+
 				break;
 		}
 	}

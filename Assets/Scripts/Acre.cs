@@ -63,13 +63,18 @@ public class Acre
 		terraformer.EraseDisaster(x, y);
 	}
 
-	public List<Acre> GetNeighbours()
+	public List<Acre> GetNeighbours(int size, bool circular)
 	{
-		return terraformer.GetNeighbours(x, y);
+		return terraformer.GetNeighbours(x, y, size, circular);
 	}
 
 	public void Wreak(DisasterType disasterType)
 	{
 		nextDisaster = disasterType;
+	}
+
+	public int GetBushfireExtinguishChance()
+	{
+		return terraformer.bushfireExtinguishChance;
 	}
 }

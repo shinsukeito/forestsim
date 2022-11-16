@@ -12,7 +12,7 @@ public class Terraformer : MonoBehaviour
 	public Tilemap forestHoverTilemap;
 	public Tilemap disasterTilemap;
 
-	[Header("Configurations")]
+	[Header("Map Configuration")]
 	[Range(0, 50)]
 	public int mapWidth = 25;
 	[Range(0, 50)]
@@ -24,6 +24,13 @@ public class Terraformer : MonoBehaviour
 	public int oceanSize = 0;
 	public int riverSpawnSize = 3;
 	public int riverCount = 3;
+
+	[Header("Disaster Configuration")]
+	public int blizzardRadius = 2;
+	public int bushfireExtinguishChance = 25;
+	public int droughtRadius = 2;
+	public int floodChance = 60;
+	public int floodRadius = 1;
 
 	[Header("Field Tiles")]
 	public TileBase barrenTile;
@@ -326,7 +333,7 @@ public class Terraformer : MonoBehaviour
 		map[x, y].forest = new Forest(yggdrasil, forestType);
 		PaintForest(x, y);
 
-		return false;
+		return true;
 	}
 
 	public bool Plantable(int x, int y, ForestType forestType)
@@ -433,7 +440,7 @@ public class Terraformer : MonoBehaviour
 				targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
 				target = targets[Random.Range(0, targets.Count)];
 
-				targets = GetAcresInCircle(target.x, target.y, 3);
+				targets = GetAcresInCircle(target.x, target.y, blizzardRadius);
 				targets.ForEach((a) =>
 				{
 					if (a.fieldType == FieldType.River || a.fieldType == FieldType.Ocean) return;
@@ -445,7 +452,7 @@ public class Terraformer : MonoBehaviour
 				targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
 				target = targets[Random.Range(0, targets.Count)];
 
-				targets = GetAcresInCircle(target.x, target.y, 3);
+				targets = GetAcresInCircle(target.x, target.y, droughtRadius);
 				targets.ForEach((a) =>
 				{
 					if (a.fieldType == FieldType.River || a.fieldType == FieldType.Ocean) return;
@@ -466,7 +473,7 @@ public class Terraformer : MonoBehaviour
 				List<Acre> rivers = GetAcresOfType(new List<FieldType>() { FieldType.River });
 				rivers.ForEach((r) =>
 				{
-					List<Acre> neighbours = r.GetNeighbours();
+					List<Acre> neighbours = r.GetNeighbours(floodRadius, true);
 
 					neighbours.ForEach((n) =>
 					{
@@ -477,7 +484,8 @@ public class Terraformer : MonoBehaviour
 
 				targets.ForEach((t) =>
 				{
-					Wreak(DisasterType.Flood, t.x, t.y);
+					if (Random.Range(0, 100) <= floodChance)
+						Wreak(DisasterType.Flood, t.x, t.y);
 				});
 				break;
 		}
@@ -491,6 +499,19 @@ public class Terraformer : MonoBehaviour
 			{
 				map[x, y].OnEachCycle(cycle);
 			}
+		}
+
+		// Blizzard and drought radius increases every 2 cycles:
+		if (cycle % 2 == 0)
+		{
+			droughtRadius++;
+			blizzardRadius++;
+		}
+
+		// Flood radius increases every 3 cycles:
+		if (cycle % 3 == 0)
+		{
+			floodRadius++;
 		}
 	}
 
@@ -510,14 +531,15 @@ public class Terraformer : MonoBehaviour
 		PaintDisaster(x, y);
 	}
 
-	public List<Acre> GetNeighbours(int x, int y)
+	public List<Acre> GetNeighbours(int x, int y, int size, bool circular)
 	{
 		List<Acre> neighbours = new List<Acre>();
 
-		for (int nx = x - 1; nx <= x + 1; nx++)
+		for (int nx = x - size; nx <= x + size; nx++)
 		{
-			for (int ny = y - 1; ny <= y + 1; ny++)
+			for (int ny = y - size; ny <= y + size; ny++)
 			{
+				if (circular && Mathf.Abs(x - nx) + Mathf.Abs(y - ny) > size) continue;
 				if (nx < 0 || nx > mapWidth - 1 || ny < 0 || ny > mapHeight - 1) continue;
 				if (nx == x && ny == y) continue;
 
