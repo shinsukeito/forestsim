@@ -1,3 +1,5 @@
+#nullable enable
+
 using System;
 
 public enum ForestType
@@ -16,6 +18,7 @@ public class Forest
 	public Acre acre;
 	private ForestType type;
 	private ForestStats stats;
+	private Healthbar hb;
 	private int level = 0;
 	private int experience = 0;
 	private int health;
@@ -55,9 +58,10 @@ public class Forest
 		new int[3] { 0, 1, 2 }
 	);
 
-	public Forest(Yggdrasil yggdrasil, Acre acre, ForestType type)
+	public Forest(Yggdrasil yggdrasil, Acre acre, ForestType type, Healthbar hb)
 	{
 		this.yggdrasil = yggdrasil;
+		this.hb = hb;
 		this.acre = acre;
 		this.type = type;
 		switch (type)
@@ -118,6 +122,8 @@ public class Forest
 	{
 		health += amount;
 
+		hb.GetComponent<Healthbar>().SetFill(health * 1f / stats.bark[level]);
+
 		if (health <= 0)
 		{
 			health = 0;
@@ -144,9 +150,25 @@ public class Forest
 			health = stats.bark[level];
 		}
 	}
-	public void OnEachDay(int day)
+	public void OnEachDay(int day, Disaster? disaster)
 	{
 		if (type == ForestType.WorldTree) return;
+
+		if (disaster != null)
+		{
+			switch (disaster.GetDisasterType())
+			{
+				case DisasterType.Blizzard:
+					break;
+				case DisasterType.Bushfire:
+					ChangeHealth(-5);
+					break;
+				case DisasterType.Drought:
+					break;
+				case DisasterType.Flood:
+					break;
+			}
+		}
 
 		Photosynthesise();
 	}

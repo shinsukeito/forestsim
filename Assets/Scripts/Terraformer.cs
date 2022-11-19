@@ -11,6 +11,7 @@ public class Terraformer : MonoBehaviour
 	public Tilemap forestTilemap;
 	public Tilemap forestHoverTilemap;
 	public Tilemap disasterTilemap;
+	public GameObject healthbarPrefab;
 
 	[Header("Map Configuration")]
 	[Range(0, 50)]
@@ -119,8 +120,10 @@ public class Terraformer : MonoBehaviour
 		for (int i = 0; i < riverCount; i++)
 			Erode();
 
-		// Create World Tree and add it as reference to four tiles:
-		Forest worldTree = new Forest(yggdrasil, map[mapWidth / 2, mapHeight / 2], ForestType.WorldTree);
+		// Create World Tree and add it as reference to four tiles: 
+		Healthbar hb = Instantiate(healthbarPrefab, new Vector3(0, -0.4f), Quaternion.identity).GetComponent<Healthbar>();
+		Forest worldTree = new Forest(yggdrasil, map[mapWidth / 2, mapHeight / 2], ForestType.WorldTree, hb);
+
 		PlantWorldTree(mapWidth / 2, mapHeight / 2, worldTree);
 		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2, worldTree);
 		PlantWorldTree(mapWidth / 2, mapHeight / 2 - 1, worldTree);
@@ -260,16 +263,16 @@ public class Terraformer : MonoBehaviour
 		switch (map[x, y].fieldType)
 		{
 			case FieldType.Barren:
-				terrainTilemap.SetTile(new Vector3Int(x, y, 0), barrenTile);
+				terrainTilemap.SetTile(new Vector3Int(x, y), barrenTile);
 				break;
 			case FieldType.Field:
-				terrainTilemap.SetTile(new Vector3Int(x, y, 0), fieldTile);
+				terrainTilemap.SetTile(new Vector3Int(x, y), fieldTile);
 				break;
 			case FieldType.Ocean:
-				terrainTilemap.SetTile(new Vector3Int(x, y, 0), oceanTile);
+				terrainTilemap.SetTile(new Vector3Int(x, y), oceanTile);
 				break;
 			case FieldType.River:
-				terrainTilemap.SetTile(new Vector3Int(x, y, 0), riverTile);
+				terrainTilemap.SetTile(new Vector3Int(x, y), riverTile);
 				break;
 		}
 	}
@@ -281,16 +284,16 @@ public class Terraformer : MonoBehaviour
 		switch (map[x, y].forest.GetForestType())
 		{
 			case ForestType.Boreal:
-				forestTilemap.SetTile(new Vector3Int(x, y, 0), borealTile);
+				forestTilemap.SetTile(new Vector3Int(x, y), borealTile);
 				break;
 			case ForestType.Bushland:
-				forestTilemap.SetTile(new Vector3Int(x, y, 0), bushlandTile);
+				forestTilemap.SetTile(new Vector3Int(x, y), bushlandTile);
 				break;
 			case ForestType.Mangrove:
-				forestTilemap.SetTile(new Vector3Int(x, y, 0), mangroveTile);
+				forestTilemap.SetTile(new Vector3Int(x, y), mangroveTile);
 				break;
 			case ForestType.Rainforest:
-				forestTilemap.SetTile(new Vector3Int(x, y, 0), rainforestTile);
+				forestTilemap.SetTile(new Vector3Int(x, y), rainforestTile);
 				break;
 		}
 	}
@@ -302,35 +305,37 @@ public class Terraformer : MonoBehaviour
 		switch (map[x, y].disaster.GetDisasterType())
 		{
 			case DisasterType.Blizzard:
-				disasterTilemap.SetTile(new Vector3Int(x, y, 0), blizzardTile);
+				disasterTilemap.SetTile(new Vector3Int(x, y), blizzardTile);
 				break;
 			case DisasterType.Bushfire:
-				disasterTilemap.SetTile(new Vector3Int(x, y, 0), bushfireTile);
+				disasterTilemap.SetTile(new Vector3Int(x, y), bushfireTile);
 				break;
 			case DisasterType.Drought:
-				disasterTilemap.SetTile(new Vector3Int(x, y, 0), droughtTile);
+				disasterTilemap.SetTile(new Vector3Int(x, y), droughtTile);
 				break;
 			case DisasterType.Flood:
-				disasterTilemap.SetTile(new Vector3Int(x, y, 0), floodTile);
+				disasterTilemap.SetTile(new Vector3Int(x, y), floodTile);
 				break;
 		}
 	}
 
 	public void EraseForest(int x, int y)
 	{
-		forestTilemap.SetTile(new Vector3Int(x, y, 0), null);
+		forestTilemap.SetTile(new Vector3Int(x, y), null);
 	}
 
 	public void EraseDisaster(int x, int y)
 	{
-		disasterTilemap.SetTile(new Vector3Int(x, y, 0), null);
+		disasterTilemap.SetTile(new Vector3Int(x, y), null);
 	}
 
 	public bool PlantForest(int x, int y, ForestType forestType)
 	{
 		if (!Plantable(x, y, forestType)) return false;
 
-		map[x, y].forest = new Forest(yggdrasil, map[x, y], forestType);
+		Vector3 healthbarPosition = forestTilemap.GetCellCenterWorld(new Vector3Int(x, y)) + new Vector3(0, -0.4f);
+		Healthbar hb = Instantiate(healthbarPrefab, healthbarPosition, Quaternion.identity).GetComponent<Healthbar>();
+		map[x, y].forest = new Forest(yggdrasil, map[x, y], forestType, hb);
 		PaintForest(x, y);
 
 		return true;

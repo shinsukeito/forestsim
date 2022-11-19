@@ -17,9 +17,11 @@ public class Chronographer : MonoBehaviour
 {
 	[Header("References")]
 	public Terraformer terraformer;
+	public Yggdrasil yggdrasil;
 	public TMP_Text textCycle;
 	public TMP_Text textSeason;
 	public TMP_Text textDay;
+	public TMP_Text textGameOver;
 
 	[Header("Configurations")]
 	public bool paused = true;
@@ -99,6 +101,11 @@ public class Chronographer : MonoBehaviour
 		// Update map:
 		terraformer.OnEachDay(currentDay);
 
+		if (yggdrasil.sunlight < 5 && terraformer.GetForestCount() == 0)
+		{
+			GameOver(false);
+		}
+
 		if (currentDay % daysInSeason == 0)
 		{
 			TickSeason();
@@ -137,5 +144,19 @@ public class Chronographer : MonoBehaviour
 
 		// Update UI:
 		textCycle.text = $"Cycle: {currentCycle + 1}";
+	}
+
+	public void GameOver(bool win)
+	{
+		if (win)
+		{
+			textGameOver.text = "You won!";
+			paused = true;
+		}
+		else
+		{
+			textGameOver.text = "Game over!";
+			paused = true;
+		}
 	}
 }

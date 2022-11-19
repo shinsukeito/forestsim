@@ -1,3 +1,5 @@
+#nullable enable
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +25,7 @@ public class Disaster
 		this.type = type;
 	}
 
-	public void OnEachDay(int day)
+	public void OnEachDay(int day, Forest? forest)
 	{
 		age++;
 

@@ -21,7 +21,7 @@ public class Watcher : MonoBehaviour
 	private Vector2 lastDragPosition;
 	private Vector2 speed;
 
-	private float zoom = 3;
+	private float targetZoom = 3;
 	private float trueZoom = 3;
 	private float prevZoom = 3;
 	private float zoomTime = 1;
@@ -76,28 +76,28 @@ public class Watcher : MonoBehaviour
 
 	void UpdateZoom()
 	{
-		if (Input.GetAxis("Mouse ScrollWheel") > 0 && zoom > 3)
+		if (Input.GetAxis("Mouse ScrollWheel") > 0 && targetZoom > 3)
 		{
 			prevZoom = trueZoom;
-			zoom -= zoomSpeed;
+			targetZoom -= zoomSpeed;
 			zoomTime = 0;
 		}
 
-		if (Input.GetAxis("Mouse ScrollWheel") < 0 && zoom <= maxZoom)
+		if (Input.GetAxis("Mouse ScrollWheel") < 0 && targetZoom <= maxZoom)
 		{
 			prevZoom = trueZoom;
-			zoom += zoomSpeed;
+			targetZoom += zoomSpeed;
 			zoomTime = 0;
 		}
 
 		if (zoomTime < finalZoomKeyTime)
 		{
 			zoomTime += Time.deltaTime;
-			trueZoom = prevZoom + zoomCurve.Evaluate(zoomTime) * (zoom - prevZoom);
+			trueZoom = prevZoom + zoomCurve.Evaluate(zoomTime) * (targetZoom - prevZoom);
 		}
 		else
 		{
-			trueZoom = zoom;
+			trueZoom = targetZoom;
 		}
 
 		cam.orthographicSize = trueZoom;

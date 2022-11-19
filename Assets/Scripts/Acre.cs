@@ -29,8 +29,8 @@ public class Acre
 
 	public void OnEachDay(int day)
 	{
-		if (forest != null) forest.OnEachDay(day);
-		if (disaster != null) disaster.OnEachDay(day);
+		if (forest != null) forest.OnEachDay(day, disaster);
+		if (disaster != null) disaster.OnEachDay(day, forest);
 
 		if (nextDisaster != DisasterType.None)
 		{
