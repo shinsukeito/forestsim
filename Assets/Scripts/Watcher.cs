@@ -64,8 +64,12 @@ public class Watcher : MonoBehaviour
 			else speed.y = 0;
 		}
 
-		Vector2 dims = terraformer.GetDimensions() / 2f;
-		Vector3 nextPos = Vector2.ClampMagnitude((Vector2)cam.transform.position + (speed * Time.deltaTime), Mathf.Max(dims.x, dims.y));
+		Vector3 nextPos = (Vector2)cam.transform.position + (speed * Time.deltaTime);
+		Vector2 dims = terraformer.GetDimensions() * cam.aspect / trueZoom;
+		nextPos = new Vector2(
+			Mathf.Clamp(nextPos.x, -dims.x, dims.x),
+			Mathf.Clamp(nextPos.y, -dims.y, dims.y)
+		);
 		nextPos.z = -5;
 		cam.transform.position = nextPos;
 	}
@@ -79,7 +83,7 @@ public class Watcher : MonoBehaviour
 			zoomTime = 0;
 		}
 
-		if (Input.GetAxis("Mouse ScrollWheel") < 0 && zoom < maxZoom)
+		if (Input.GetAxis("Mouse ScrollWheel") < 0 && zoom <= maxZoom)
 		{
 			prevZoom = trueZoom;
 			zoom += zoomSpeed;

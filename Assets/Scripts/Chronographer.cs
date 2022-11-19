@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum Season
 {
@@ -16,9 +17,9 @@ public class Chronographer : MonoBehaviour
 {
 	[Header("References")]
 	public Terraformer terraformer;
-	public Text textCycle;
-	public Text textSeason;
-	public Text textDay;
+	public TMP_Text textCycle;
+	public TMP_Text textSeason;
+	public TMP_Text textDay;
 
 	[Header("Configurations")]
 	public bool paused = true;
@@ -53,6 +54,12 @@ public class Chronographer : MonoBehaviour
 		}
 	}
 
+	public void Commence()
+	{
+		TickSeason();
+		paused = false;
+	}
+
 	void GenerateCycle()
 	{
 		// Randomise seasons:
@@ -80,8 +87,6 @@ public class Chronographer : MonoBehaviour
 		seasonIcons[0].Highlight();
 	}
 
-
-
 	Season GetCurrentSeason()
 	{
 		return seasonOrder[currentSeason];
@@ -94,14 +99,13 @@ public class Chronographer : MonoBehaviour
 		// Update map:
 		terraformer.OnEachDay(currentDay);
 
-		if (currentDay >= daysInSeason)
+		if (currentDay % daysInSeason == 0)
 		{
-			currentDay = 0;
 			TickSeason();
 		}
 
 		// Update UI:
-		textDay.text = $"Day: {currentSeason * daysInSeason + currentDay + 1}";
+		textDay.text = $"Day: {currentDay + 1}";
 	}
 
 	void TickSeason()

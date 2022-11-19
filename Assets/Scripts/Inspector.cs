@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
+using TMPro;
 
 public class Inspector : MonoBehaviour
 {
 	[Header("References")]
 	public Terraformer terraformer;
 	public Tilemap tilemap;
-	public Text textInspector;
+	public TMP_Text textInspector;
 
 	private Vector3Int inspectedTile;
 

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
+using TMPro;
 
 public class Yggdrasil : MonoBehaviour
 {
 	[Header("References")]
 	public Terraformer terraformer;
 	public Tilemap forestHoverTilemap;
-	public Text textSunlight;
+	public TMP_Text textSunlight;
 
 	[Header("Configurations")]
 	public int sunlight = 0;
@@ -124,6 +124,23 @@ public class Yggdrasil : MonoBehaviour
 			}
 		else
 			forestHoverTilemap.SetTile(hoveredTile, null);
+	}
+
+	public void SelectBoreal()
+	{
+		SetSelectedForest(ForestType.Boreal);
+	}
+	public void SelectBushland()
+	{
+		SetSelectedForest(ForestType.Bushland);
+	}
+	public void SelectMangrove()
+	{
+		SetSelectedForest(ForestType.Mangrove);
+	}
+	public void SelectRainforest()
+	{
+		SetSelectedForest(ForestType.Rainforest);
 	}
 
 	public void SetSunlight(int amount)
