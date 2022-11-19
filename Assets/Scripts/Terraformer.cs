@@ -120,7 +120,7 @@ public class Terraformer : MonoBehaviour
 			Erode();
 
 		// Create World Tree and add it as reference to four tiles:
-		Forest worldTree = new Forest(yggdrasil, ForestType.WorldTree);
+		Forest worldTree = new Forest(yggdrasil, map[mapWidth / 2, mapHeight / 2], ForestType.WorldTree);
 		PlantWorldTree(mapWidth / 2, mapHeight / 2, worldTree);
 		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2, worldTree);
 		PlantWorldTree(mapWidth / 2, mapHeight / 2 - 1, worldTree);
@@ -330,7 +330,7 @@ public class Terraformer : MonoBehaviour
 	{
 		if (!Plantable(x, y, forestType)) return false;
 
-		map[x, y].forest = new Forest(yggdrasil, forestType);
+		map[x, y].forest = new Forest(yggdrasil, map[x, y], forestType);
 		PaintForest(x, y);
 
 		return true;

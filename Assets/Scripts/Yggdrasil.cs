@@ -94,7 +94,6 @@ public class Yggdrasil : MonoBehaviour
 		}
 	}
 
-
 	void SetSelectedForest(ForestType forestType)
 	{
 		if (sunlight < forestCost) selectedForestType = ForestType.None;
