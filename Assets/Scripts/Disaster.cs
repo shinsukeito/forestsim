@@ -45,7 +45,7 @@ public class Disaster
 				List<Acre> neighbours = acre.GetNeighbours(1, false);
 				List<Acre> matched = neighbours.FindAll((n) =>
 				{
-					if (n.fieldType != FieldType.Barren && n.fieldType != FieldType.Field) return false;
+					if (n.fieldType != FieldType.Field) return false;
 					if (n.disaster != null && n.disaster.GetDisasterType() == DisasterType.Bushfire) return false;
 					return true;
 				});

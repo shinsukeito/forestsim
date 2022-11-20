@@ -268,8 +268,8 @@ GameObject:
   m_Component:
   - component: {fileID: 65983856}
   - component: {fileID: 65983855}
-  - component: {fileID: 65983854}
   - component: {fileID: 65983857}
+  - component: {fileID: 65983858}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -277,14 +277,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &65983854
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65983853}
-  m_Enabled: 1
 --- !u!20 &65983855
 Camera:
   m_ObjectHideFlags: 0
@@ -384,6 +376,19 @@ MonoBehaviour:
   scrollSpeed: 25
   maxZoom: 15
   zoomSpeed: 2
+--- !u!114 &65983858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65983853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &180516910
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,7 +1418,7 @@ MonoBehaviour:
   healthbarPrefab: {fileID: 4627262999169483501, guid: b1be080c9fb460143b2f791c766df60e, type: 3}
   mapWidth: 50
   mapHeight: 40
-  fieldSpawnPercent: 80
+  fieldSpawnPercent: 75
   oceanSize: 10
   riverSpawnSize: 3
   riverCount: 2
