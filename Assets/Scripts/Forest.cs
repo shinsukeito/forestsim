@@ -27,34 +27,34 @@ public class Forest
 	private float sunlightModifier = 1;
 	private float expModifier = 1;
 
-	private int expPerLevel = 20;
+	private int expPerLevel = 40;
 
 	// Forest stats:
 	ForestStats borealStats = new ForestStats(
 		3,
-		new int[3] { 25, 45, 90 },
-		new int[3] { 10, 15, 25 },
+		new int[3] { 25, 65, 65 },
+		new int[3] { 10, 20, 20 },
 		new int[3] { 0, 1, 2 }
 	);
 
 	ForestStats bushlandStats = new ForestStats(
 		3,
-		new int[3] { 35, 55, 100 },
-		new int[3] { 3, 6, 10 },
+		new int[3] { 35, 75, 75 },
+		new int[3] { 3, 7, 7 },
 		new int[3] { 0, 1, 2 }
 	);
 
 	ForestStats mangroveStats = new ForestStats(
 		3,
-		new int[3] { 20, 35, 50 },
-		new int[3] { 5, 8, 12 },
+		new int[3] { 25, 45, 45 },
+		new int[3] { 5, 10, 10 },
 		new int[3] { 0, 1, 2 }
 	);
 
 	ForestStats rainforestStats = new ForestStats(
 		3,
-		new int[3] { 15, 25, 35 },
-		new int[3] { 5, 10, 15 },
+		new int[3] { 20, 40, 40 },
+		new int[3] { 6, 12, 12 },
 		new int[3] { 0, 1, 2 }
 	);
 

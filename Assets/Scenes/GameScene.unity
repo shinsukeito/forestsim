@@ -1860,7 +1860,7 @@ MonoBehaviour:
   - {fileID: 551434526}
   - {fileID: 1742279121}
   tickSpan: 0
-  dayLength: 2
+  dayLength: 3
   daysInSeason: 5
   currentDay: 0
   currentSeason: 0
