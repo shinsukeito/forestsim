@@ -13,7 +13,7 @@ public class Yggdrasil : MonoBehaviour
 
 	[Header("Configurations")]
 	public int sunlight = 0;
-	public int forestCost = 5;
+	public int forestCost = 50;
 	public int expPerGrowth = 3;
 
 	public TileBase borealTile;
@@ -27,7 +27,7 @@ public class Yggdrasil : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		SetSunlight(20);
+		SetSunlight(200);
 	}
 
 	// Update is called once per frame

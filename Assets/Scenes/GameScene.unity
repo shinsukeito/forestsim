@@ -1540,7 +1540,7 @@ MonoBehaviour:
   forestHoverTilemap: {fileID: 1145062367}
   textSunlight: {fileID: 1029267931}
   sunlight: 0
-  forestCost: 5
+  forestCost: 50
   expPerGrowth: 3
   borealTile: {fileID: 11400000, guid: 86e6e97cec0b2564fb87a475fc977355, type: 2}
   bushlandTile: {fileID: 11400000, guid: 4e1048442db1e52468a5f4d0c20465dd, type: 2}
