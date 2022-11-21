@@ -152,7 +152,26 @@ public class Forest
 	}
 	public void OnEachDay(int day, Disaster? disaster)
 	{
-		if (type == ForestType.WorldTree) return;
+		if (type == ForestType.WorldTree)
+		{
+			if (disaster != null)
+			{
+				switch (disaster.GetDisasterType())
+				{
+					case DisasterType.Blizzard:
+						break;
+					case DisasterType.Bushfire:
+						yggdrasil.ChangeHealth(-5);
+						break;
+					case DisasterType.Drought:
+						break;
+					case DisasterType.Flood:
+						break;
+				}
+			}
+
+			return;
+		}
 
 		if (disaster != null)
 		{

@@ -106,6 +106,11 @@ public class Chronographer : MonoBehaviour
 			GameOver(false);
 		}
 
+		if (yggdrasil.health <= 0)
+		{
+			GameOver(false);
+		}
+
 		if (currentDay % daysInSeason == 0)
 		{
 			TickSeason();

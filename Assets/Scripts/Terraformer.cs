@@ -122,6 +122,7 @@ public class Terraformer : MonoBehaviour
 
 		// Create World Tree and add it as reference to four tiles: 
 		Healthbar hb = Instantiate(healthbarPrefab, new Vector3(0, -0.4f), Quaternion.identity).GetComponent<Healthbar>();
+		yggdrasil.hb = hb;
 		Forest worldTree = new Forest(yggdrasil, map[mapWidth / 2, mapHeight / 2], ForestType.WorldTree, hb);
 
 		PlantWorldTree(mapWidth / 2, mapHeight / 2, worldTree);

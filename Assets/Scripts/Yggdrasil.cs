@@ -10,12 +10,14 @@ public class Yggdrasil : MonoBehaviour
 	public Terraformer terraformer;
 	public Tilemap forestHoverTilemap;
 	public TMP_Text textSunlight;
+	public Healthbar hb;
 
 	[Header("Configurations")]
 	public int sunlight = 0;
 	public int forestCost = 50;
 	public int expPerGrowth = 3;
-
+	public int maxHealth = 50;
+	public int health = 50;
 	public TileBase borealTile;
 	public TileBase bushlandTile;
 	public TileBase mangroveTile;
@@ -148,4 +150,11 @@ public class Yggdrasil : MonoBehaviour
 		sunlight = amount;
 		textSunlight.text = $"Sunlight: {sunlight}";
 	}
+
+	public void ChangeHealth(int amount)
+	{
+		health += amount;
+		hb.GetComponent<Healthbar>().SetFill(health * 1f / maxHealth);
+	}
+
 }
