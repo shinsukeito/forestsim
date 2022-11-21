@@ -37,7 +37,7 @@ public class Disaster
 					age > 1 &&
 					Random.Range(0, 100) <= acre.GetBushfireExtinguishChance())
 				{
-					acre.RemoveDisaster();
+					acre.RemoveDisaster(DisasterType.Bushfire);
 					return;
 				}
 

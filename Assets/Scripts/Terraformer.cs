@@ -61,11 +61,11 @@ public class Terraformer : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.R))
-		{
-			BigBang();
-			PaintWorld();
-		}
+		// if (Input.GetKeyDown(KeyCode.R))
+		// {
+		// 	BigBang();
+		// 	PaintWorld();
+		// }
 	}
 
 	void BigBang()
@@ -537,7 +537,7 @@ public class Terraformer : MonoBehaviour
 		PaintDisaster(x, y);
 	}
 
-	public List<Acre> GetNeighbours(int x, int y, int size, bool circular)
+	public List<Acre> GetNeighbours(int x, int y, int size, bool includeSelf, bool circular)
 	{
 		List<Acre> neighbours = new List<Acre>();
 
@@ -547,7 +547,7 @@ public class Terraformer : MonoBehaviour
 			{
 				if (circular && Mathf.Abs(x - nx) + Mathf.Abs(y - ny) > size) continue;
 				if (nx < 0 || nx > mapWidth - 1 || ny < 0 || ny > mapHeight - 1) continue;
-				if (nx == x && ny == y) continue;
+				if (!includeSelf && nx == x && ny == y) continue;
 
 				neighbours.Add(map[nx, ny]);
 			}
@@ -619,5 +619,11 @@ public class Terraformer : MonoBehaviour
 			if (x < 0 || x >= mapWidth) continue;
 			acres.Add(map[x, y0]);
 		}
+	}
+
+	public List<Acre> GetSpellTiles(int x, int y, ForestType forestType, int level)
+	{
+		int size = level == 1 ? 1 : 2;
+		return GetNeighbours(x, y, size, true, true);
 	}
 }

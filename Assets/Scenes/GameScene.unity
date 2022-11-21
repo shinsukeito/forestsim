@@ -1539,13 +1539,17 @@ MonoBehaviour:
   terraformer: {fileID: 715526312}
   forestHoverTilemap: {fileID: 1145062367}
   textSunlight: {fileID: 1029267931}
+  hb: {fileID: 0}
   sunlight: 0
   forestCost: 50
   expPerGrowth: 3
+  maxHealth: 50
+  health: 50
   borealTile: {fileID: 11400000, guid: 86e6e97cec0b2564fb87a475fc977355, type: 2}
   bushlandTile: {fileID: 11400000, guid: 4e1048442db1e52468a5f4d0c20465dd, type: 2}
   mangroveTile: {fileID: 11400000, guid: 163de4e31652c614e8e9c2ae3ac67652, type: 2}
   rainforestTile: {fileID: 11400000, guid: f1d0ad3a425379248920588ab76b26cc, type: 2}
+  spellTile: {fileID: 11400000, guid: 32e1caa3e804e1a4aab17883aee6b9e6, type: 2}
 --- !u!1 &918343006
 GameObject:
   m_ObjectHideFlags: 0

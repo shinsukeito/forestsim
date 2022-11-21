@@ -15,6 +15,7 @@ public class Yggdrasil : MonoBehaviour
 	[Header("Configurations")]
 	public int sunlight = 0;
 	public int forestCost = 50;
+	public int spellCost = 10;
 	public int expPerGrowth = 3;
 	public int maxHealth = 50;
 	public int health = 50;
@@ -22,6 +23,7 @@ public class Yggdrasil : MonoBehaviour
 	public TileBase bushlandTile;
 	public TileBase mangroveTile;
 	public TileBase rainforestTile;
+	public TileBase spellTile;
 
 	private Vector3Int hoveredTile;
 	private ForestType selectedForestType = ForestType.None;
@@ -56,9 +58,10 @@ public class Yggdrasil : MonoBehaviour
 			SetSelectedForest(ForestType.None);
 		}
 
+		// Forest Placement:
+		Vector3Int tilePosition = forestHoverTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 		if (selectedForestType != ForestType.None)
 		{
-			Vector3Int tilePosition = forestHoverTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 			if (tilePosition != hoveredTile)
 			{
 				forestHoverTilemap.SetTile(hoveredTile, null);
@@ -93,6 +96,54 @@ public class Yggdrasil : MonoBehaviour
 					SetSunlight(sunlight - forestCost);
 
 				selectedForestType = ForestType.None;
+			}
+		}
+		// Forest Spell:
+		else
+		{
+			forestHoverTilemap.ClearAllTiles();
+
+			Acre acre = terraformer.GetAcre(tilePosition.x, tilePosition.y);
+			if (acre == null || acre.forest == null || acre.forest.GetForestType() == ForestType.WorldTree) return;
+
+			List<Acre> acres = terraformer.GetSpellTiles(tilePosition.x, tilePosition.y, acre.forest.GetForestType(), acre.forest.GetLevel());
+
+			acres.ForEach((Acre a) =>
+			{
+				forestHoverTilemap.SetTile(new Vector3Int(a.x, a.y, 0), spellTile);
+			});
+
+			if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
+			{
+				switch (acre.forest.GetForestType())
+				{
+					case ForestType.Boreal:
+						acres.ForEach((Acre a) =>
+						{
+							a.RemoveDisaster(DisasterType.Blizzard);
+						});
+						break;
+					case ForestType.Bushland:
+						acres.ForEach((Acre a) =>
+						{
+							a.RemoveDisaster(DisasterType.Drought);
+						});
+						break;
+					case ForestType.Mangrove:
+						acres.ForEach((Acre a) =>
+						{
+							a.RemoveDisaster(DisasterType.Flood);
+						});
+						break;
+					case ForestType.Rainforest:
+						acres.ForEach((Acre a) =>
+						{
+							a.RemoveDisaster(DisasterType.Bushfire);
+						});
+						break;
+				}
+
+				SetSunlight(sunlight - spellCost);
 			}
 		}
 	}

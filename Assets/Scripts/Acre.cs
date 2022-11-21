@@ -57,15 +57,17 @@ public class Acre
 		terraformer.EraseForest(x, y);
 	}
 
-	public void RemoveDisaster()
+	public void RemoveDisaster(DisasterType disasterType)
 	{
+		if (disaster == null || disaster.GetDisasterType() != disasterType) return;
+
 		disaster = null;
 		terraformer.EraseDisaster(x, y);
 	}
 
 	public List<Acre> GetNeighbours(int size, bool circular)
 	{
-		return terraformer.GetNeighbours(x, y, size, circular);
+		return terraformer.GetNeighbours(x, y, size, false, circular);
 	}
 
 	public void Wreak(DisasterType disasterType)
