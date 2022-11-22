@@ -79,4 +79,24 @@ public class Acre
 	{
 		return terraformer.bushfireExtinguishChance;
 	}
+
+	public int GetBlizzardHinderChance(int level)
+	{
+		return terraformer.blizzardHinderChance[level];
+	}
+
+	public int GetBlizzardDestroyChance(int level)
+	{
+		return terraformer.blizzardDestroyChance[level];
+	}
+
+	public float GetDroughtHinderModifier()
+	{
+		return terraformer.droughtHinderModifier;
+	}
+
+	public float GetFloodDamage()
+	{
+		return terraformer.floodDamage;
+	}
 }

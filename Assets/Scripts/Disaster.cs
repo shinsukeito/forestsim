@@ -70,4 +70,9 @@ public class Disaster
 	{
 		return type;
 	}
+
+	public int GetAge()
+	{
+		return age;
+	}
 }

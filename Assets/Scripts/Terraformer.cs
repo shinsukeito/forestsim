@@ -27,11 +27,18 @@ public class Terraformer : MonoBehaviour
 	public int riverCount = 3;
 
 	[Header("Disaster Configuration")]
-	public int blizzardRadius = 2;
 	public int bushfireExtinguishChance = 25;
+
+	public int blizzardRadius = 2;
+	public int[] blizzardHinderChance = new int[] { 70, 30 };
+	public int[] blizzardDestroyChance = new int[] { 30, 10 };
+
 	public int droughtRadius = 2;
-	public int floodChance = 60;
+	public float droughtHinderModifier = 0.65f;
+
 	public int floodRadius = 1;
+	public int floodChance = 60;
+	public int floodDamage = 2;
 
 	[Header("Field Tiles")]
 	public TileBase barrenTile;

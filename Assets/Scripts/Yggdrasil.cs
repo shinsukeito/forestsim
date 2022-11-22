@@ -62,6 +62,11 @@ public class Yggdrasil : MonoBehaviour
 		Vector3Int tilePosition = forestHoverTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 		if (selectedForestType != ForestType.None)
 		{
+			if (Input.GetMouseButtonDown(1))
+			{
+				SetSelectedForest(ForestType.None);
+			}
+
 			if (tilePosition != hoveredTile)
 			{
 				forestHoverTilemap.SetTile(hoveredTile, null);
@@ -205,6 +210,9 @@ public class Yggdrasil : MonoBehaviour
 	public void ChangeHealth(int amount)
 	{
 		health += amount;
+		if (health + amount <= 0)
+			health = 0;
+
 		hb.GetComponent<Healthbar>().SetFill(health * 1f / maxHealth);
 	}
 

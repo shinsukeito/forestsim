@@ -1422,11 +1422,15 @@ MonoBehaviour:
   oceanSize: 10
   riverSpawnSize: 3
   riverCount: 2
-  blizzardRadius: 2
   bushfireExtinguishChance: 50
+  blizzardRadius: 2
+  blizzardHinderChance: 460000001e000000
+  blizzardDestroyChance: 1e0000000a000000
   droughtRadius: 2
-  floodChance: 60
+  droughtHinderModifier: 0.65
   floodRadius: 2
+  floodChance: 60
+  floodDamage: 2
   barrenTile: {fileID: 11400000, guid: 37051be443d34c3479eacf9ac48ce2eb, type: 2}
   fieldTile: {fileID: 11400000, guid: 25127c4408168f74e9faf11c2ef619e1, type: 2}
   oceanTile: {fileID: 11400000, guid: 02b16b5f2fa39f7468f492a5d3c08026, type: 2}
@@ -1542,6 +1546,7 @@ MonoBehaviour:
   hb: {fileID: 0}
   sunlight: 0
   forestCost: 50
+  spellCost: 10
   expPerGrowth: 3
   maxHealth: 50
   health: 50
@@ -2954,6 +2959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terraformer: {fileID: 715526312}
+  yggdrasil: {fileID: 834084151}
   tilemap: {fileID: 211119474}
   textInspector: {fileID: 16227475}
 --- !u!224 &1595998667 stripped

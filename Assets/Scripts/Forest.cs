@@ -1,6 +1,8 @@
 #nullable enable
 
-using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public enum ForestType
 {
@@ -23,10 +25,6 @@ public class Forest
 	private int experience = 0;
 	private int health;
 	private int expGeneration = 10;
-
-	private float sunlightModifier = 1;
-	private float expModifier = 1;
-
 	private int expPerLevel = 40;
 
 	// Forest stats:
@@ -115,18 +113,18 @@ public class Forest
 
 	public int GetSunlightGeneration()
 	{
-		return (int)Math.Round(stats.leaves[level] * sunlightModifier);
+		float sunlightModifier = 1;
+		return Mathf.RoundToInt(stats.leaves[level] * sunlightModifier);
 	}
 
 	public void ChangeHealth(int amount)
 	{
 		health += amount;
 
-		hb.GetComponent<Healthbar>().SetFill(health * 1f / stats.bark[level]);
-
 		if (health <= 0)
 		{
 			health = 0;
+			hb.GetComponent<Healthbar>().SetFill(health * 1f / stats.bark[level]);
 			acre.RemoveForest();
 		}
 	}
@@ -138,9 +136,24 @@ public class Forest
 
 	public void Grow()
 	{
-		if (level >= stats.maxLevel - 1) return;
+		float expModifier = 1;
 
-		experience += (int)Math.Round(expGeneration * expModifier);
+		if (level >= stats.maxLevel - 1) return;
+		if (acre.disaster != null)
+		{
+			switch (acre.disaster.GetDisasterType())
+			{
+				case DisasterType.Blizzard:
+					if (Random.Range(0, 100) <= acre.GetBlizzardHinderChance(level))
+						return;
+					break;
+				case DisasterType.Drought:
+					expModifier = acre.GetDroughtHinderModifier();
+					break;
+			}
+		}
+
+		experience += Mathf.RoundToInt(expGeneration * expModifier);
 
 		if (experience >= expPerLevel)
 		{
@@ -166,6 +179,7 @@ public class Forest
 					case DisasterType.Drought:
 						break;
 					case DisasterType.Flood:
+						yggdrasil.ChangeHealth(Mathf.RoundToInt(-acre.GetFloodDamage() * disaster.GetAge()));
 						break;
 				}
 			}
@@ -178,6 +192,11 @@ public class Forest
 			switch (disaster.GetDisasterType())
 			{
 				case DisasterType.Blizzard:
+					if (Random.Range(0, 100) <= acre.GetBlizzardDestroyChance(level))
+					{
+						ChangeHealth(-health);
+						return;
+					}
 					break;
 				case DisasterType.Bushfire:
 					ChangeHealth(-5);
@@ -185,6 +204,8 @@ public class Forest
 				case DisasterType.Drought:
 					break;
 				case DisasterType.Flood:
+					if (disaster.GetAge() > 1)
+						ChangeHealth(Mathf.RoundToInt(-acre.GetFloodDamage() * disaster.GetAge()));
 					break;
 			}
 		}

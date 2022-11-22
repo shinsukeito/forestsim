@@ -8,6 +8,7 @@ public class Inspector : MonoBehaviour
 {
 	[Header("References")]
 	public Terraformer terraformer;
+	public Yggdrasil yggdrasil;
 	public Tilemap tilemap;
 	public TMP_Text textInspector;
 
@@ -43,6 +44,7 @@ public class Inspector : MonoBehaviour
 				if (forestType == ForestType.WorldTree)
 				{
 					forestText = "Forest: World Tree";
+					forestText += $"\n - Health: {yggdrasil.health} / {yggdrasil.maxHealth}";
 				}
 				else
 				{
