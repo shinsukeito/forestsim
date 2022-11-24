@@ -176,11 +176,21 @@ public class Forest
 				switch (disaster.GetDisasterType())
 				{
 					case DisasterType.Blizzard:
+					if (Random.Range(0, 100) <= acre.GetBlizzardYggdrasilDamageChance())
+					{
+						ChangeHealth(-acre.GetBlizzardDamage());
+						return;
+					}
 						break;
 					case DisasterType.Bushfire:
-						yggdrasil.ChangeHealth(-5);
+						yggdrasil.ChangeHealth(-acre.GetBushfireDamage());
 						break;
 					case DisasterType.Drought:
+					if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
+					{
+						ChangeHealth(-acre.GetDroughtDamage());
+						return;
+					}
 						break;
 					case DisasterType.Flood:
 						yggdrasil.ChangeHealth(Mathf.RoundToInt(-acre.GetFloodDamage() * disaster.GetAge()));
@@ -198,14 +208,19 @@ public class Forest
 				case DisasterType.Blizzard:
 					if (Random.Range(0, 100) <= acre.GetBlizzardDestroyChance(level))
 					{
-						ChangeHealth(-health);
+						ChangeHealth(-acre.GetBlizzardDamage());
 						return;
 					}
 					break;
 				case DisasterType.Bushfire:
-					ChangeHealth(-5);
+					ChangeHealth(-acre.GetBushfireDamage());
 					break;
 				case DisasterType.Drought:
+					if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
+					{
+						ChangeHealth(-acre.GetDroughtDamage());
+						return;
+					}
 					break;
 				case DisasterType.Flood:
 					if (disaster.GetAge() > 1)

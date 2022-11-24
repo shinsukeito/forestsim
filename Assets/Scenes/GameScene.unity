@@ -1420,10 +1420,15 @@ MonoBehaviour:
   riverSpawnSize: 3
   riverCount: 2
   bushfireExtinguishChance: 50
+  bushfireDamage: 5
   blizzardRadius: 2
+  blizzardDamage: 20
+  blizzardYggdrasilDamageChance: 15
   blizzardHinderChance: 460000001e000000
-  blizzardDestroyChance: 1e0000000a000000
+  blizzardDestroyChance: 2800000019000000
   droughtRadius: 2
+  droughtDamageChance: 90
+  droughtDamage: 2
   droughtHinderModifier: 0.65
   floodRadius: 2
   floodChance: 60
@@ -1558,11 +1563,12 @@ MonoBehaviour:
   textSunlight: {fileID: 1029267931}
   hb: {fileID: 0}
   sunlight: 0
-  forestCost: 50
-  spellCost: 10
+  startingSunlight: 600
+  forestCost: 100
+  spellCost: 20
   expPerGrowth: 3
-  maxHealth: 50
-  health: 50
+  maxHealth: 100
+  health: 100
   borealTile: {fileID: 11400000, guid: 86e6e97cec0b2564fb87a475fc977355, type: 2}
   bushlandTile: {fileID: 11400000, guid: 4e1048442db1e52468a5f4d0c20465dd, type: 2}
   mangroveTile: {fileID: 11400000, guid: 163de4e31652c614e8e9c2ae3ac67652, type: 2}

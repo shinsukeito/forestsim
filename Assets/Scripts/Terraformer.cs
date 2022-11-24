@@ -29,12 +29,17 @@ public class Terraformer : MonoBehaviour
 
 	[Header("Disaster Configuration")]
 	public int bushfireExtinguishChance = 25;
+	public int bushfireDamage = 5;
 
 	public int blizzardRadius = 2;
+	public int blizzardDamage = 20;
+	public int blizzardYggdrasilDamageChance = 15;
 	public int[] blizzardHinderChance = new int[] { 70, 30 };
-	public int[] blizzardDestroyChance = new int[] { 30, 10 };
+	public int[] blizzardDestroyChance = new int[] { 40, 25 };
 
 	public int droughtRadius = 2;
+	public int droughtDamageChance = 90;
+	public int droughtDamage = 2;
 	public float droughtHinderModifier = 0.65f;
 
 	public int floodRadius = 1;
@@ -639,6 +644,6 @@ public class Terraformer : MonoBehaviour
 	public List<Acre> GetSpellTiles(int x, int y, ForestType forestType, int level)
 	{
 		int size = level == 0 ? 1 : 2;
-		return GetNeighbours(x, y, size, true, true);
+		return GetNeighbours(x, y, size, true, false);
 	}
 }
