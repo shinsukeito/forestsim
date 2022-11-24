@@ -9,6 +9,7 @@ public class Yggdrasil : MonoBehaviour
 	[Header("References")]
 	public Terraformer terraformer;
 	public Tilemap forestHoverTilemap;
+	public Tilemap spellTilemap;
 	public TMP_Text textSunlight;
 	public Healthbar hb;
 
@@ -106,7 +107,7 @@ public class Yggdrasil : MonoBehaviour
 		// Forest Spell:
 		else
 		{
-			forestHoverTilemap.ClearAllTiles();
+			spellTilemap.ClearAllTiles();
 
 			Acre acre = terraformer.GetAcre(tilePosition.x, tilePosition.y);
 			if (acre == null || acre.forest == null || acre.forest.GetForestType() == ForestType.WorldTree) return;
@@ -115,7 +116,7 @@ public class Yggdrasil : MonoBehaviour
 
 			acres.ForEach((Acre a) =>
 			{
-				forestHoverTilemap.SetTile(new Vector3Int(a.x, a.y, 0), spellTile);
+				spellTilemap.SetTile(new Vector3Int(a.x, a.y, 0), spellTile);
 			});
 
 			if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
@@ -215,5 +216,4 @@ public class Yggdrasil : MonoBehaviour
 
 		hb.GetComponent<Healthbar>().SetFill(health * 1f / maxHealth);
 	}
-
 }

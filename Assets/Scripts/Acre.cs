@@ -51,6 +51,16 @@ public class Acre
 		if (disaster != null) disaster.OnEachCycle(cycle);
 	}
 
+	public void RepaintForest()
+	{
+		terraformer.PaintForest(x, y);
+	}
+
+	public void RepaintDisaster()
+	{
+		terraformer.PaintDisaster(x, y);
+	}
+
 	public void RemoveForest()
 	{
 		forest = null;

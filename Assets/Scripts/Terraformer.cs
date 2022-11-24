@@ -11,6 +11,7 @@ public class Terraformer : MonoBehaviour
 	public Tilemap forestTilemap;
 	public Tilemap forestHoverTilemap;
 	public Tilemap disasterTilemap;
+	public Tilemap spellTilemap;
 	public GameObject healthbarPrefab;
 
 	[Header("Map Configuration")]
@@ -43,14 +44,15 @@ public class Terraformer : MonoBehaviour
 	[Header("Field Tiles")]
 	public TileBase barrenTile;
 	public TileBase fieldTile;
+	public TileBase fieldShadowTile;
 	public TileBase oceanTile;
 	public TileBase riverTile;
 
 	[Header("Forest Tiles")]
-	public TileBase borealTile;
-	public TileBase bushlandTile;
-	public TileBase mangroveTile;
-	public TileBase rainforestTile;
+	public TileBase[] borealTiles;
+	public TileBase[] bushlandTiles;
+	public TileBase[] mangroveTiles;
+	public TileBase[] rainforestTiles;
 
 	[Header("Disaster Tiles")]
 	public TileBase blizzardTile;
@@ -89,7 +91,10 @@ public class Terraformer : MonoBehaviour
 		forestHoverTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
 
 		disasterTilemap.ClearAllTiles();
-		disasterTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
+		disasterTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2); ;
+
+		spellTilemap.ClearAllTiles();
+		spellTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
 
 		string seed = Time.time.ToString();
 		System.Random randomValue = new System.Random(seed.GetHashCode());
@@ -128,7 +133,7 @@ public class Terraformer : MonoBehaviour
 			Erode();
 
 		// Create World Tree and add it as reference to four tiles: 
-		Healthbar hb = Instantiate(healthbarPrefab, new Vector3(0, -0.4f), Quaternion.identity).GetComponent<Healthbar>();
+		Healthbar hb = Instantiate(healthbarPrefab, new Vector3(0, -0.5f), Quaternion.identity).GetComponent<Healthbar>();
 		yggdrasil.hb = hb;
 		Forest worldTree = new Forest(yggdrasil, map[mapWidth / 2, mapHeight / 2], ForestType.WorldTree, hb);
 
@@ -274,7 +279,10 @@ public class Terraformer : MonoBehaviour
 				terrainTilemap.SetTile(new Vector3Int(x, y), barrenTile);
 				break;
 			case FieldType.Field:
-				terrainTilemap.SetTile(new Vector3Int(x, y), fieldTile);
+				if (map[x, y].forest != null && map[x, y].forest.GetForestType() == ForestType.WorldTree)
+					terrainTilemap.SetTile(new Vector3Int(x, y), fieldShadowTile);
+				else
+					terrainTilemap.SetTile(new Vector3Int(x, y), fieldTile);
 				break;
 			case FieldType.Ocean:
 				terrainTilemap.SetTile(new Vector3Int(x, y), oceanTile);
@@ -292,16 +300,16 @@ public class Terraformer : MonoBehaviour
 		switch (map[x, y].forest.GetForestType())
 		{
 			case ForestType.Boreal:
-				forestTilemap.SetTile(new Vector3Int(x, y), borealTile);
+				forestTilemap.SetTile(new Vector3Int(x, y), borealTiles[map[x, y].forest.GetLevel()]);
 				break;
 			case ForestType.Bushland:
-				forestTilemap.SetTile(new Vector3Int(x, y), bushlandTile);
+				forestTilemap.SetTile(new Vector3Int(x, y), bushlandTiles[map[x, y].forest.GetLevel()]);
 				break;
 			case ForestType.Mangrove:
-				forestTilemap.SetTile(new Vector3Int(x, y), mangroveTile);
+				forestTilemap.SetTile(new Vector3Int(x, y), mangroveTiles[map[x, y].forest.GetLevel()]);
 				break;
 			case ForestType.Rainforest:
-				forestTilemap.SetTile(new Vector3Int(x, y), rainforestTile);
+				forestTilemap.SetTile(new Vector3Int(x, y), rainforestTiles[map[x, y].forest.GetLevel()]);
 				break;
 		}
 	}
@@ -341,7 +349,7 @@ public class Terraformer : MonoBehaviour
 	{
 		if (!Plantable(x, y, forestType)) return false;
 
-		Vector3 healthbarPosition = forestTilemap.GetCellCenterWorld(new Vector3Int(x, y)) + new Vector3(0, -0.4f);
+		Vector3 healthbarPosition = forestTilemap.GetCellCenterWorld(new Vector3Int(x, y)) + new Vector3(0, -0.5f);
 		Healthbar hb = Instantiate(healthbarPrefab, healthbarPosition, Quaternion.identity).GetComponent<Healthbar>();
 		map[x, y].forest = new Forest(yggdrasil, map[x, y], forestType, hb);
 		PaintForest(x, y);
@@ -379,7 +387,7 @@ public class Terraformer : MonoBehaviour
 
 	public Vector2 GetDimensions()
 	{
-		return new Vector2(mapWidth, mapHeight);
+		return terrainTilemap.localBounds.size;
 	}
 
 	public List<Forest> GetForests()
@@ -630,7 +638,7 @@ public class Terraformer : MonoBehaviour
 
 	public List<Acre> GetSpellTiles(int x, int y, ForestType forestType, int level)
 	{
-		int size = level == 1 ? 1 : 2;
+		int size = level == 0 ? 1 : 2;
 		return GetNeighbours(x, y, size, true, true);
 	}
 }

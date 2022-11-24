@@ -98,7 +98,7 @@ public class Forest
 
 	public int GetLevel()
 	{
-		return level + 1;
+		return level;
 	}
 
 	public int GetExperience()
@@ -124,9 +124,10 @@ public class Forest
 		if (health <= 0)
 		{
 			health = 0;
-			hb.GetComponent<Healthbar>().SetFill(health * 1f / stats.bark[level]);
 			acre.RemoveForest();
 		}
+
+		hb.GetComponent<Healthbar>().SetFill(health * 1f / stats.bark[level]);
 	}
 
 	public void Photosynthesise()
@@ -160,7 +161,10 @@ public class Forest
 			experience -= expPerLevel;
 			level++;
 
+			acre.RepaintForest();
+
 			health = stats.bark[level];
+			hb.GetComponent<Healthbar>().SetFill(health * 1f / stats.bark[level]);
 		}
 	}
 	public void OnEachDay(int day, Disaster? disaster)

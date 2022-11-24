@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum Season
 {
@@ -22,6 +23,7 @@ public class Chronographer : MonoBehaviour
 	public TMP_Text textSeason;
 	public TMP_Text textDay;
 	public TMP_Text textGameOver;
+	public Button exitButton;
 
 	[Header("Configurations")]
 	public bool paused = true;
@@ -163,5 +165,12 @@ public class Chronographer : MonoBehaviour
 			textGameOver.text = "Game over!";
 			paused = true;
 		}
+
+		exitButton.gameObject.SetActive(true);
+	}
+
+	public void Exit()
+	{
+		SceneManager.LoadScene("TitleScene");
 	}
 }
