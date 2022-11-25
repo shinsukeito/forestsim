@@ -178,7 +178,7 @@ public class Forest
 					case DisasterType.Blizzard:
 					if (Random.Range(0, 100) <= acre.GetBlizzardYggdrasilDamageChance())
 					{
-						ChangeHealth(-acre.GetBlizzardDamage());
+						yggdrasil.ChangeHealth(-acre.GetBlizzardDamage());
 						return;
 					}
 						break;
@@ -188,7 +188,7 @@ public class Forest
 					case DisasterType.Drought:
 					if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
 					{
-						ChangeHealth(-acre.GetDroughtDamage());
+						yggdrasil.ChangeHealth(-acre.GetDroughtDamage());
 						return;
 					}
 						break;
