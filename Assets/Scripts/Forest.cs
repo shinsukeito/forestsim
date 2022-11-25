@@ -30,28 +30,28 @@ public class Forest
 	// Forest stats:
 	ForestStats borealStats = new ForestStats(
 		3,
-		new int[3] { 25, 65, 65 },
+		new int[3] { 25, 50, 50 },
 		new int[3] { 9, 14, 14 },
 		new int[3] { 0, 1, 2 }
 	);
 
 	ForestStats bushlandStats = new ForestStats(
 		3,
-		new int[3] { 35, 75, 75 },
+		new int[3] { 35, 60, 60 },
 		new int[3] { 3, 5, 5 },
 		new int[3] { 0, 1, 2 }
 	);
 
 	ForestStats mangroveStats = new ForestStats(
 		3,
-		new int[3] { 25, 45, 45 },
+		new int[3] { 25, 40, 40 },
 		new int[3] { 5, 7, 7 },
 		new int[3] { 0, 1, 2 }
 	);
 
 	ForestStats rainforestStats = new ForestStats(
 		3,
-		new int[3] { 20, 40, 40 },
+		new int[3] { 20, 35, 35 },
 		new int[3] { 6, 9, 9 },
 		new int[3] { 0, 1, 2 }
 	);
