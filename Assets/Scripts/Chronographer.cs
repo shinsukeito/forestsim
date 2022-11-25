@@ -103,7 +103,7 @@ public class Chronographer : MonoBehaviour
 		// Update map:
 		terraformer.OnEachDay(currentDay);
 
-		if (yggdrasil.sunlight < 50 && terraformer.GetForestCount() == 0)
+		if (yggdrasil.sunlight < yggdrasil.forestCost && terraformer.GetForestCount() == 0)
 		{
 			GameOver(false);
 		}
