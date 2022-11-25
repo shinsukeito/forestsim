@@ -38,7 +38,7 @@ public class Forest
 	ForestStats bushlandStats = new ForestStats(
 		3,
 		new int[3] { 35, 60, 60 },
-		new int[3] { 3, 5, 5 },
+		new int[3] { 4, 5, 5 },
 		new int[3] { 0, 1, 2 }
 	);
 

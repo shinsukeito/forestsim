@@ -1565,7 +1565,7 @@ MonoBehaviour:
   sunlight: 0
   startingSunlight: 600
   forestCost: 100
-  spellCost: 20
+  spellCost: 25
   expPerGrowth: 3
   maxHealth: 100
   health: 100
