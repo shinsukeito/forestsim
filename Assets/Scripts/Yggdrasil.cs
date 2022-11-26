@@ -41,23 +41,23 @@ public class Yggdrasil : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			SetSelectedForest(ForestType.Boreal);
+			ToggleSelectedForest(ForestType.Boreal);
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
-			SetSelectedForest(ForestType.Bushland);
+			ToggleSelectedForest(ForestType.Bushland);
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			SetSelectedForest(ForestType.Mangrove);
+			ToggleSelectedForest(ForestType.Mangrove);
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
-			SetSelectedForest(ForestType.Rainforest);
+			ToggleSelectedForest(ForestType.Rainforest);
 		}
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Escape))
 		{
-			SetSelectedForest(ForestType.None);
+			ToggleSelectedForest(ForestType.None);
 		}
 
 		// Forest Placement:
@@ -66,7 +66,7 @@ public class Yggdrasil : MonoBehaviour
 		{
 			if (Input.GetMouseButtonDown(1))
 			{
-				SetSelectedForest(ForestType.None);
+				ToggleSelectedForest(ForestType.None);
 			}
 
 			if (tilePosition != hoveredTile)
@@ -101,8 +101,6 @@ public class Yggdrasil : MonoBehaviour
 
 				if (planted)
 					SetSunlight(sunlight - forestCost);
-
-				selectedForestType = ForestType.None;
 			}
 		}
 		// Forest Spell:
@@ -155,9 +153,9 @@ public class Yggdrasil : MonoBehaviour
 		}
 	}
 
-	void SetSelectedForest(ForestType forestType)
+	void ToggleSelectedForest(ForestType forestType)
 	{
-		if (sunlight < forestCost) selectedForestType = ForestType.None;
+		if (sunlight < forestCost || selectedForestType == forestType) selectedForestType = ForestType.None;
 		else selectedForestType = forestType;
 
 		if (selectedForestType == ForestType.None)
@@ -188,19 +186,19 @@ public class Yggdrasil : MonoBehaviour
 
 	public void SelectBoreal()
 	{
-		SetSelectedForest(ForestType.Boreal);
+		ToggleSelectedForest(ForestType.Boreal);
 	}
 	public void SelectBushland()
 	{
-		SetSelectedForest(ForestType.Bushland);
+		ToggleSelectedForest(ForestType.Bushland);
 	}
 	public void SelectMangrove()
 	{
-		SetSelectedForest(ForestType.Mangrove);
+		ToggleSelectedForest(ForestType.Mangrove);
 	}
 	public void SelectRainforest()
 	{
-		SetSelectedForest(ForestType.Rainforest);
+		ToggleSelectedForest(ForestType.Rainforest);
 	}
 
 	public void SetSunlight(int amount)
