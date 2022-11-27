@@ -134,7 +134,7 @@ public class Yggdrasil : MonoBehaviour
 				{
 					// Heal:
 					case ForestType.WorldTree:
-						TooltipSystem.ShowText("Heal Yggdrassil", $"{healCost}", $"Heal Yggdrassil for {healAmount} health");
+						TooltipSystem.ShowText("Heal Yggdrasil", $"{healCost}", $"Heal Yggdrasil for {healAmount} health");
 						if (Input.GetMouseButtonDown(0) && sunlight >= healCost)
 						{
 							ChangeHealth(healAmount);
