@@ -734,7 +734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Plant Mangrove Forest
   cost: 100
-  text: Mangrove forests repel the Rains when activated
+  text: Mangrove forests repel <color=#1475C0>the Rains</color> when activated
 --- !u!1 &193252231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,8 +1422,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4289460991
+  m_fontColor: {r: 1, g: 0.98039216, b: 0.67058825, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1877,8 +1877,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 232.005, y: -24}
-  m_SizeDelta: {x: 432.01, y: 16}
+  m_AnchoredPosition: {x: 175.275, y: -24}
+  m_SizeDelta: {x: 318.55, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &568183616
 MonoBehaviour:
@@ -1901,7 +1901,7 @@ MonoBehaviour:
   m_Spacing: 8
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -3023,8 +3023,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4289460991
+  m_fontColor: {r: 1, g: 0.98039216, b: 0.67058825, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3146,8 +3146,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -8}
-  m_SizeDelta: {x: 200, y: 14.67}
+  m_AnchoredPosition: {x: 118.605, y: -8}
+  m_SizeDelta: {x: 237.21, y: 14.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1109290890
 MonoBehaviour:
@@ -3693,7 +3693,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 11.200989, y: 0}
-  m_SizeDelta: {x: 464.01, y: 70.67}
+  m_SizeDelta: {x: 350.55, y: 70.67}
   m_Pivot: {x: 0, y: -0.1}
 --- !u!114 &1183293995
 MonoBehaviour:
@@ -3785,7 +3785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
+  m_HorizontalFit: 1
   m_VerticalFit: 2
 --- !u!1 &1216119372
 GameObject:
@@ -3898,8 +3898,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 232.005, y: -47.335}
-  m_SizeDelta: {x: 432.01, y: 14.67}
+  m_AnchoredPosition: {x: 123.335, y: -47.335}
+  m_SizeDelta: {x: 214.67, y: 14.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1230908258
 MonoBehaviour:
@@ -3921,7 +3921,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  m_text: Lorem ipsum dolor sit amet.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f04f7822d0c28f45af76a1bb651089f, type: 2}
   m_sharedMaterial: {fileID: -2783690836327379372, guid: 3f04f7822d0c28f45af76a1bb651089f, type: 2}
@@ -4363,8 +4363,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175.335, y: -8}
-  m_SizeDelta: {x: 350.67, y: 16}
+  m_AnchoredPosition: {x: 118.605, y: -8}
+  m_SizeDelta: {x: 237.21, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1358784892
 MonoBehaviour:
@@ -4386,8 +4386,8 @@ MonoBehaviour:
   m_ChildAlignment: 3
   m_Spacing: 4
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -4542,10 +4542,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Plant Bushland Forest
   cost: 100
-  text: 'Bushland forests repel the Famine when activated
+  text: 'Bushland forests repel <color=#FBEAA3>the Famine</color> when activated
 
-    Bushland forests can
-    be planted on Barren terrain'
+    Bushland
+    forests can be planted on Barren terrain'
 --- !u!1001 &1455777141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5403,7 +5403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 395.34003, y: -8}
+  m_AnchoredPosition: {x: 281.88, y: -8}
   m_SizeDelta: {x: 73.34, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1815304101
@@ -5426,7 +5426,7 @@ MonoBehaviour:
   m_ChildAlignment: 5
   m_Spacing: 4
   m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -5582,7 +5582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Plant Rainforest
   cost: 100
-  text: Rainforests repel the Burns when activated
+  text: Rainforests repel <color=#E37840>the Burns</color> when activated
 --- !u!114 &1966289671 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3082084823201381938, guid: 58bd8419137ddd64494333e76ac9571b, type: 3}
@@ -5744,7 +5744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Plant Boreal Forest
   cost: 100
-  text: Boreal forests repel the Frosts when activated
+  text: Boreal forests repel <color=#74F5FD>the Frosts</color> when activated
 --- !u!1 &2068227169
 GameObject:
   m_ObjectHideFlags: 0
