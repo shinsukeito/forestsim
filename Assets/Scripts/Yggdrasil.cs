@@ -10,6 +10,7 @@ public class Yggdrasil : MonoBehaviour
 {
 	[Header("References")]
 	public Terraformer terraformer;
+	public Chronographer chronographer;
 	public Tilemap forestHoverTilemap;
 	public Tilemap spellTilemap;
 	public TMP_Text textSunlight;
@@ -51,6 +52,8 @@ public class Yggdrasil : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (chronographer.finished) return;
+
 		hoveringUI = EventSystem.current.IsPointerOverGameObject();
 
 		if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -191,6 +194,8 @@ public class Yggdrasil : MonoBehaviour
 
 	void ToggleSelectedForest(ForestType forestType)
 	{
+		if (chronographer.finished) return;
+
 		TooltipSystem.Hide();
 		spellTilemap.ClearAllTiles();
 
@@ -278,6 +283,7 @@ public class Yggdrasil : MonoBehaviour
 		if (health + amount <= 0)
 			health = 0;
 
-		hb.GetComponent<Healthbar>().SetFill(health * 1f / maxHealth);
+		if (hb != null)
+			hb.GetComponent<Healthbar>().SetFill(health * 1f / maxHealth);
 	}
 }

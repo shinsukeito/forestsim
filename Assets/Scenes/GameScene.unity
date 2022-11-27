@@ -2542,6 +2542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terraformer: {fileID: 715526312}
+  chronographer: {fileID: 1004092297}
   forestHoverTilemap: {fileID: 1145062367}
   spellTilemap: {fileID: 2128629656}
   textSunlight: {fileID: 472223995}
@@ -2948,6 +2949,7 @@ MonoBehaviour:
   textGameOver: {fileID: 371439796}
   exitButton: {fileID: 2115794080}
   paused: 1
+  finished: 0
   seasonOrder: 00000000010000000200000003000000
   seasonIcons:
   - {fileID: 1966289671}
@@ -6077,6 +6079,7 @@ MonoBehaviour:
   textTitle: {fileID: 1109290890}
   textCost: {fileID: 1029267931}
   textTooltip: {fileID: 1230908258}
+  rect: {fileID: 0}
 --- !u!1 &2128629653
 GameObject:
   m_ObjectHideFlags: 0

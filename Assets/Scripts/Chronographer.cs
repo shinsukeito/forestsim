@@ -27,6 +27,7 @@ public class Chronographer : MonoBehaviour
 
 	[Header("Configurations")]
 	public bool paused = true;
+	public bool finished = false;
 	public Season[] seasonOrder;
 	public SeasonIcon[] seasonIcons;
 
@@ -164,6 +165,7 @@ public class Chronographer : MonoBehaviour
 			paused = true;
 		}
 
+		finished = true;
 		exitButton.gameObject.SetActive(true);
 	}
 
