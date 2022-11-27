@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using TMPro;
 
@@ -12,6 +13,12 @@ public class Yggdrasil : MonoBehaviour
 	public Tilemap spellTilemap;
 	public TMP_Text textSunlight;
 	public Healthbar hb;
+
+	public Image borealButton;
+	public Image bushlandButton;
+	public Image mangroveButton;
+	public Image rainforestButton;
+	public Color buttonSelectedColor = new Color(0.7f, 0.7f, 0.7f);
 
 	[Header("Configurations")]
 	public int sunlight = 0;
@@ -73,25 +80,7 @@ public class Yggdrasil : MonoBehaviour
 			{
 				forestHoverTilemap.SetTile(hoveredTile, null);
 				hoveredTile = tilePosition;
-
-				if (terraformer.Plantable(hoveredTile.x, hoveredTile.y, selectedForestType))
-				{
-					switch (selectedForestType)
-					{
-						case ForestType.Boreal:
-							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), borealTile);
-							break;
-						case ForestType.Bushland:
-							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), bushlandTile);
-							break;
-						case ForestType.Mangrove:
-							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), mangroveTile);
-							break;
-						case ForestType.Rainforest:
-							forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), rainforestTile);
-							break;
-					}
-				}
+				ShowHoveredForest();
 			}
 
 			if (Input.GetMouseButtonDown(0) && sunlight >= forestCost)
@@ -158,15 +147,43 @@ public class Yggdrasil : MonoBehaviour
 
 	void ToggleSelectedForest(ForestType forestType)
 	{
+		spellTilemap.ClearAllTiles();
+
 		if (sunlight < forestCost || selectedForestType == forestType) selectedForestType = ForestType.None;
 		else selectedForestType = forestType;
 
 		if (selectedForestType == ForestType.None)
 		{
 			forestHoverTilemap.SetTile(new Vector3Int(hoveredTile.x, hoveredTile.y, 0), null);
+			borealButton.color = bushlandButton.color = mangroveButton.color = rainforestButton.color = buttonSelectedColor;
 			return;
 		}
 
+		switch (selectedForestType)
+		{
+			case ForestType.Boreal:
+				bushlandButton.color = mangroveButton.color = rainforestButton.color = buttonSelectedColor;
+				borealButton.color = new Color(1, 1, 1);
+				break;
+			case ForestType.Bushland:
+				borealButton.color = mangroveButton.color = rainforestButton.color = buttonSelectedColor;
+				bushlandButton.color = new Color(1, 1, 1);
+				break;
+			case ForestType.Mangrove:
+				borealButton.color = bushlandButton.color = rainforestButton.color = buttonSelectedColor;
+				mangroveButton.color = new Color(1, 1, 1);
+				break;
+			case ForestType.Rainforest:
+				borealButton.color = bushlandButton.color = mangroveButton.color = buttonSelectedColor;
+				rainforestButton.color = new Color(1, 1, 1);
+				break;
+		}
+
+		ShowHoveredForest();
+	}
+
+	void ShowHoveredForest()
+	{
 		if (terraformer.Plantable(hoveredTile.x, hoveredTile.y, selectedForestType))
 			switch (selectedForestType)
 			{
@@ -207,7 +224,7 @@ public class Yggdrasil : MonoBehaviour
 	public void SetSunlight(int amount)
 	{
 		sunlight = amount;
-		textSunlight.text = $"Sunlight: {sunlight}";
+		textSunlight.text = $"{sunlight}";
 	}
 
 	public void ChangeHealth(int amount)

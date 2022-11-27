@@ -13,6 +13,7 @@ public class Terraformer : MonoBehaviour
 	public Tilemap disasterTilemap;
 	public Tilemap spellTilemap;
 	public GameObject healthbarPrefab;
+	public Transform healthbarContainer;
 
 	[Header("Map Configuration")]
 	[Range(0, 50)]
@@ -138,7 +139,7 @@ public class Terraformer : MonoBehaviour
 			Erode();
 
 		// Create World Tree and add it as reference to four tiles: 
-		Healthbar hb = Instantiate(healthbarPrefab, new Vector3(0, -0.5f), Quaternion.identity).GetComponent<Healthbar>();
+		Healthbar hb = Instantiate(healthbarPrefab, new Vector3(0, -0.5f), Quaternion.identity, healthbarContainer).GetComponent<Healthbar>();
 		yggdrasil.hb = hb;
 		Forest worldTree = new Forest(yggdrasil, map[mapWidth / 2, mapHeight / 2], ForestType.WorldTree, hb);
 
@@ -355,7 +356,7 @@ public class Terraformer : MonoBehaviour
 		if (!Plantable(x, y, forestType)) return false;
 
 		Vector3 healthbarPosition = forestTilemap.GetCellCenterWorld(new Vector3Int(x, y)) + new Vector3(0, -0.5f);
-		Healthbar hb = Instantiate(healthbarPrefab, healthbarPosition, Quaternion.identity).GetComponent<Healthbar>();
+		Healthbar hb = Instantiate(healthbarPrefab, healthbarPosition, Quaternion.identity, healthbarContainer).GetComponent<Healthbar>();
 		map[x, y].forest = new Forest(yggdrasil, map[x, y], forestType, hb);
 		PaintForest(x, y);
 

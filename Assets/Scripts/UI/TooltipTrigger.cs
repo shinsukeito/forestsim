@@ -6,12 +6,14 @@ using UnityEngine.EventSystems;
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
+	public string title;
+	public string cost;
 	[TextArea]
-	public string tooltipText;
+	public string text;
 
 	void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
 	{
-		TooltipSystem.ShowText(tooltipText);
+		TooltipSystem.ShowText(title, cost, text);
 	}
 
 	void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

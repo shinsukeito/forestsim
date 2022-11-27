@@ -9,6 +9,9 @@ public class TooltipSystem : MonoBehaviour
 	private static TooltipSystem current;
 
 	public GameObject tooltip;
+	public TMP_Text textTitle;
+	public TMP_Text textCost;
+	public TMP_Text textTooltip;
 
 	// Start is called before the first frame update
 	void Start()
@@ -21,10 +24,12 @@ public class TooltipSystem : MonoBehaviour
 	{
 	}
 
-	public static void ShowText(string text)
+	public static void ShowText(string title, string cost, string text)
 	{
 		current.tooltip.SetActive(true);
-		current.tooltip.GetComponentInChildren<TMP_Text>().SetText(text);
+		current.textTitle.SetText(title);
+		current.textCost.SetText(cost);
+		current.textTooltip.SetText(text);
 	}
 
 	public static void Hide()
