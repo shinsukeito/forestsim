@@ -101,22 +101,20 @@ public class Chronographer : MonoBehaviour
 		currentDay++;
 
 		// Update map:
-		terraformer.OnEachDay(currentDay);
+		bool won = terraformer.OnEachDay(currentDay);
+
+		if (won)
+			GameOver(true);
 
 		if (yggdrasil.sunlight < yggdrasil.forestCost && terraformer.GetForestCount() == 0)
-		{
 			GameOver(false);
-		}
 
 		if (yggdrasil.health <= 0)
-		{
 			GameOver(false);
-		}
 
 		if (currentDay % daysInSeason == 0)
-		{
 			TickSeason();
-		}
+
 
 		// Update UI:
 		textDay.text = $"Day: {currentDay + 1}";

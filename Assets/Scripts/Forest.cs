@@ -101,6 +101,11 @@ public class Forest
 		return level;
 	}
 
+	public bool FullyGrown()
+	{
+		return level == stats.maxLevel - 1;
+	}
+
 	public int GetExperience()
 	{
 		return experience;
@@ -176,21 +181,21 @@ public class Forest
 				switch (disaster.GetDisasterType())
 				{
 					case DisasterType.Blizzard:
-					if (Random.Range(0, 100) <= acre.GetBlizzardYggdrasilDamageChance())
-					{
-						yggdrasil.ChangeHealth(-acre.GetBlizzardDamage());
-						return;
-					}
+						if (Random.Range(0, 100) <= acre.GetBlizzardYggdrasilDamageChance())
+						{
+							yggdrasil.ChangeHealth(-acre.GetBlizzardDamage());
+							return;
+						}
 						break;
 					case DisasterType.Bushfire:
 						yggdrasil.ChangeHealth(-acre.GetBushfireDamage());
 						break;
 					case DisasterType.Drought:
-					if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
-					{
-						yggdrasil.ChangeHealth(-acre.GetDroughtDamage());
-						return;
-					}
+						if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
+						{
+							yggdrasil.ChangeHealth(-acre.GetDroughtDamage());
+							return;
+						}
 						break;
 					case DisasterType.Flood:
 						yggdrasil.ChangeHealth(Mathf.RoundToInt(-acre.GetFloodDamage() * disaster.GetAge()));

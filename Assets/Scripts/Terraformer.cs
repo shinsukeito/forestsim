@@ -435,15 +435,23 @@ public class Terraformer : MonoBehaviour
 		return map[x, y];
 	}
 
-	public void OnEachDay(int day)
+	public bool OnEachDay(int day)
 	{
+		// Check win condition each day
+		bool won = true;
+
 		for (int x = 0; x < mapWidth; x++)
 		{
 			for (int y = 0; y < mapHeight; y++)
 			{
 				map[x, y].OnEachDay(day);
+
+				if (!CheckAcreForWinCondition(x, y))
+					won = false;
 			}
 		}
+
+		return won;
 	}
 
 	public void OnEachSeason(Season season)
@@ -645,5 +653,14 @@ public class Terraformer : MonoBehaviour
 	{
 		int size = level == 0 ? 1 : 2;
 		return GetNeighbours(x, y, size, true, false);
+	}
+
+	public bool CheckAcreForWinCondition(int x, int y)
+	{
+		if (map[x, y].fieldType == FieldType.Ocean || map[x, y].fieldType == FieldType.River) return true;
+		if (map[x, y].forest == null) return false;
+		if (map[x, y].forest.GetForestType() == ForestType.WorldTree) return true;
+		if (map[x, y].forest.FullyGrown()) return true;
+		return false;
 	}
 }
