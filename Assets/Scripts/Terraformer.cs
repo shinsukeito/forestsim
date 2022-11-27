@@ -35,8 +35,8 @@ public class Terraformer : MonoBehaviour
 	public int blizzardRadius = 2;
 	public int blizzardDamage = 20;
 	public int blizzardYggdrasilDamageChance = 15;
-	public int[] blizzardHinderChance = new int[] { 70, 30 };
-	public int[] blizzardDestroyChance = new int[] { 40, 25 };
+	public int[] blizzardHinderChance = new int[] { 70, 30, 30 };
+	public int[] blizzardDestroyChance = new int[] { 40, 25, 25 };
 
 	public int droughtRadius = 2;
 	public int droughtDamageChance = 90;
