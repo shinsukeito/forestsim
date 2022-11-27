@@ -66,6 +66,8 @@ public class Terraformer : MonoBehaviour
 	public TileBase droughtTile;
 	public TileBase floodTile;
 
+	private List<Acre> worldTreeAcres = new List<Acre>();
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -233,6 +235,7 @@ public class Terraformer : MonoBehaviour
 				if (nx >= cx - 1 && nx <= cx && ny >= cy - 1 && ny <= cy)
 				{
 					map[nx, ny].forest = worldTree;
+					worldTreeAcres.Add(map[nx, ny]);
 				}
 			}
 		}
@@ -661,8 +664,15 @@ public class Terraformer : MonoBehaviour
 
 	public List<Acre> GetSpellTiles(int x, int y, ForestType forestType, int level)
 	{
-		int size = level == 0 ? 1 : 2;
-		return GetNeighbours(x, y, size, true, false);
+		if (forestType == ForestType.WorldTree)
+		{
+			return worldTreeAcres;
+		}
+		else
+		{
+			int size = level == 0 ? 1 : 2;
+			return GetNeighbours(x, y, size, true, false);
+		}
 	}
 
 	public bool CheckAcreForWinCondition(int x, int y)

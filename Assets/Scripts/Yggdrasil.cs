@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class Yggdrasil : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class Yggdrasil : MonoBehaviour
 	public int expPerGrowth = 3;
 	public int maxHealth = 100;
 	public int health = 100;
+	public int healAmount = 15;
+	public int healCost = 100;
 	public TileBase borealTile;
 	public TileBase bushlandTile;
 	public TileBase mangroveTile;
@@ -36,6 +39,8 @@ public class Yggdrasil : MonoBehaviour
 
 	private Vector3Int hoveredTile;
 	private ForestType selectedForestType = ForestType.None;
+
+	private bool hoveringUI = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -46,6 +51,8 @@ public class Yggdrasil : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		hoveringUI = EventSystem.current.IsPointerOverGameObject();
+
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			ToggleSelectedForest(ForestType.Boreal);
@@ -67,80 +74,117 @@ public class Yggdrasil : MonoBehaviour
 			ToggleSelectedForest(ForestType.None);
 		}
 
-		// Forest Placement:
-		Vector3Int tilePosition = forestHoverTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-		if (selectedForestType != ForestType.None)
+		if (!hoveringUI)
 		{
-			if (Input.GetMouseButtonDown(1))
+			// Forest Placement:
+			Vector3Int tilePosition = forestHoverTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+			if (selectedForestType != ForestType.None)
 			{
-				ToggleSelectedForest(ForestType.None);
-			}
-
-			if (tilePosition != hoveredTile)
-			{
-				forestHoverTilemap.SetTile(hoveredTile, null);
-				hoveredTile = tilePosition;
-				ShowHoveredForest();
-			}
-
-			if (Input.GetMouseButtonDown(0) && sunlight >= forestCost)
-			{
-				forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), null);
-				bool planted = terraformer.PlantForest(tilePosition.x, tilePosition.y, selectedForestType);
-
-				if (planted)
-					SetSunlight(sunlight - forestCost);
-
-				if (sunlight < forestCost)
-					selectedForestType = ForestType.None;
-			}
-		}
-		// Forest Spell:
-		else
-		{
-			spellTilemap.ClearAllTiles();
-
-			Acre acre = terraformer.GetAcre(tilePosition.x, tilePosition.y);
-			if (acre == null || acre.forest == null || acre.forest.GetForestType() == ForestType.WorldTree) return;
-
-			List<Acre> acres = terraformer.GetSpellTiles(tilePosition.x, tilePosition.y, acre.forest.GetForestType(), acre.forest.GetLevel());
-
-			acres.ForEach((Acre a) =>
-			{
-				spellTilemap.SetTile(new Vector3Int(a.x, a.y, 0), spellTile);
-			});
-
-			if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
-			{
-				switch (acre.forest.GetForestType())
+				if (Input.GetMouseButtonDown(1))
 				{
-					case ForestType.Boreal:
-						acres.ForEach((Acre a) =>
-						{
-							a.RemoveDisaster(DisasterType.Blizzard);
-						});
-						break;
-					case ForestType.Bushland:
-						acres.ForEach((Acre a) =>
-						{
-							a.RemoveDisaster(DisasterType.Drought);
-						});
-						break;
-					case ForestType.Mangrove:
-						acres.ForEach((Acre a) =>
-						{
-							a.RemoveDisaster(DisasterType.Flood);
-						});
-						break;
-					case ForestType.Rainforest:
-						acres.ForEach((Acre a) =>
-						{
-							a.RemoveDisaster(DisasterType.Bushfire);
-						});
-						break;
+					ToggleSelectedForest(ForestType.None);
 				}
 
-				SetSunlight(sunlight - spellCost);
+				if (tilePosition != hoveredTile)
+				{
+					forestHoverTilemap.SetTile(hoveredTile, null);
+					hoveredTile = tilePosition;
+					ShowHoveredForest();
+				}
+
+				if (Input.GetMouseButtonDown(0) && sunlight >= forestCost)
+				{
+					forestHoverTilemap.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), null);
+					bool planted = terraformer.PlantForest(tilePosition.x, tilePosition.y, selectedForestType);
+
+					if (planted)
+						SetSunlight(sunlight - forestCost);
+
+					if (sunlight < forestCost)
+						selectedForestType = ForestType.None;
+				}
+			}
+			// Forest Spell:
+			else
+			{
+				spellTilemap.ClearAllTiles();
+
+				if (tilePosition != hoveredTile)
+				{
+					TooltipSystem.Hide();
+					hoveredTile = tilePosition;
+				}
+
+				Acre acre = terraformer.GetAcre(tilePosition.x, tilePosition.y);
+				if (acre == null || acre.forest == null) return;
+
+				ForestType thisType = acre.forest.GetForestType();
+
+				List<Acre> acres = terraformer.GetSpellTiles(tilePosition.x, tilePosition.y, thisType, acre.forest.GetLevel());
+
+				acres.ForEach((Acre a) =>
+				{
+					spellTilemap.SetTile(new Vector3Int(a.x, a.y, 0), spellTile);
+				});
+
+				switch (thisType)
+				{
+					// Heal:
+					case ForestType.WorldTree:
+						TooltipSystem.ShowText("Heal Yggdrassil", $"{healCost}", $"Heal Yggdrassil for {healAmount} health");
+						if (Input.GetMouseButtonDown(0) && sunlight >= healCost)
+						{
+							ChangeHealth(healAmount);
+							SetSunlight(sunlight - healCost);
+						}
+						break;
+
+					// Activate Forests:
+					case ForestType.Boreal:
+						TooltipSystem.ShowText("Activate Boreal Forest", $"{spellCost}", $"Repel Blizzard in surrounding tiles");
+						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
+						{
+							acres.ForEach((Acre a) =>
+							{
+								a.RemoveDisaster(DisasterType.Blizzard);
+							});
+							SetSunlight(sunlight - spellCost);
+						}
+						break;
+					case ForestType.Bushland:
+						TooltipSystem.ShowText("Activate Bushland Forest", $"{spellCost}", $"Repel Drought in surrounding tiles");
+						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
+						{
+							acres.ForEach((Acre a) =>
+							{
+								a.RemoveDisaster(DisasterType.Drought);
+							});
+							SetSunlight(sunlight - spellCost);
+						}
+						break;
+					case ForestType.Mangrove:
+						TooltipSystem.ShowText("Activate Mangrove Forest", $"{spellCost}", $"Repel Flood in surrounding tiles");
+						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
+						{
+							acres.ForEach((Acre a) =>
+							{
+								a.RemoveDisaster(DisasterType.Flood);
+							});
+							SetSunlight(sunlight - spellCost);
+						}
+						break;
+					case ForestType.Rainforest:
+						TooltipSystem.ShowText("Activate Rainforest Forest", $"{spellCost}", $"Repel Bushfire in surrounding tiles");
+						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
+						{
+							acres.ForEach((Acre a) =>
+							{
+								a.RemoveDisaster(DisasterType.Bushfire);
+							});
+							SetSunlight(sunlight - spellCost);
+						}
+						break;
+				}
 			}
 		}
 	}
