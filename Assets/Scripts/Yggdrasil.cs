@@ -26,7 +26,6 @@ public class Yggdrasil : MonoBehaviour
 	public int sunlight = 0;
 	public int startingSunlight = 400;
 	public int forestCost = 100;
-	public int spellCost = 25;
 	public int expPerGrowth = 3;
 	public int maxHealth = 100;
 	public int health = 100;
@@ -130,6 +129,7 @@ public class Yggdrasil : MonoBehaviour
 					spellTilemap.SetTile(new Vector3Int(a.x, a.y, 0), spellTile);
 				});
 
+				int spellCost = 25;
 				switch (thisType)
 				{
 					// Heal:
@@ -144,6 +144,7 @@ public class Yggdrasil : MonoBehaviour
 
 					// Activate Forests:
 					case ForestType.Boreal:
+						spellCost = acre.forest.GetSpellCost();
 						TooltipSystem.ShowText("Activate Boreal Forest", $"{spellCost}", $"Repel <color=#74F5FD>the Frosts</color> in surrounding tiles");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
@@ -155,6 +156,7 @@ public class Yggdrasil : MonoBehaviour
 						}
 						break;
 					case ForestType.Bushland:
+						spellCost = acre.forest.GetSpellCost();
 						TooltipSystem.ShowText("Activate Bushland Forest", $"{spellCost}", $"Repel <color=#FBEAA3>the Famine</color> in surrounding tiles");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
@@ -166,6 +168,7 @@ public class Yggdrasil : MonoBehaviour
 						}
 						break;
 					case ForestType.Mangrove:
+						spellCost = acre.forest.GetSpellCost();
 						TooltipSystem.ShowText("Activate Mangrove Forest", $"{spellCost}", $"Repel <color=#1475C0>the Rains</color> in surrounding tiles");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
@@ -177,6 +180,7 @@ public class Yggdrasil : MonoBehaviour
 						}
 						break;
 					case ForestType.Rainforest:
+						spellCost = acre.forest.GetSpellCost();
 						TooltipSystem.ShowText("Activate Rainforest Forest", $"{spellCost}", $"Repel <color=#E37840>the Burns</color> in surrounding tiles");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{

@@ -32,28 +32,32 @@ public class Forest
 		3,
 		new int[3] { 25, 50, 50 },
 		new int[3] { 9, 14, 14 },
-		new int[3] { 0, 1, 2 }
+		new int[3] { 0, 1, 2 },
+		new int[3] { 25, 30, 35 }
 	);
 
 	ForestStats bushlandStats = new ForestStats(
 		3,
 		new int[3] { 35, 60, 60 },
 		new int[3] { 4, 5, 5 },
-		new int[3] { 0, 1, 2 }
+		new int[3] { 0, 1, 2 },
+		new int[3] { 25, 30, 35 }
 	);
 
 	ForestStats mangroveStats = new ForestStats(
 		3,
 		new int[3] { 25, 40, 40 },
 		new int[3] { 5, 7, 7 },
-		new int[3] { 0, 1, 2 }
+		new int[3] { 0, 1, 2 },
+		new int[3] { 25, 30, 35 }
 	);
 
 	ForestStats rainforestStats = new ForestStats(
 		3,
 		new int[3] { 20, 35, 35 },
 		new int[3] { 6, 9, 9 },
-		new int[3] { 0, 1, 2 }
+		new int[3] { 0, 1, 2 },
+		new int[3] { 25, 30, 35 }
 	);
 
 	public Forest(Yggdrasil yggdrasil, Acre acre, ForestType type, Healthbar hb)
@@ -83,6 +87,7 @@ public class Forest
 			case ForestType.WorldTree:
 				this.stats = new ForestStats(
 					0,
+					null,
 					null,
 					null,
 					null
@@ -247,5 +252,10 @@ public class Forest
 	public void OnEachCycle(int cycle)
 	{
 
+	}
+
+	public int GetSpellCost()
+	{
+		return stats.costs[level];
 	}
 }
