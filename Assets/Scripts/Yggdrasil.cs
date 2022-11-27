@@ -283,6 +283,9 @@ public class Yggdrasil : MonoBehaviour
 		if (health + amount <= 0)
 			health = 0;
 
+		if (health + amount >= maxHealth)
+			health = maxHealth;
+
 		if (hb != null)
 			hb.GetComponent<Healthbar>().SetFill(health * 1f / maxHealth);
 	}
