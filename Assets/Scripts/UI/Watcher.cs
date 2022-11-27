@@ -10,8 +10,8 @@ public class Watcher : MonoBehaviour
 
 	[Header("Configurations")]
 	[Range(0, 50)]
-
 	public float scrollSpeed;
+	public Vector2 offset = new Vector2(-2, 0); // 128px, 0px
 
 	private Vector2 lastDragPosition;
 	private Vector2 speed;
@@ -52,10 +52,10 @@ public class Watcher : MonoBehaviour
 		}
 
 		Vector3 nextPos = (Vector2)cam.transform.position + (speed * Time.deltaTime);
-		Vector2 dims = terraformer.GetDimensions() * 0.5f - new Vector2(7.5f, 4.6875f);
+		Vector2 dims = terraformer.GetDimensions() * 0.5f - new Vector2(5.5f, 4.6875f);
 		nextPos = new Vector2(
-			Mathf.Clamp(nextPos.x, -dims.x, dims.x),
-			Mathf.Clamp(nextPos.y, -dims.y, dims.y)
+			Mathf.Clamp(nextPos.x, -dims.x + offset.x, dims.x + offset.x),
+			Mathf.Clamp(nextPos.y, -dims.y + offset.y, dims.y + offset.y)
 		);
 		nextPos.z = -5;
 		cam.transform.position = nextPos;
