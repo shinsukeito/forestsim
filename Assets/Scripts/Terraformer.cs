@@ -142,11 +142,7 @@ public class Terraformer : MonoBehaviour
 		Healthbar hb = Instantiate(healthbarPrefab, new Vector3(0, -0.5f), Quaternion.identity, healthbarContainer).GetComponent<Healthbar>();
 		yggdrasil.hb = hb;
 		Forest worldTree = new Forest(yggdrasil, map[mapWidth / 2, mapHeight / 2], ForestType.WorldTree, hb);
-
-		PlantWorldTree(mapWidth / 2, mapHeight / 2, worldTree);
-		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2, worldTree);
-		PlantWorldTree(mapWidth / 2, mapHeight / 2 - 1, worldTree);
-		PlantWorldTree(mapWidth / 2 - 1, mapHeight / 2 - 1, worldTree);
+		PlantYggdrasil(worldTree);
 	}
 
 	void Smooth()
@@ -224,10 +220,23 @@ public class Terraformer : MonoBehaviour
 		}
 	}
 
-	void PlantWorldTree(int x, int y, Forest worldTree)
+	void PlantYggdrasil(Forest worldTree)
 	{
-		map[x, y].fieldType = FieldType.Field;
-		map[x, y].forest = worldTree;
+		int cx = mapWidth / 2;
+		int cy = mapHeight / 2;
+
+		for (int nx = cx - 2; nx <= cx + 1; nx++)
+		{
+			for (int ny = cy - 2; ny <= cy + 1; ny++)
+			{
+				map[nx, ny].fieldType = FieldType.Field;
+				if (nx >= cx - 1 && nx <= cx && ny >= cy - 1 && ny <= cy)
+				{
+					map[nx, ny].forest = worldTree;
+				}
+			}
+		}
+
 	}
 
 	FieldType DetermineFieldType(int x, int y)
