@@ -191,6 +191,7 @@ public class Yggdrasil : MonoBehaviour
 
 	void ToggleSelectedForest(ForestType forestType)
 	{
+		TooltipSystem.Hide();
 		spellTilemap.ClearAllTiles();
 
 		if (sunlight < forestCost || selectedForestType == forestType) selectedForestType = ForestType.None;
