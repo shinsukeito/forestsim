@@ -286,4 +286,10 @@ public class Yggdrasil : MonoBehaviour
 		if (hb != null)
 			hb.GetComponent<Healthbar>().SetFill(health * 1f / maxHealth);
 	}
+
+	public void ClearTilemaps()
+	{
+		spellTilemap.ClearAllTiles();
+		forestHoverTilemap.ClearAllTiles();
+	}
 }

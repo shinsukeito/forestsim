@@ -154,6 +154,9 @@ public class Chronographer : MonoBehaviour
 
 	public void GameOver(bool win)
 	{
+		TooltipSystem.Hide();
+		yggdrasil.ClearTilemaps();
+
 		if (win)
 		{
 			textGameOver.text = "You won!";
@@ -162,7 +165,7 @@ public class Chronographer : MonoBehaviour
 		else
 		{
 			textGameOver.text = "Game over!";
-			paused = true;
+			dayLength = 1f;
 		}
 
 		finished = true;
