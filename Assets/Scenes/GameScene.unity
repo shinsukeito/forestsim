@@ -2274,8 +2274,8 @@ MonoBehaviour:
   blizzardRadius: 2
   blizzardDamage: 20
   blizzardYggdrasilDamageChance: 15
-  blizzardHinderChance: 460000001e000000
-  blizzardDestroyChance: 2800000019000000
+  blizzardHinderChance: 46000000320000001e000000
+  blizzardDestroyChance: 280000001e00000019000000
   droughtRadius: 2
   droughtDamageChance: 90
   droughtDamage: 2
