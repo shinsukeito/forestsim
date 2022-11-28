@@ -33,7 +33,7 @@ public class Forest
 		new int[3] { 25, 50, 50 },
 		new int[3] { 9, 14, 14 },
 		new int[3] { 0, 1, 2 },
-		new int[3] { 25, 30, 35 }
+		new int[3] { 25, 50, 50 }
 	);
 
 	ForestStats bushlandStats = new ForestStats(
@@ -41,7 +41,7 @@ public class Forest
 		new int[3] { 35, 60, 60 },
 		new int[3] { 4, 5, 5 },
 		new int[3] { 0, 1, 2 },
-		new int[3] { 25, 30, 35 }
+		new int[3] { 25, 50, 50 }
 	);
 
 	ForestStats mangroveStats = new ForestStats(
@@ -49,7 +49,7 @@ public class Forest
 		new int[3] { 25, 40, 40 },
 		new int[3] { 5, 7, 7 },
 		new int[3] { 0, 1, 2 },
-		new int[3] { 25, 30, 35 }
+		new int[3] { 25, 50, 50 }
 	);
 
 	ForestStats rainforestStats = new ForestStats(
@@ -57,7 +57,7 @@ public class Forest
 		new int[3] { 20, 35, 35 },
 		new int[3] { 6, 9, 9 },
 		new int[3] { 0, 1, 2 },
-		new int[3] { 25, 30, 35 }
+		new int[3] { 25, 50, 50 }
 	);
 
 	public Forest(Yggdrasil yggdrasil, Acre acre, ForestType type, Healthbar hb)

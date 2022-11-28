@@ -69,7 +69,7 @@ public class Inspector : MonoBehaviour
 				{
 					case DisasterType.Blizzard:
 						disasterText = $"Disaster: <color=#74F5FD>The Frosts</color>";
-						disasterText += "\n - Chance to damage forests";
+						disasterText += "\n - Chance to highly damage forests";
 						disasterText += "\n - Forests have a chance not to grow";
 						break;
 					case DisasterType.Bushfire:
@@ -80,6 +80,7 @@ public class Inspector : MonoBehaviour
 					case DisasterType.Drought:
 						disasterText = $"Disaster: <color=#FBEAA3>The Famine</color>";
 						disasterText += "\n - Hinders forests from growing";
+						disasterText += "\n - Low but steady damage to forests";
 						break;
 					case DisasterType.Flood:
 						disasterText = $"Disaster: <color=#1475C0>The Rains</color>";

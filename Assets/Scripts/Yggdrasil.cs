@@ -29,8 +29,8 @@ public class Yggdrasil : MonoBehaviour
 	public int expPerGrowth = 3;
 	public int maxHealth = 100;
 	public int health = 100;
-	public int healAmount = 15;
-	public int healCost = 100;
+	public int healAmount = 20;
+	public int healCost = 300;
 	public TileBase borealTile;
 	public TileBase bushlandTile;
 	public TileBase mangroveTile;
