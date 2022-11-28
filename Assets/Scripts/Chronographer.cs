@@ -156,6 +156,7 @@ public class Chronographer : MonoBehaviour
 	{
 		TooltipSystem.Hide();
 		yggdrasil.ClearTilemaps();
+		textGameOver.gameObject.SetActive(true);
 
 		if (win)
 		{
