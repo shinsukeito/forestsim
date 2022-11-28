@@ -683,4 +683,20 @@ public class Terraformer : MonoBehaviour
 		if (map[x, y].forest.FullyGrown()) return true;
 		return false;
 	}
+
+	public void HideHealthbars()
+	{
+		healthbarContainer.gameObject.SetActive(false);
+	}
+
+	public void ClearAllDisasters()
+	{
+		for (int x = 0; x < mapWidth; x++)
+		{
+			for (int y = 0; y < mapHeight; y++)
+			{
+				EraseDisaster(x, y);
+			}
+		}
+	}
 }

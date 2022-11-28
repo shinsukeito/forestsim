@@ -162,6 +162,8 @@ public class Chronographer : MonoBehaviour
 		{
 			textGameOver.text = "You won!";
 			paused = true;
+			terraformer.HideHealthbars();
+			terraformer.ClearAllDisasters();
 		}
 		else
 		{
