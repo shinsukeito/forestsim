@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cf586fb42c20ca54cb587ac5e5e16117
+guid: 89f66ad4e3e257640875db735318d86c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,7 +129,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GrassGreen9x9_0
+      name: tilesheet_grass_1
       rect:
         serializedVersion: 2
         x: 0
@@ -143,14 +143,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d3ac395fd6ea104ca9807aeec748d42
-      internalID: 665230199
+      spriteID: 8bc30cca001bbed418f97b7592097062
+      internalID: 1471857932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GrassGreen9x9_1
+      name: tilesheet_grass_2
       rect:
         serializedVersion: 2
         x: 64
@@ -164,14 +164,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c90835d2d58a3ff4b9faf08ecfea15be
-      internalID: -1961323950
+      spriteID: 59f32b681d983f245822032b0f674bca
+      internalID: -1335659535
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GrassGreen9x9_2
+      name: tilesheet_grass_3
       rect:
         serializedVersion: 2
         x: 128
@@ -185,14 +185,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6555957447fab7d4b88fa9762fb02a6a
-      internalID: -1477048345
+      spriteID: d43930f89a0eb2948b2771ca6499909a
+      internalID: 690035294
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GrassGreen9x9_3
+      name: tilesheet_barren_1
       rect:
         serializedVersion: 2
         x: 0
@@ -206,14 +206,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d169794c58e0434388a08f425009fe1
-      internalID: -1469800070
+      spriteID: 2517040ce25cbb145992a53ebc3f4d3d
+      internalID: 1082089574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GrassGreen9x9_4
+      name: tilesheet_barren_2
       rect:
         serializedVersion: 2
         x: 64
@@ -227,14 +227,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb4b5be6061457f47a4045a12d357ec5
-      internalID: -1667812862
+      spriteID: 490b67af90a5c53498d28bee8ae1d9a5
+      internalID: -2075705592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GrassGreen9x9_5
+      name: tilesheet_barren_3
       rect:
         serializedVersion: 2
         x: 128
@@ -248,14 +248,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcd9355b3d38ea945b78a8a356b2eddb
-      internalID: -2057309692
+      spriteID: efbf4b460cdf16a4d9018f205e3ec1a1
+      internalID: 1515754162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GrassGreen9x9_6
+      name: tilesheet_water
       rect:
         serializedVersion: 2
         x: 0
@@ -269,50 +269,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 431613ce0c6f4d048a7ce7effca110b0
-      internalID: 1963128387
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GrassGreen9x9_7
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0c95fab7a1f0c149a09ab6a9f057825
-      internalID: 1148107626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GrassGreen9x9_8
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 436b5e56c35e3124c8441427ddfb4d12
-      internalID: 55372153
+      spriteID: 00b0be1be68e7d04ab28970e2baa2545
+      internalID: 1140151694
       vertices: []
       indices: 
       edges: []
@@ -328,15 +286,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GrassGreen9x9_7: 1148107626
-      GrassGreen9x9_1: -1961323950
-      GrassGreen9x9_3: -1469800070
-      GrassGreen9x9_0: 665230199
-      GrassGreen9x9_4: -1667812862
-      GrassGreen9x9_8: 55372153
-      GrassGreen9x9_2: -1477048345
-      GrassGreen9x9_6: 1963128387
-      GrassGreen9x9_5: -2057309692
+      tilesheet_grass_1: -1335659535
+      tilesheet_8: 1471857932
+      tilesheet_barren_1: 1082089574
+      tilesheet_grass_2: 690035294
+      tilesheet_water: 1140151694
+      tilesheet_barren_2: -2075705592
+      tilesheet_7: -1922373509
+      tilesheet_grass_3: 1082089574
+      tilesheet_barren_3: 1515754162
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
