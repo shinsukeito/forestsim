@@ -68,6 +68,8 @@ public class Terraformer : MonoBehaviour
 
 	private List<Acre> worldTreeAcres = new List<Acre>();
 
+	private int acreCount = 0;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -285,6 +287,12 @@ public class Terraformer : MonoBehaviour
 			{
 				PaintField(x, y);
 				PaintForest(x, y);
+
+				// Get all non-ocean and non-river tiles to calculate intensity:
+				if (map[x, y].fieldType == FieldType.Ocean || map[x, y].fieldType == FieldType.River)
+				{
+					acreCount++;
+				}
 			}
 		}
 	}
@@ -453,6 +461,9 @@ public class Terraformer : MonoBehaviour
 		// Check win condition each day
 		bool won = true;
 
+		// Calculate intensity
+		int disasterCount = 0;
+
 		for (int x = 0; x < mapWidth; x++)
 		{
 			for (int y = 0; y < mapHeight; y++)
@@ -461,8 +472,23 @@ public class Terraformer : MonoBehaviour
 
 				if (!CheckAcreForWinCondition(x, y))
 					won = false;
+
+				if (map[x, y].disaster != null)
+				{
+					disasterCount++;
+				}
 			}
 		}
+
+		// Set intensity:
+		float percent = disasterCount / acreCount * 1f;
+		if (percent < 0.25f)
+			Orchestrator.SetIntensity(0);
+		else if (percent < 0.5f)
+			Orchestrator.SetIntensity(1);
+		else
+			Orchestrator.SetIntensity(2);
+
 
 		return won;
 	}

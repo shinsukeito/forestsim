@@ -140,6 +140,9 @@ public class Chronographer : MonoBehaviour
 		// Update UI:
 		textSeason.text = $"Season: {GetCurrentSeason()}";
 		seasonIcons[currentSeason].Highlight();
+
+		// Update Music:
+		Orchestrator.SetSeason(GetCurrentSeason());
 	}
 
 	void TickCycle()
@@ -165,11 +168,13 @@ public class Chronographer : MonoBehaviour
 			paused = true;
 			terraformer.HideHealthbars();
 			terraformer.ClearAllDisasters();
+			Orchestrator.PlayBGM(BGM.Victory);
 		}
 		else
 		{
 			textGameOver.text = "Game over!";
 			dayLength = 1f;
+			Orchestrator.PlayBGM(BGM.None);
 		}
 
 		finished = true;
