@@ -11,6 +11,7 @@ public class Terraformer : MonoBehaviour
 	public Tilemap forestTilemap;
 	public Tilemap forestHoverTilemap;
 	public Tilemap disasterTilemap;
+	public Tilemap disasterOverlayTilemap;
 	public Tilemap spellTilemap;
 	public GameObject healthbarPrefab;
 	public Transform healthbarContainer;
@@ -65,6 +66,11 @@ public class Terraformer : MonoBehaviour
 	public TileBase bushfireTile;
 	public TileBase droughtTile;
 	public TileBase floodTile;
+	[Header("Disaster Overlay Tiles")]
+	public TileBase blizzardOverlayTile;
+	public TileBase bushfireOverlayTile;
+	public TileBase droughtOverlayTile;
+	public TileBase floodOverlayTile;
 
 	private List<Acre> worldTreeAcres = new List<Acre>();
 
@@ -102,6 +108,9 @@ public class Terraformer : MonoBehaviour
 
 		disasterTilemap.ClearAllTiles();
 		disasterTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2); ;
+
+		disasterOverlayTilemap.ClearAllTiles();
+		disasterOverlayTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2); ;
 
 		spellTilemap.ClearAllTiles();
 		spellTilemap.transform.position = new Vector2(-mapWidth / 2, -mapHeight / 2);
@@ -348,15 +357,19 @@ public class Terraformer : MonoBehaviour
 		{
 			case DisasterType.Blizzard:
 				disasterTilemap.SetTile(new Vector3Int(x, y), blizzardTile);
+				disasterOverlayTilemap.SetTile(new Vector3Int(x, y), blizzardOverlayTile);
 				break;
 			case DisasterType.Bushfire:
 				disasterTilemap.SetTile(new Vector3Int(x, y), bushfireTile);
+				disasterOverlayTilemap.SetTile(new Vector3Int(x, y), bushfireOverlayTile);
 				break;
 			case DisasterType.Drought:
 				disasterTilemap.SetTile(new Vector3Int(x, y), droughtTile);
+				disasterOverlayTilemap.SetTile(new Vector3Int(x, y), droughtOverlayTile);
 				break;
 			case DisasterType.Flood:
 				disasterTilemap.SetTile(new Vector3Int(x, y), floodTile);
+				disasterOverlayTilemap.SetTile(new Vector3Int(x, y), floodOverlayTile);
 				break;
 		}
 	}
@@ -369,6 +382,7 @@ public class Terraformer : MonoBehaviour
 	public void EraseDisaster(int x, int y)
 	{
 		disasterTilemap.SetTile(new Vector3Int(x, y), null);
+		disasterOverlayTilemap.SetTile(new Vector3Int(x, y), null);
 	}
 
 	public bool PlantForest(int x, int y, ForestType forestType)
