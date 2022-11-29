@@ -2559,8 +2559,8 @@ MonoBehaviour:
   expPerGrowth: 3
   maxHealth: 100
   health: 100
-  healAmount: 15
-  healCost: 100
+  healAmount: 20
+  healCost: 200
   borealTile: {fileID: 11400000, guid: 86e6e97cec0b2564fb87a475fc977355, type: 2}
   bushlandTile: {fileID: 11400000, guid: 4e1048442db1e52468a5f4d0c20465dd, type: 2}
   mangroveTile: {fileID: 11400000, guid: 163de4e31652c614e8e9c2ae3ac67652, type: 2}

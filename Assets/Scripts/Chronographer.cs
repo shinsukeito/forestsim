@@ -62,6 +62,7 @@ public class Chronographer : MonoBehaviour
 	public void Commence()
 	{
 		TickSeason();
+		yggdrasil.SetSunlight(yggdrasil.sunlight + yggdrasil.commenceSunlight);
 		paused = false;
 	}
 

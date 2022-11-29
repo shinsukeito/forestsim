@@ -295,12 +295,12 @@ MonoBehaviour:
     of each disaster, and to heal the world tree if it comes under siege. \r\n\r\nNurture
     saplings for a year and they\u2019ll mature into fully grown trees with higher
     defence, rewards and spell effect area. Each tree type counters a specific disaster,
-    so be strategic in your planting choices! \r\n\r\nFill the world with trees to
-    win! Fail to protect Yggdrasil, or lose all your trees and sunlight, and the
-    world (and game) ends :(\r\n\nControls:\nPLANT A TREE (100 sunlight): 1234 /
-    click tree button then click destination\r\nCAST A SPELL (25 sunlight): click
-    planted tree (affects highlighted area)\r\nHEAL YGGDRASIL (100 sunlight): click
-    world tree\r\n"
+    so be strategic in your planting choices! \r\n\r\nFill the world with fully grown
+    trees to win! Fail to protect Yggdrasil, or lose all your trees and sunlight,
+    and the world (and game) ends :(\r\n\nControls:\nPLANT A TREE (100 sunlight):
+    1234 / click tree button then click destination\r\nCAST A SPELL (25 sunlight):
+    click planted tree (affects highlighted area)\r\nHEAL YGGDRASIL (100 sunlight):
+    click world tree\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f04f7822d0c28f45af76a1bb651089f, type: 2}
   m_sharedMaterial: {fileID: -2783690836327379372, guid: 3f04f7822d0c28f45af76a1bb651089f, type: 2}
