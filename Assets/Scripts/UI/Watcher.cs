@@ -44,10 +44,10 @@ public class Watcher : MonoBehaviour
 		}
 		else
 		{
-			if (Mathf.Abs(speed.x) > 0.01) speed.x *= 0.99f;
+			if (Mathf.Abs(speed.x) > 0.01) speed.x *= 0.96f;
 			else speed.x = 0;
 
-			if (Mathf.Abs(speed.y) > 0.01) speed.y *= 0.99f;
+			if (Mathf.Abs(speed.y) > 0.01) speed.y *= 0.96f;
 			else speed.y = 0;
 		}
 
