@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 // https://www.youtube.com/watch?v=HXFoUGw7eKk
@@ -12,6 +13,7 @@ public class TooltipSystem : MonoBehaviour
 	public TMP_Text textTitle;
 	public TMP_Text textCost;
 	public TMP_Text textTooltip;
+	public Image sunlightIcon;
 
 	public RectTransform rect;
 
@@ -51,12 +53,24 @@ public class TooltipSystem : MonoBehaviour
 		rect.pivot = new Vector2(px, py);
 	}
 
-	public static void ShowText(string title, string cost, string text)
+	public static void ShowText(string title, int cost, string text)
 	{
 		current.tooltip.SetActive(true);
 		current.textTitle.SetText(title);
-		current.textCost.SetText(cost);
 		current.textTooltip.SetText(text);
+
+		if (cost != 0)
+		{
+			current.textCost.gameObject.SetActive(true);
+			current.sunlightIcon.gameObject.SetActive(true);
+			current.textCost.SetText(cost.ToString());
+		}
+		else
+		{
+			current.textCost.gameObject.SetActive(false);
+			current.sunlightIcon.gameObject.SetActive(false);
+			current.textCost.SetText(cost.ToString());
+		}
 	}
 
 	public static void Hide()

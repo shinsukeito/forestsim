@@ -7,7 +7,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
 
 	public string title;
-	public string cost;
+	public int cost;
 	[TextArea]
 	public string text;
 

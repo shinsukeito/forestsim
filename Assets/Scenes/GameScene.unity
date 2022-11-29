@@ -972,6 +972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 257735852}
   - component: {fileID: 257735853}
+  - component: {fileID: 257735854}
   m_Layer: 5
   m_Name: SunlightSection
   m_TagString: Untagged
@@ -1019,7 +1020,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
-  m_Spacing: 8
+  m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -1027,6 +1028,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &257735854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257735851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a1e4e83b19f884e8227c3d188f49f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Sunlight
+  cost: 0
+  text: Use this to plant forests, activate forests, and heal Yggdrasil
 --- !u!1001 &292156823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1477,7 +1493,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 8, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2855,7 +2871,7 @@ GameObject:
   - component: {fileID: 977018357}
   - component: {fileID: 977018356}
   m_Layer: 5
-  m_Name: Image
+  m_Name: SunlightIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6335,7 +6351,8 @@ MonoBehaviour:
   textTitle: {fileID: 1109290890}
   textCost: {fileID: 1029267931}
   textTooltip: {fileID: 1230908258}
-  rect: {fileID: 1183293994}
+  sunlightIcon: {fileID: 977018356}
+  rect: {fileID: 2117784008}
 --- !u!1 &2128629653
 GameObject:
   m_ObjectHideFlags: 0
