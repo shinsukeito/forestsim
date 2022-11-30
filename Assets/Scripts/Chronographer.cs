@@ -22,6 +22,7 @@ public class Chronographer : MonoBehaviour
 	public TMP_Text textCycle;
 	public TMP_Text textSeason;
 	public TMP_Text textDay;
+	public GameObject gameOverPanel;
 	public TMP_Text textGameOver;
 	public Button exitButton;
 
@@ -160,7 +161,7 @@ public class Chronographer : MonoBehaviour
 	{
 		TooltipSystem.Hide();
 		yggdrasil.ClearTilemaps();
-		textGameOver.gameObject.SetActive(true);
+		gameOverPanel.SetActive(true);
 
 		if (win)
 		{
