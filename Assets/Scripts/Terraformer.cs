@@ -597,6 +597,7 @@ public class Terraformer : MonoBehaviour
 				});
 				break;
 		}
+		CalculateIntensity();
 	}
 
 	public void OnEachCycle(int cycle)
@@ -759,5 +760,31 @@ public class Terraformer : MonoBehaviour
 				EraseDisaster(x, y);
 			}
 		}
+	}
+
+	public void CalculateIntensity()
+	{
+		// Calculate intensity
+		int disasterCount = 0;
+
+		for (int x = 0; x < mapWidth; x++)
+		{
+			for (int y = 0; y < mapHeight; y++)
+			{
+				if (map[x, y].disaster != null)
+				{
+					disasterCount++;
+				}
+			}
+		}
+
+		// Set intensity:
+		float percent = disasterCount * 1f / acreCount;
+		if (percent < 0.25f)
+			Orchestrator.SetIntensity(0);
+		else if (percent < 0.5f)
+			Orchestrator.SetIntensity(1);
+		else
+			Orchestrator.SetIntensity(2);
 	}
 }
