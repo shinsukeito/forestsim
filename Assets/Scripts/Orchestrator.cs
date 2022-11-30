@@ -24,12 +24,23 @@ public class Orchestrator : MonoBehaviour
 	private EventInstance gameplayEventInstance;
 	private EventInstance menuEventInstance;
 
+	void Awake()
+	{
+		if (current == null)
+		{
+			DontDestroyOnLoad(gameObject);
+			current = this;
+		}
+		else if (current != this)
+		{
+			Destroy(gameObject);
+		}
+
+		SceneManager.activeSceneChanged += OnSceneChange;
+	}
+
 	void Start()
 	{
-		current = this;
-		SceneManager.activeSceneChanged += OnSceneChange;
-		DontDestroyOnLoad(this.gameObject);
-
 		// Load event instances:
 		gameplayEventInstance = FMODUnity.RuntimeManager.CreateInstance(gameplayEvent);
 		menuEventInstance = FMODUnity.RuntimeManager.CreateInstance(menuEvent);
