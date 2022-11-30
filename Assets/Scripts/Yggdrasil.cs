@@ -171,7 +171,7 @@ public class Yggdrasil : MonoBehaviour
 						break;
 					case ForestType.Bushland:
 						spellCost = acre.forest.GetSpellCost();
-						TooltipSystem.ShowText("Caast SUCCULENT SPLAT", spellCost, $"Repel <color=#FBEAA3>the Famine</color> in surrounding tiles");
+						TooltipSystem.ShowText("Cast SUCCULENT SPLAT", spellCost, $"Repel <color=#FBEAA3>the Famine</color> in surrounding tiles");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
 							acres.ForEach((Acre a) =>
