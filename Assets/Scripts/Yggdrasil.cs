@@ -291,11 +291,13 @@ public class Yggdrasil : MonoBehaviour
 		if (health + amount >= maxHealth)
 			health = maxHealth;
 
+		float percent = health * 1f / maxHealth;
+
 		if (hb != null)
-			hb.GetComponent<Healthbar>().SetFill(health * 1f / maxHealth);
+			hb.GetComponent<Healthbar>().SetFill(percent);
 
 		// Update Music:
-		Orchestrator.SetYggdrasil(health / maxHealth);
+		Orchestrator.SetYggdrasil(percent);
 	}
 
 	public void ClearTilemaps()

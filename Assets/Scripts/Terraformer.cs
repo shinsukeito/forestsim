@@ -298,7 +298,7 @@ public class Terraformer : MonoBehaviour
 				PaintForest(x, y);
 
 				// Get all non-ocean and non-river tiles to calculate intensity:
-				if (map[x, y].fieldType == FieldType.Ocean || map[x, y].fieldType == FieldType.River)
+				if (map[x, y].fieldType != FieldType.Ocean && map[x, y].fieldType != FieldType.River)
 				{
 					acreCount++;
 				}
@@ -495,7 +495,7 @@ public class Terraformer : MonoBehaviour
 		}
 
 		// Set intensity:
-		float percent = disasterCount / acreCount * 1f;
+		float percent = disasterCount * 1f / acreCount;
 		if (percent < 0.25f)
 			Orchestrator.SetIntensity(0);
 		else if (percent < 0.5f)
