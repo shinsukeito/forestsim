@@ -76,6 +76,27 @@ public class Terraformer : MonoBehaviour
 
 	private int acreCount = 0;
 
+	void Awake()
+	{
+		switch (Omniscience.Difficulty)
+		{
+			case GameDifficulty.Easy:
+				mapWidth = 16;
+				mapHeight = 12;
+				break;
+
+			case GameDifficulty.Normal:
+				mapWidth = 20;
+				mapHeight = 16;
+				break;
+
+			case GameDifficulty.Hard:
+				mapWidth = 24;
+				mapHeight = 20;
+				break;
+		}
+	}
+
 	// Start is called before the first frame update
 	void Start()
 	{
