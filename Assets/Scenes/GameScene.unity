@@ -2579,7 +2579,7 @@ MonoBehaviour:
   rainforestButton: {fileID: 1887777568}
   buttonSelectedColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
   sunlight: 0
-  startingSunlight: 400
+  startingSunlight: 580200009001000090010000
   commenceSunlight: 100
   forestCost: 100
   expPerGrowth: 3

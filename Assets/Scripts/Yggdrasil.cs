@@ -24,7 +24,7 @@ public class Yggdrasil : MonoBehaviour
 
 	[Header("Configurations")]
 	public int sunlight = 0;
-	public int startingSunlight = 400;
+	public int[] startingSunlight = { 600, 400, 400 };
 	public int commenceSunlight = 100;
 	public int forestCost = 100;
 	public int expPerGrowth = 3;
@@ -46,7 +46,20 @@ public class Yggdrasil : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		SetSunlight(startingSunlight);
+		switch (Omniscience.Difficulty)
+		{
+			case GameDifficulty.Easy:
+				SetSunlight(startingSunlight[0]);
+				break;
+
+			case GameDifficulty.Normal:
+				SetSunlight(startingSunlight[1]);
+				break;
+
+			case GameDifficulty.Hard:
+				SetSunlight(startingSunlight[2]);
+				break;
+		}
 	}
 
 	// Update is called once per frame
