@@ -286,21 +286,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "This ruinous world is ruled by four deadly seasons: the burns, the rains,
-    the frosts and the famine \u2013 and a fifth season that passes without event.
-    Weather the four seasons and their elemental disasters (fast-spreading fire,
-    escalating flood, killing frost and slow-damaging drought) by planting trees!
-    The more you plant, the more sunlight you will be able to use. But there\u2019s
-    a catch: you also need sunlight to cast tree-specific spells to remove the effects
-    of each disaster, and to heal the world tree if it comes under siege. \r\n\r\nNurture
-    saplings for a year and they\u2019ll mature into fully grown trees with higher
-    defence, rewards and spell effect area. Each tree type counters a specific disaster,
-    so be strategic in your planting choices! \r\n\r\nFill the world with fully grown
-    trees to win! Fail to protect Yggdrasil, or lose all your trees and sunlight,
-    and the world (and game) ends :(\r\n\nControls:\nPLANT A TREE (100 sunlight):
-    1234 / click tree button then click destination\r\nCAST A SPELL (25 sunlight):
-    click planted tree (affects highlighted area)\r\nHEAL YGGDRASIL (100 sunlight):
-    click world tree\r\n"
+  m_text: "This ruinous world is ruled by four deadly seasons - the Burns, the Rains,
+    the Frosts and the Famine \u2013 and a fifth Fair season that passes without
+    event. Weather the four seasons and their elemental disasters (fast-spreading
+    fire, escalating flood, killing frost and slow-damaging drought) by planting
+    trees! \r\n\r\nThe more trees you plant, the more sunlight you will be able to
+    use. But there\u2019s a catch: you also need sunlight to cast tree-specific spells
+    to remove the effects of each disaster, and to heal the world tree if it comes
+    under siege. \r\n\r\nNurture saplings for a year and they\u2019ll mature into
+    fully grown trees with higher defence, rewards and spell effect area. Each tree
+    type counters a specific disaster, so be strategic in your planting choices!
+    \r\n\r\nTO WIN: Fill the world with fully grown trees! Fail to protect Yggdrasil,
+    or lose all your trees and sunlight, and the world (and game) ends :( Replay
+    to try out a different map + season order and adjust your strategy accordingly!\n\nControls:\nPLANT
+    A TREE: 1234 / click tree button then click destination\r\nCAST A SPELL: click
+    planted tree (affects highlighted area)\r\nHEAL YGGDRASIL: click world tree\n\rPAN
+    MAP - right click + drag\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f04f7822d0c28f45af76a1bb651089f, type: 2}
   m_sharedMaterial: {fileID: -2783690836327379372, guid: 3f04f7822d0c28f45af76a1bb651089f, type: 2}

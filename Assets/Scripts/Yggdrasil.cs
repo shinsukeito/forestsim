@@ -159,7 +159,7 @@ public class Yggdrasil : MonoBehaviour
 					// Activate Forests:
 					case ForestType.Boreal:
 						spellCost = acre.forest.GetSpellCost();
-						TooltipSystem.ShowText("Cast BOREAL BLAST", spellCost, $"Repel <color=#74F5FD>the Frosts</color> in surrounding tiles");
+						TooltipSystem.ShowText("Cast BOREAL BLAST", spellCost, $"Repel surrounding <color=#74F5FD>Blizzard</color>");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
 							acres.ForEach((Acre a) =>
@@ -171,7 +171,7 @@ public class Yggdrasil : MonoBehaviour
 						break;
 					case ForestType.Bushland:
 						spellCost = acre.forest.GetSpellCost();
-						TooltipSystem.ShowText("Cast SUCCULENT SPLAT", spellCost, $"Repel <color=#FBEAA3>the Famine</color> in surrounding tiles");
+						TooltipSystem.ShowText("Cast SUCCULENT SPLAT", spellCost, $"Repel surrounding <color=#FBEAA3>Drought</color>");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
 							acres.ForEach((Acre a) =>
@@ -183,7 +183,7 @@ public class Yggdrasil : MonoBehaviour
 						break;
 					case ForestType.Mangrove:
 						spellCost = acre.forest.GetSpellCost();
-						TooltipSystem.ShowText("Cast MANGROVE MELT", spellCost, $"Repel <color=#1475C0>the Rains</color> in surrounding tiles");
+						TooltipSystem.ShowText("Cast MANGROVE MELT", spellCost, $"Repel surrounding <color=#1475C0>Flood</color>");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
 							acres.ForEach((Acre a) =>
@@ -195,7 +195,7 @@ public class Yggdrasil : MonoBehaviour
 						break;
 					case ForestType.Rainforest:
 						spellCost = acre.forest.GetSpellCost();
-						TooltipSystem.ShowText("Cast RAINFOREST RUIN", spellCost, $"Repel <color=#E37840>the Burns</color> in surrounding tiles");
+						TooltipSystem.ShowText("Cast RAINFOREST RUIN", spellCost, $"Repel surrounding <color=#E37840>Fire</color>");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
 							acres.ForEach((Acre a) =>

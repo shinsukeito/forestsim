@@ -33,8 +33,8 @@ public class Chronographer : MonoBehaviour
 	public SeasonIcon[] seasonIcons;
 
 	public float tickSpan = 0;
-	public float dayLength = 1;
-	public float daysInSeason = 10;
+	public float dayLength = 2;
+	public float daysInSeason = 8;
 
 	public int currentDay = 0;
 	public int currentSeason;

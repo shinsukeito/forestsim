@@ -2985,8 +2985,8 @@ MonoBehaviour:
   - {fileID: 551434526}
   - {fileID: 1742279121}
   tickSpan: 0
-  dayLength: 3
-  daysInSeason: 6
+  dayLength: 2
+  daysInSeason: 8
   currentDay: 0
   currentSeason: 0
   currentCycle: 0
