@@ -49,10 +49,10 @@ public class Inspector : MonoBehaviour
 				else
 				{
 					forestText = $"Forest: {forestType}";
-					forestText += $"\n - Level: {acre.forest.GetLevel() + 1}";
+					forestText += $"\n - Maturity: {acre.forest.GetMaturity()}";
 					forestText += $"\n - Experience: {acre.forest.GetExperience()}";
 					forestText += $"\n - Health: {acre.forest.GetHealth()}";
-					forestText += $"\n - Sunlight Generation: {acre.forest.GetSunlightGeneration()}";
+					forestText += $"\n - Sunlight gen: {acre.forest.GetSunlightGeneration()}";
 				}
 			};
 

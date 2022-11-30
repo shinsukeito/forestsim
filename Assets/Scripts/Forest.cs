@@ -111,14 +111,28 @@ public class Forest
 		return level == stats.maxLevel - 1;
 	}
 
-	public int GetExperience()
+	public string GetExperience()
 	{
-		return experience;
+		return $"{experience} / {expPerLevel}";
 	}
 
-	public int GetHealth()
+	public string GetMaturity()
 	{
-		return health;
+		switch (level)
+		{
+			case 0:
+				return "Sapling";
+			case 1:
+				return "Young";
+			case 2:
+				return "Stout";
+		}
+		return "";
+	}
+
+	public string GetHealth()
+	{
+		return $"{health} / {stats.bark[level]}";
 	}
 
 	public int GetSunlightGeneration()

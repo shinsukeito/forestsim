@@ -733,9 +733,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a1e4e83b19f884e8227c3d188f49f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Plant Mangrove Forest
+  title: Plant MANGROVES
   cost: 100
-  text: Mangrove forests repel <color=#1475C0>the Rains</color> when activated
+  text: 'SWAMPY: medium health, medium sunlight gen
+
+    Repels <color=#1475C0>the
+    Rains</color> when activated'
 --- !u!1 &193252231
 GameObject:
   m_ObjectHideFlags: 0
@@ -3221,8 +3224,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4561,12 +4564,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a1e4e83b19f884e8227c3d188f49f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Plant Bushland Forest
+  title: Plant BUSHLAND
   cost: 100
-  text: 'Bushland forests repel <color=#FBEAA3>the Famine</color> when activated
+  text: 'HARDY: extreme health, low sunlight gen, grows on barren
 
-    Bushland
-    forests can be planted on Barren terrain'
+    Repels <color=#FBEAA3>the
+    Famine</color> when activated'
 --- !u!1001 &1455777141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5854,9 +5857,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a1e4e83b19f884e8227c3d188f49f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Plant Rainforest
+  title: Plant RAINFOREST
   cost: 100
-  text: Rainforests repel <color=#E37840>the Burns</color> when activated
+  text: 'HUMID: low health, high sunlight gen
+
+    Repels <color=#E37840>the Burns</color>
+    when activated'
 --- !u!114 &1966289671 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3082084823201381938, guid: 58bd8419137ddd64494333e76ac9571b, type: 3}
@@ -6016,9 +6022,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a1e4e83b19f884e8227c3d188f49f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Plant Boreal Forest
+  title: Plant BOREAL FOREST
   cost: 100
-  text: Boreal forests repel <color=#74F5FD>the Frosts</color> when activated
+  text: 'HUMID: low health, high sunlight gen
+
+    Repels <color=#74F5FD>the Frosts</color>
+    when activated'
 --- !u!1 &2068227169
 GameObject:
   m_ObjectHideFlags: 0
