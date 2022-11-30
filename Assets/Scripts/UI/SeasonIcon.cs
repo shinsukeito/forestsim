@@ -74,7 +74,6 @@ public class SeasonIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 				tooltipText += "\n - Damages forests";
 				tooltipText += "\n - Deals more damage the longer it remains";
 				break;
-				break;
 		}
 	}
 

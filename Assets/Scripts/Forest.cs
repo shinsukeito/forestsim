@@ -113,6 +113,7 @@ public class Forest
 
 	public string GetExperience()
 	{
+		if (level == stats.maxLevel - 1) return "MAX";
 		return $"{experience} / {expPerLevel}";
 	}
 
