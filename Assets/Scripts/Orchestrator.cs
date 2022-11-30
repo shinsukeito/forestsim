@@ -17,12 +17,14 @@ public class Orchestrator : MonoBehaviour
 {
 	public static Orchestrator current;
 
-	public FMODUnity.EventReference gameplayEvent;
-	public FMODUnity.EventReference menuEvent;
-	public FMODUnity.EventReference victoryEvent;
+	public EventReference gameplayEvent;
+	public EventReference menuEvent;
+	public EventReference victoryEvent;
 
 	private EventInstance gameplayEventInstance;
 	private EventInstance menuEventInstance;
+
+	private float bgmVolume = 1;
 
 	void Awake()
 	{
@@ -42,8 +44,8 @@ public class Orchestrator : MonoBehaviour
 	void Start()
 	{
 		// Load event instances:
-		gameplayEventInstance = FMODUnity.RuntimeManager.CreateInstance(gameplayEvent);
-		menuEventInstance = FMODUnity.RuntimeManager.CreateInstance(menuEvent);
+		gameplayEventInstance = RuntimeManager.CreateInstance(gameplayEvent);
+		menuEventInstance = RuntimeManager.CreateInstance(menuEvent);
 		PlayBGM(BGM.Menu);
 	}
 
@@ -87,7 +89,7 @@ public class Orchestrator : MonoBehaviour
 				current.gameplayEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 				break;
 			case BGM.Victory:
-				RuntimeManager.PlayOneShot(current.victoryEvent);
+				PlayOnce(current.victoryEvent, current.bgmVolume);
 
 				current.gameplayEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 				current.menuEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -100,31 +102,31 @@ public class Orchestrator : MonoBehaviour
 		switch (season)
 		{
 			case Season.Fair:
-				FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Seasons", "Fair");
+				RuntimeManager.StudioSystem.setParameterByNameWithLabel("Seasons", "Fair");
 				break;
 			case Season.Cold:
-				FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Seasons", "Frosts");
+				RuntimeManager.StudioSystem.setParameterByNameWithLabel("Seasons", "Frosts");
 				break;
 			case Season.Dry:
-				FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Seasons", "Famine");
+				RuntimeManager.StudioSystem.setParameterByNameWithLabel("Seasons", "Famine");
 				break;
 			case Season.Hot:
-				FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Seasons", "Burns");
+				RuntimeManager.StudioSystem.setParameterByNameWithLabel("Seasons", "Burns");
 				break;
 			case Season.Wet:
-				FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Seasons", "Rains");
+				RuntimeManager.StudioSystem.setParameterByNameWithLabel("Seasons", "Rains");
 				break;
 		}
 	}
 
 	public static void SetIntensity(int intensity)
 	{
-		FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Intensity", intensity);
+		RuntimeManager.StudioSystem.setParameterByName("Intensity", intensity);
 	}
 
 	public static void SetYggdrasil(float yggdrasil)
 	{
-		FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Yggdrasil", yggdrasil);
+		RuntimeManager.StudioSystem.setParameterByName("Yggdrasil", yggdrasil);
 	}
 
 	public static void Mute(bool mute)
@@ -132,4 +134,25 @@ public class Orchestrator : MonoBehaviour
 		RuntimeManager.MuteAllEvents(mute);
 	}
 
+	public static void ChangeVolume(float volume)
+	{
+		float logVolume = Mathf.Log(volume + 1, 2);
+		current.bgmVolume = logVolume;
+		current.gameplayEventInstance.setVolume(logVolume);
+		current.menuEventInstance.setVolume(logVolume);
+	}
+
+	public static float GetVolume()
+	{
+		return current.bgmVolume;
+	}
+
+	public static void PlayOnce(EventReference eventRef, float volume, Vector3 position = new Vector3())
+	{
+		var instance = RuntimeManager.CreateInstance(eventRef);
+		instance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+		instance.setVolume(volume);
+		instance.start();
+		instance.release();
+	}
 }
