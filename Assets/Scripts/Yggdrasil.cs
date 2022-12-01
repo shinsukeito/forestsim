@@ -144,6 +144,8 @@ public class Yggdrasil : MonoBehaviour
 				});
 
 				int spellCost = 25;
+				bool removed = false;
+
 				switch (thisType)
 				{
 					// Heal:
@@ -166,7 +168,7 @@ public class Yggdrasil : MonoBehaviour
 							Orchestrator.PlaySFX(SFX.TreeSpell);
 							acres.ForEach((Acre a) =>
 							{
-								a.RemoveDisaster(DisasterType.Blizzard, true);
+								if (a.TryRemoveDisaster(DisasterType.Blizzard)) removed = true;
 							});
 							SetSunlight(sunlight - spellCost);
 						}
@@ -179,7 +181,7 @@ public class Yggdrasil : MonoBehaviour
 							Orchestrator.PlaySFX(SFX.TreeSpell);
 							acres.ForEach((Acre a) =>
 							{
-								a.RemoveDisaster(DisasterType.Drought, true);
+								if (a.TryRemoveDisaster(DisasterType.Drought)) removed = true;
 							});
 							SetSunlight(sunlight - spellCost);
 						}
@@ -192,7 +194,7 @@ public class Yggdrasil : MonoBehaviour
 							Orchestrator.PlaySFX(SFX.TreeSpell);
 							acres.ForEach((Acre a) =>
 							{
-								a.RemoveDisaster(DisasterType.Flood, true);
+								if (a.TryRemoveDisaster(DisasterType.Flood)) removed = true;
 							});
 							SetSunlight(sunlight - spellCost);
 						}
@@ -205,12 +207,14 @@ public class Yggdrasil : MonoBehaviour
 							Orchestrator.PlaySFX(SFX.TreeSpell);
 							acres.ForEach((Acre a) =>
 							{
-								a.RemoveDisaster(DisasterType.Bushfire, true);
+								if (a.TryRemoveDisaster(DisasterType.Bushfire)) removed = true;
 							});
 							SetSunlight(sunlight - spellCost);
 						}
 						break;
 				}
+
+				if (removed) Orchestrator.PlaySFX(SFX.TreeSpellHit);
 			}
 		}
 	}

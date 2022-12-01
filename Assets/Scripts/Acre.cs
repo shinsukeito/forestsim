@@ -67,14 +67,19 @@ public class Acre
 		terraformer.EraseForest(x, y);
 	}
 
-	public void RemoveDisaster(DisasterType disasterType, bool spell = false)
+	public void RemoveDisaster(DisasterType disasterType)
 	{
 		if (disaster == null || disaster.GetDisasterType() != disasterType) return;
-
-		if (spell) Orchestrator.PlaySFX(SFX.TreeSpellHit);
-
 		disaster = null;
 		terraformer.EraseDisaster(x, y);
+	}
+
+	public bool TryRemoveDisaster(DisasterType disasterType)
+	{
+		if (disaster == null || disaster.GetDisasterType() != disasterType) return false;
+		disaster = null;
+		terraformer.EraseDisaster(x, y);
+		return true;
 	}
 
 	public List<Acre> GetNeighbours(int size, bool circular)
