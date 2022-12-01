@@ -2303,7 +2303,7 @@ MonoBehaviour:
   oceanSize: 3
   riverSpawnSize: 3
   riverCount: 2
-  bushfireExtinguishChance: 40
+  bushfireExtinguishChance: 50
   bushfireDamage: 6
   blizzardRadius: 2
   blizzardDamage: 15

@@ -30,7 +30,7 @@ public class Terraformer : MonoBehaviour
 	public int riverCount = 3;
 
 	[Header("Disaster Configuration")]
-	public int bushfireExtinguishChance = 40;
+	public int bushfireExtinguishChance = 50;
 	public int bushfireDamage = 6;
 
 	public int blizzardRadius = 2;
