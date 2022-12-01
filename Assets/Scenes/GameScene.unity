@@ -2305,11 +2305,13 @@ MonoBehaviour:
   riverCount: 2
   bushfireExtinguishChance: 50
   bushfireDamage: 6
+  blizzardStartingRadius: 010000000200000004000000
   blizzardRadius: 2
   blizzardDamage: 15
   blizzardYggdrasilDamageChance: 15
   blizzardHinderChance: 410000002d0000002d000000
   blizzardDestroyChance: 230000001900000019000000
+  droughtStartingRadius: 010000000200000004000000
   droughtRadius: 2
   droughtDamageChance: 90
   droughtDamage: 2
