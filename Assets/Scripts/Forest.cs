@@ -197,7 +197,7 @@ public class Forest
 		return false;
 	}
 
-	public void OnEachDay(int day, Disaster? disaster)
+	public bool OnEachDay(int day, Disaster? disaster)
 	{
 		if (type == ForestType.WorldTree)
 		{
@@ -209,27 +209,29 @@ public class Forest
 						if (Random.Range(0, 100) <= acre.GetBlizzardYggdrasilDamageChance())
 						{
 							yggdrasil.ChangeHealth(-acre.GetBlizzardDamage());
-							return;
+							return true;
 						}
 						break;
 					case DisasterType.Bushfire:
 						yggdrasil.ChangeHealth(-acre.GetBushfireDamage());
-						break;
+						return true;
 					case DisasterType.Drought:
 						if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
 						{
 							yggdrasil.ChangeHealth(-acre.GetDroughtDamage());
-							return;
+							return true;
 						}
 						break;
 					case DisasterType.Flood:
 						yggdrasil.ChangeHealth(Mathf.RoundToInt(-acre.GetFloodDamage() * disaster.GetAge()));
-						break;
+						return true;
 				}
 			}
 
-			return;
+			return false;
 		}
+
+		bool affected = false;
 
 		if (disaster != null)
 		{
@@ -239,29 +241,33 @@ public class Forest
 					if (Random.Range(0, 100) <= acre.GetBlizzardDestroyChance(level))
 					{
 						ChangeHealth(-acre.GetBlizzardDamage());
-						return;
+						affected = true;
 					}
 					break;
 				case DisasterType.Bushfire:
 					ChangeHealth(-acre.GetBushfireDamage());
+					affected = true;
 					break;
 				case DisasterType.Drought:
 					if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
 					{
 						ChangeHealth(-acre.GetDroughtDamage());
-						return;
+						affected = true;
 					}
 					break;
 				case DisasterType.Flood:
 					if (disaster.GetAge() > 1)
 					{
 						ChangeHealth(Mathf.RoundToInt(-acre.GetFloodDamage() * disaster.GetAge()));
+						affected = true;
 					}
 					break;
 			}
 		}
 
 		Photosynthesise();
+
+		return affected;
 	}
 
 	public bool OnEachSeason(Season season)
