@@ -58,6 +58,8 @@ public class Chronographer : MonoBehaviour
 			tickSpan -= dayLength;
 			TickDay();
 		}
+
+		seasonIcons[currentSeason].SetClock(CalculateSeasonPercentage());
 	}
 
 	public void Commence()
@@ -187,5 +189,12 @@ public class Chronographer : MonoBehaviour
 	public void Exit()
 	{
 		SceneManager.LoadScene("TitleScene");
+	}
+
+	public float CalculateSeasonPercentage()
+	{
+		float tickPercent = tickSpan / dayLength;
+		float dayInSeason = currentDay % daysInSeason;
+		return (dayInSeason + tickPercent) / daysInSeason;
 	}
 }

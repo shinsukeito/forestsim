@@ -8,15 +8,22 @@ public class SeasonIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
 
 	public Image seasonImage;
-	public Image backgroundImage;
 	public Sprite fairIcon;
-
 	public Sprite coldIcon;
-
 	public Sprite dryIcon;
-
 	public Sprite hotIcon;
 	public Sprite wetIcon;
+
+	public Image backgroundImage;
+	public Sprite clock0;
+	public Sprite clock12;
+	public Sprite clock25;
+	public Sprite clock37;
+	public Sprite clock50;
+	public Sprite clock62;
+	public Sprite clock75;
+	public Sprite clock87;
+	public Sprite clock100;
 
 	private string tooltipTitle = "";
 	private string tooltipText = "";
@@ -79,12 +86,24 @@ public class SeasonIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
 	public void Highlight()
 	{
-		backgroundImage.color = new Color(255, 255, 255, 0.9f);
+		backgroundImage.sprite = clock100;
 	}
 
 	public void Unhighlight()
 	{
-		backgroundImage.color = new Color(0, 0, 0, 0.5f);
+		backgroundImage.sprite = clock0;
+	}
+
+	public void SetClock(float percent)
+	{
+		if (percent < 0.12f) backgroundImage.sprite = clock100;
+		else if (percent < 0.25f) backgroundImage.sprite = clock87;
+		else if (percent < 0.37f) backgroundImage.sprite = clock75;
+		else if (percent < 0.50f) backgroundImage.sprite = clock62;
+		else if (percent < 0.62f) backgroundImage.sprite = clock50;
+		else if (percent < 0.75f) backgroundImage.sprite = clock37;
+		else if (percent < 0.87f) backgroundImage.sprite = clock25;
+		else if (percent < 1f) backgroundImage.sprite = clock12;
 	}
 
 	void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
