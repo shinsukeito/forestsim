@@ -63,10 +63,12 @@ public class Orchestrator : MonoBehaviour
 	public EventReference sfx_drought_spawn;
 	public EventReference sfx_drought_damage;
 
+	private EventInstance deathEventInstance;
 	private EventInstance gameplayEventInstance;
 	private EventInstance menuEventInstance;
+	private EventInstance victoryEventInstance;
 
-	private float bgmVolume = 1;
+	private float volume = 1;
 
 	void Awake()
 	{
@@ -119,7 +121,10 @@ public class Orchestrator : MonoBehaviour
 				break;
 
 			case BGM.Death:
-				PlayOnce(current.deathEvent, current.bgmVolume);
+				current.deathEventInstance = RuntimeManager.CreateInstance(current.deathEvent);
+				current.deathEventInstance.setVolume(current.volume);
+				current.deathEventInstance.start();
+				current.deathEventInstance.release();
 
 				current.gameplayEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 				current.menuEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -134,10 +139,15 @@ public class Orchestrator : MonoBehaviour
 				current.menuEventInstance.getPlaybackState(out state);
 				if (state != PLAYBACK_STATE.PLAYING) current.menuEventInstance.start();
 
+				current.deathEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 				current.gameplayEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+				current.victoryEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 				break;
 			case BGM.Victory:
-				PlayOnce(current.victoryEvent, current.bgmVolume);
+				current.victoryEventInstance = RuntimeManager.CreateInstance(current.victoryEvent);
+				current.victoryEventInstance.setVolume(current.volume);
+				current.victoryEventInstance.start();
+				current.victoryEventInstance.release();
 
 				current.gameplayEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 				current.menuEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -150,52 +160,52 @@ public class Orchestrator : MonoBehaviour
 		switch (sfx)
 		{
 			case SFX.UISelect:
-				PlayOnce(current.sfx_ui_select, current.bgmVolume);
+				PlayOnce(current.sfx_ui_select, current.volume);
 				break;
 			case SFX.UIHover:
-				PlayOnce(current.sfx_ui_hover, current.bgmVolume);
+				PlayOnce(current.sfx_ui_hover, current.volume);
 				break;
 			case SFX.TreeSwap:
-				PlayOnce(current.sfx_tree_swap, current.bgmVolume);
+				PlayOnce(current.sfx_tree_swap, current.volume);
 				break;
 			case SFX.TreePlant:
-				PlayOnce(current.sfx_tree_plant, current.bgmVolume);
+				PlayOnce(current.sfx_tree_plant, current.volume);
 				break;
 			case SFX.TreeSpell:
-				PlayOnce(current.sfx_tree_spell, current.bgmVolume);
+				PlayOnce(current.sfx_tree_spell, current.volume);
 				break;
 			case SFX.TreeSpellHit:
-				PlayOnce(current.sfx_tree_spell_hit, current.bgmVolume);
+				PlayOnce(current.sfx_tree_spell_hit, current.volume);
 				break;
 			case SFX.TreeGrow:
-				PlayOnce(current.sfx_tree_grow, current.bgmVolume);
+				PlayOnce(current.sfx_tree_grow, current.volume);
 				break;
 			case SFX.FireSpawn:
-				PlayOnce(current.sfx_fire_spawn, current.bgmVolume);
+				PlayOnce(current.sfx_fire_spawn, current.volume);
 				break;
 			case SFX.FireSpread:
-				PlayOnce(current.sfx_fire_spread, current.bgmVolume);
+				PlayOnce(current.sfx_fire_spread, current.volume);
 				break;
 			case SFX.FireDamage:
-				PlayOnce(current.sfx_fire_damage, current.bgmVolume);
+				PlayOnce(current.sfx_fire_damage, current.volume);
 				break;
 			case SFX.BlizzardSpawn:
-				PlayOnce(current.sfx_blizzard_spawn, current.bgmVolume);
+				PlayOnce(current.sfx_blizzard_spawn, current.volume);
 				break;
 			case SFX.BlizzardDamage:
-				PlayOnce(current.sfx_blizzard_damage, current.bgmVolume);
+				PlayOnce(current.sfx_blizzard_damage, current.volume);
 				break;
 			case SFX.FloodSpawn:
-				PlayOnce(current.sfx_flood_spawn, current.bgmVolume);
+				PlayOnce(current.sfx_flood_spawn, current.volume);
 				break;
 			case SFX.FloodDamage:
-				PlayOnce(current.sfx_flood_damage, current.bgmVolume);
+				PlayOnce(current.sfx_flood_damage, current.volume);
 				break;
 			case SFX.DroughtSpawn:
-				PlayOnce(current.sfx_drought_spawn, current.bgmVolume);
+				PlayOnce(current.sfx_drought_spawn, current.volume);
 				break;
 			case SFX.DroughtDamage:
-				PlayOnce(current.sfx_drought_damage, current.bgmVolume);
+				PlayOnce(current.sfx_drought_damage, current.volume);
 				break;
 		}
 	}
@@ -240,14 +250,14 @@ public class Orchestrator : MonoBehaviour
 	public static void ChangeVolume(float volume)
 	{
 		float logVolume = Mathf.Log(volume + 1, 2);
-		current.bgmVolume = logVolume;
+		current.volume = logVolume;
 		current.gameplayEventInstance.setVolume(logVolume);
 		current.menuEventInstance.setVolume(logVolume);
 	}
 
 	public static float GetVolume()
 	{
-		return current.bgmVolume;
+		return current.volume;
 	}
 
 	public static void PlayOnce(EventReference eventRef, float volume, Vector3 position = new Vector3())
