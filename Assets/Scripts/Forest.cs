@@ -160,18 +160,18 @@ public class Forest
 		yggdrasil.SetSunlight(yggdrasil.sunlight + GetSunlightGeneration());
 	}
 
-	public void Grow()
+	public bool Grow()
 	{
 		float expModifier = 1;
 
-		if (level >= stats.maxLevel - 1) return;
+		if (level >= stats.maxLevel - 1) return false;
 		if (acre.disaster != null)
 		{
 			switch (acre.disaster.GetDisasterType())
 			{
 				case DisasterType.Blizzard:
 					if (Random.Range(0, 100) <= acre.GetBlizzardHinderChance(level))
-						return;
+						return false;
 					break;
 				case DisasterType.Drought:
 					expModifier = acre.GetDroughtHinderModifier();
@@ -183,8 +183,6 @@ public class Forest
 
 		if (experience >= expPerLevel)
 		{
-			Orchestrator.PlaySFX(SFX.TreeGrow);
-
 			experience -= expPerLevel;
 			level++;
 
@@ -192,8 +190,13 @@ public class Forest
 
 			health = stats.bark[level];
 			hb.GetComponent<Healthbar>().SetFill(health * 1f / stats.bark[level]);
+
+			return true;
 		}
+
+		return false;
 	}
+
 	public void OnEachDay(int day, Disaster? disaster)
 	{
 		if (type == ForestType.WorldTree)
@@ -205,25 +208,21 @@ public class Forest
 					case DisasterType.Blizzard:
 						if (Random.Range(0, 100) <= acre.GetBlizzardYggdrasilDamageChance())
 						{
-							Orchestrator.PlaySFX(SFX.BlizzardDamage);
 							yggdrasil.ChangeHealth(-acre.GetBlizzardDamage());
 							return;
 						}
 						break;
 					case DisasterType.Bushfire:
-						Orchestrator.PlaySFX(SFX.FireDamage);
 						yggdrasil.ChangeHealth(-acre.GetBushfireDamage());
 						break;
 					case DisasterType.Drought:
 						if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
 						{
-							Orchestrator.PlaySFX(SFX.DroughtDamage);
 							yggdrasil.ChangeHealth(-acre.GetDroughtDamage());
 							return;
 						}
 						break;
 					case DisasterType.Flood:
-						Orchestrator.PlaySFX(SFX.FloodDamage);
 						yggdrasil.ChangeHealth(Mathf.RoundToInt(-acre.GetFloodDamage() * disaster.GetAge()));
 						break;
 				}
@@ -239,19 +238,16 @@ public class Forest
 				case DisasterType.Blizzard:
 					if (Random.Range(0, 100) <= acre.GetBlizzardDestroyChance(level))
 					{
-						Orchestrator.PlaySFX(SFX.BlizzardDamage);
 						ChangeHealth(-acre.GetBlizzardDamage());
 						return;
 					}
 					break;
 				case DisasterType.Bushfire:
-					Orchestrator.PlaySFX(SFX.FireDamage);
 					ChangeHealth(-acre.GetBushfireDamage());
 					break;
 				case DisasterType.Drought:
 					if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
 					{
-						Orchestrator.PlaySFX(SFX.DroughtDamage);
 						ChangeHealth(-acre.GetDroughtDamage());
 						return;
 					}
@@ -259,7 +255,6 @@ public class Forest
 				case DisasterType.Flood:
 					if (disaster.GetAge() > 1)
 					{
-						Orchestrator.PlaySFX(SFX.FloodDamage);
 						ChangeHealth(Mathf.RoundToInt(-acre.GetFloodDamage() * disaster.GetAge()));
 					}
 					break;
@@ -269,11 +264,11 @@ public class Forest
 		Photosynthesise();
 	}
 
-	public void OnEachSeason(Season season)
+	public bool OnEachSeason(Season season)
 	{
-		if (type == ForestType.WorldTree) return;
+		if (type == ForestType.WorldTree) return false;
 
-		Grow();
+		return Grow();
 	}
 
 	public void OnEachCycle(int cycle)

@@ -27,9 +27,16 @@ public class Acre
 		this.y = y;
 	}
 
-	public void OnEachDay(int day)
+	// Returns affected disaster
+	public DisasterType OnEachDay(int day)
 	{
-		if (forest != null) forest.OnEachDay(day, disaster);
+		bool hasForest = false;
+
+		if (forest != null)
+		{
+			forest.OnEachDay(day, disaster);
+			hasForest = true;
+		}
 		if (disaster != null) disaster.OnEachDay(day, forest);
 
 		if (nextDisaster != DisasterType.None)
@@ -37,12 +44,21 @@ public class Acre
 			terraformer.Wreak(nextDisaster, x, y, true);
 			nextDisaster = DisasterType.None;
 		}
+
+		if (hasForest && disaster != null) return disaster.GetDisasterType();
+		else return DisasterType.None;
 	}
 
-	public void OnEachSeason(Season season)
+	public bool OnEachSeason(Season season)
 	{
-		if (forest != null) forest.OnEachSeason(season);
+		bool grown = false;
+		if (forest != null)
+		{
+			grown = forest.OnEachSeason(season);
+		}
 		if (disaster != null) disaster.OnEachSeason(season);
+
+		return grown;
 	}
 
 	public void OnEachCycle(int cycle)

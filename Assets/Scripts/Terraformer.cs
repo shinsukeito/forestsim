@@ -510,11 +510,21 @@ public class Terraformer : MonoBehaviour
 		// Calculate intensity
 		int disasterCount = 0;
 
+		Dictionary<DisasterType, bool> affectedDisasters = new Dictionary<DisasterType, bool>()
+		{
+			{DisasterType.None, false},
+			{DisasterType.Blizzard, false},
+			{DisasterType.Bushfire, false},
+			{DisasterType.Drought, false},
+			{DisasterType.Flood, false}
+		};
+
 		for (int x = 0; x < mapWidth; x++)
 		{
 			for (int y = 0; y < mapHeight; y++)
 			{
-				map[x, y].OnEachDay(day);
+				var affected = map[x, y].OnEachDay(day);
+				if (!affectedDisasters[affected]) affectedDisasters[affected] = true;
 
 				if (!CheckAcreForWinCondition(x, y))
 					won = false;
@@ -525,6 +535,11 @@ public class Terraformer : MonoBehaviour
 				}
 			}
 		}
+
+		if (affectedDisasters[DisasterType.Blizzard]) Orchestrator.PlaySFX(SFX.BlizzardDamage);
+		if (affectedDisasters[DisasterType.Bushfire]) Orchestrator.PlaySFX(SFX.FireDamage);
+		if (affectedDisasters[DisasterType.Drought]) Orchestrator.PlaySFX(SFX.DroughtDamage);
+		if (affectedDisasters[DisasterType.Flood]) Orchestrator.PlaySFX(SFX.FloodDamage);
 
 		// Set intensity:
 		float percent = disasterCount * 1f / acreCount;
@@ -541,13 +556,18 @@ public class Terraformer : MonoBehaviour
 
 	public void OnEachSeason(Season season)
 	{
+		bool grown = false;
+
 		for (int x = 0; x < mapWidth; x++)
 		{
 			for (int y = 0; y < mapHeight; y++)
 			{
-				map[x, y].OnEachSeason(season);
+				if (map[x, y].OnEachSeason(season)) grown = true;
 			}
 		}
+
+		if (grown)
+			Orchestrator.PlaySFX(SFX.TreeGrow);
 
 		// Spawn disasters:
 		List<Acre> targets;
