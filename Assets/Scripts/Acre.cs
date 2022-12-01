@@ -30,12 +30,11 @@ public class Acre
 	// Returns affected disaster
 	public DisasterType OnEachDay(int day)
 	{
-		bool hasForest = false;
+		bool affected = false;
 
 		if (forest != null)
 		{
-			forest.OnEachDay(day, disaster);
-			hasForest = true;
+			affected = forest.OnEachDay(day, disaster);
 		}
 		if (disaster != null) disaster.OnEachDay(day, forest);
 
@@ -45,7 +44,7 @@ public class Acre
 			nextDisaster = DisasterType.None;
 		}
 
-		if (hasForest && disaster != null) return disaster.GetDisasterType();
+		if (affected && disaster != null) return disaster.GetDisasterType();
 		else return DisasterType.None;
 	}
 
