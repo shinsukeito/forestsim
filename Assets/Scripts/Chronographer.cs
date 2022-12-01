@@ -101,6 +101,25 @@ public class Chronographer : MonoBehaviour
 		return seasonOrder[currentSeason];
 	}
 
+	string GetCurrentSeasonName()
+	{
+		switch (seasonOrder[currentSeason])
+		{
+			case Season.Fair:
+				return "Fair";
+			case Season.Cold:
+				return "The Frosts";
+			case Season.Dry:
+				return "The Famine";
+			case Season.Hot:
+				return "The Burns";
+			case Season.Wet:
+				return "The Rains";
+		}
+		return "Fair";
+	}
+
+
 	void TickDay()
 	{
 		currentDay++;
@@ -141,7 +160,7 @@ public class Chronographer : MonoBehaviour
 		terraformer.OnEachSeason(GetCurrentSeason());
 
 		// Update UI:
-		textSeason.text = $"Season: {GetCurrentSeason()}";
+		textSeason.text = $"Season: {GetCurrentSeasonName()}";
 		seasonIcons[currentSeason].Highlight();
 
 		// Update Music:

@@ -74,7 +74,7 @@ public class Inspector : MonoBehaviour
 						disasterText += "\n - More dangerous to young trees";
 						break;
 					case DisasterType.Bushfire:
-						disasterText = $"Disaster: <color=#E37840>the Burns</color>";
+						disasterText = $"Disaster: <color=#E37840>The Burns</color>";
 						disasterText += "\n - Damages forests";
 						disasterText += "\n - Add. risk of fast spread";
 						break;
