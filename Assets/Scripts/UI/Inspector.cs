@@ -68,23 +68,23 @@ public class Inspector : MonoBehaviour
 				switch (acre.disaster.GetDisasterType())
 				{
 					case DisasterType.Blizzard:
-						disasterText = $"Disaster: <color=#74F5FD>The Frosts</color>";
+						disasterText = $"Disaster: <color=#74F5FD>Blizzard</color>";
 						disasterText += "\n - Risk of high damage";
 						disasterText += "\n - Add. risk of slowing tree growth";
 						disasterText += "\n - More dangerous to young trees";
 						break;
 					case DisasterType.Bushfire:
-						disasterText = $"Disaster: <color=#E37840>The Burns</color>";
+						disasterText = $"Disaster: <color=#E37840>Fire</color>";
 						disasterText += "\n - Damages forests";
 						disasterText += "\n - Add. risk of fast spread";
 						break;
 					case DisasterType.Drought:
-						disasterText = $"Disaster: <color=#FBEAA3>The Famine</color>";
+						disasterText = $"Disaster: <color=#FBEAA3>Drought</color>";
 						disasterText += "\n - Slows tree growth";
 						disasterText += "\n - Low damage over time";
 						break;
 					case DisasterType.Flood:
-						disasterText = $"Disaster: <color=#1475C0>The Rains</color>";
+						disasterText = $"Disaster: <color=#1475C0>Flood</color>";
 						disasterText += "\n - Damages forests";
 						disasterText += "\n - Increasing damage over time";
 						break;
