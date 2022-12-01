@@ -239,23 +239,29 @@ public class Forest
 				case DisasterType.Blizzard:
 					if (Random.Range(0, 100) <= acre.GetBlizzardDestroyChance(level))
 					{
+						Orchestrator.PlaySFX(SFX.BlizzardDamage);
 						ChangeHealth(-acre.GetBlizzardDamage());
 						return;
 					}
 					break;
 				case DisasterType.Bushfire:
+					Orchestrator.PlaySFX(SFX.FireDamage);
 					ChangeHealth(-acre.GetBushfireDamage());
 					break;
 				case DisasterType.Drought:
 					if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
 					{
+						Orchestrator.PlaySFX(SFX.DroughtDamage);
 						ChangeHealth(-acre.GetDroughtDamage());
 						return;
 					}
 					break;
 				case DisasterType.Flood:
 					if (disaster.GetAge() > 1)
+					{
+						Orchestrator.PlaySFX(SFX.FloodDamage);
 						ChangeHealth(Mathf.RoundToInt(-acre.GetFloodDamage() * disaster.GetAge()));
+					}
 					break;
 			}
 		}
