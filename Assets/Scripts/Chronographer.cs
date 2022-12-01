@@ -142,6 +142,9 @@ public class Chronographer : MonoBehaviour
 
 		// Update UI:
 		textDay.text = $"Day: {currentDay + 1}";
+
+		// Update Music:
+		Orchestrator.SetSeason(GetCurrentSeason());
 	}
 
 	void TickSeason()
