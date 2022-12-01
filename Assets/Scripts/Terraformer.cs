@@ -413,6 +413,8 @@ public class Terraformer : MonoBehaviour
 	{
 		if (!Plantable(x, y, forestType)) return false;
 
+		Orchestrator.PlaySFX(SFX.TreePlant);
+
 		Vector3 healthbarPosition = forestTilemap.GetCellCenterWorld(new Vector3Int(x, y)) + new Vector3(0, -0.5f);
 		Healthbar hb = Instantiate(healthbarPrefab, healthbarPosition, Quaternion.identity, healthbarContainer).GetComponent<Healthbar>();
 		map[x, y].forest = new Forest(yggdrasil, map[x, y], forestType, hb);
@@ -627,14 +629,25 @@ public class Terraformer : MonoBehaviour
 		}
 	}
 
-	public void Wreak(DisasterType disasterType, int x, int y)
+	public void Wreak(DisasterType disasterType, int x, int y, bool chain = false)
 	{
 		Acre acre = map[x, y];
 		switch (disasterType)
 		{
+			case DisasterType.Blizzard:
+				Orchestrator.PlaySFX(SFX.BlizzardSpawn);
+				break;
 			case DisasterType.Bushfire:
 				if (acre.fieldType == FieldType.Ocean || acre.fieldType == FieldType.River) return;
 				if (acre.disaster != null && acre.disaster.GetDisasterType() == DisasterType.Bushfire) return;
+				if (chain) Orchestrator.PlaySFX(SFX.FireSpread);
+				else Orchestrator.PlaySFX(SFX.FireSpawn);
+				break;
+			case DisasterType.Drought:
+				Orchestrator.PlaySFX(SFX.DroughtSpawn);
+				break;
+			case DisasterType.Flood:
+				Orchestrator.PlaySFX(SFX.FloodSpawn);
 				break;
 		}
 

@@ -448,6 +448,118 @@ MonoBehaviour:
       Data3: 1406040729
       Data4: -213682673
     Path: event:/Music/music_victory
+  sfx_ui_select:
+    Guid:
+      Data1: -70274903
+      Data2: 1095640731
+      Data3: -1358683227
+      Data4: 1341741004
+    Path: event:/SFX/sfx_ui_select
+  sfx_ui_hover:
+    Guid:
+      Data1: 636361514
+      Data2: 1175895520
+      Data3: 1136451262
+      Data4: -1481272681
+    Path: event:/SFX/sfx_ui_hover
+  sfx_tree_swap:
+    Guid:
+      Data1: 1403535330
+      Data2: 1316745148
+      Data3: 778533782
+      Data4: 120028538
+    Path: event:/SFX/sfx_tree_swap
+  sfx_tree_plant:
+    Guid:
+      Data1: 720977971
+      Data2: 1086289897
+      Data3: 1915773612
+      Data4: 2017568744
+    Path: event:/SFX/sfx_tree_plant
+  sfx_tree_spell:
+    Guid:
+      Data1: -1019551523
+      Data2: 1224497766
+      Data3: 1031302019
+      Data4: -770559490
+    Path: event:/SFX/sfx_tree_spell
+  sfx_tree_spell_hit:
+    Guid:
+      Data1: 1695044099
+      Data2: 1085203225
+      Data3: -1316148824
+      Data4: -1611209805
+    Path: event:/SFX/sfx_tree_spell_hit
+  sfx_tree_grow:
+    Guid:
+      Data1: 1881482197
+      Data2: 1318272748
+      Data3: -2025929074
+      Data4: -806023768
+    Path: event:/SFX/sfx_tree_grow
+  sfx_fire_spawn:
+    Guid:
+      Data1: -1681229420
+      Data2: 1087849718
+      Data3: -1322649941
+      Data4: -7076904
+    Path: event:/SFX/sfx_fire_spawn
+  sfx_fire_spread:
+    Guid:
+      Data1: -468044568
+      Data2: 1164340986
+      Data3: -786721363
+      Data4: -2004043043
+    Path: event:/SFX/sfx_fire_spread
+  sfx_fire_damage:
+    Guid:
+      Data1: -677526476
+      Data2: 1078965021
+      Data3: -1930971222
+      Data4: 451519282
+    Path: event:/SFX/sfx_fire_damage
+  sfx_blizzard_spawn:
+    Guid:
+      Data1: -1129434863
+      Data2: 1233138190
+      Data3: -1587910253
+      Data4: 1372737401
+    Path: event:/SFX/sfx_blizzard_spawn
+  sfx_blizzard_damage:
+    Guid:
+      Data1: -47203701
+      Data2: 1205529871
+      Data3: -1544857971
+      Data4: 1971270524
+    Path: event:/SFX/sfx_blizzard_damage
+  sfx_flood_spawn:
+    Guid:
+      Data1: 1004831874
+      Data2: 1241697824
+      Data3: -1707482974
+      Data4: -752150107
+    Path: event:/SFX/sfx_flood_spawn
+  sfx_flood_damage:
+    Guid:
+      Data1: 190805973
+      Data2: 1291976950
+      Data3: 926033310
+      Data4: 642581440
+    Path: event:/SFX/sfx_flood_damage
+  sfx_drought_spawn:
+    Guid:
+      Data1: 1855002836
+      Data2: 1207903942
+      Data3: -1702113653
+      Data4: 1982139551
+    Path: event:/SFX/sfx_drought_spawn
+  sfx_drought_damage:
+    Guid:
+      Data1: 380143511
+      Data2: 1322513453
+      Data3: -1040225630
+      Data4: 1305505496
+    Path: event:/SFX/sfx_drought_damage
 --- !u!1 &826738983
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +756,7 @@ GameObject:
   - component: {fileID: 865352636}
   - component: {fileID: 865352635}
   - component: {fileID: 865352634}
+  - component: {fileID: 865352637}
   m_Layer: 5
   m_Name: EasyButton
   m_TagString: Untagged
@@ -778,6 +891,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865352632}
   m_CullTransparentMesh: 1
+--- !u!114 &865352637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865352632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2659ec25fcf8a49b62e6789a71ddfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &887052151
 GameObject:
   m_ObjectHideFlags: 0
@@ -2758,6 +2883,9 @@ GameObject:
   - component: {fileID: 1178295379}
   - component: {fileID: 1178295378}
   - component: {fileID: 1178295377}
+  - component: {fileID: 1178295381}
+  - component: {fileID: 1178295380}
+  - component: {fileID: 1178295382}
   m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
@@ -2880,6 +3008,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178295375}
   m_CullTransparentMesh: 1
+--- !u!114 &1178295380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178295375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -70274903
+      Data2: 1095640731
+      Data3: -1358683227
+      Data4: 1341741004
+    Path: event:/SFX/sfx_ui_select
+  Event: 
+  PlayEvent: 16
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1178295381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178295375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 636361514
+      Data2: 1175895520
+      Data3: 1136451262
+      Data4: -1481272681
+    Path: event:/SFX/sfx_ui_hover
+  Event: 
+  PlayEvent: 13
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1178295382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178295375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2659ec25fcf8a49b62e6789a71ddfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1320528918
 GameObject:
   m_ObjectHideFlags: 0
@@ -3162,6 +3362,7 @@ GameObject:
   - component: {fileID: 1526522096}
   - component: {fileID: 1526522095}
   - component: {fileID: 1526522094}
+  - component: {fileID: 1526522097}
   m_Layer: 5
   m_Name: NormalButton
   m_TagString: Untagged
@@ -3296,6 +3497,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526522092}
   m_CullTransparentMesh: 1
+--- !u!114 &1526522097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526522092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2659ec25fcf8a49b62e6789a71ddfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1567670417
 GameObject:
   m_ObjectHideFlags: 0
@@ -3443,6 +3656,7 @@ GameObject:
   - component: {fileID: 1630220618}
   - component: {fileID: 1630220617}
   - component: {fileID: 1630220616}
+  - component: {fileID: 1630220619}
   m_Layer: 5
   m_Name: HardButton
   m_TagString: Untagged
@@ -3577,6 +3791,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1630220614}
   m_CullTransparentMesh: 1
+--- !u!114 &1630220619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630220614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2659ec25fcf8a49b62e6789a71ddfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1678358744
 GameObject:
   m_ObjectHideFlags: 0

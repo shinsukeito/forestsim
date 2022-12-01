@@ -16,4 +16,14 @@ public class Menu : MonoBehaviour
 		else if (difficulty == 1) Omniscience.Difficulty = GameDifficulty.Normal;
 		else Omniscience.Difficulty = GameDifficulty.Hard;
 	}
+
+	public void PlayHoverSound()
+	{
+		Orchestrator.PlaySFX(SFX.UIHover);
+	}
+
+	public void PlaySelectSound()
+	{
+		Orchestrator.PlaySFX(SFX.UISelect);
+	}
 }

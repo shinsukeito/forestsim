@@ -151,6 +151,7 @@ public class Yggdrasil : MonoBehaviour
 						TooltipSystem.ShowText("Heal YGGDRASIL", healCost, $"Heal Yggdrasil for {healAmount} health");
 						if (Input.GetMouseButtonDown(0) && sunlight >= healCost && health < maxHealth)
 						{
+							Orchestrator.PlaySFX(SFX.TreeSpell);
 							ChangeHealth(healAmount);
 							SetSunlight(sunlight - healCost);
 						}
@@ -162,6 +163,7 @@ public class Yggdrasil : MonoBehaviour
 						TooltipSystem.ShowText("Cast BOREAL BLAST", spellCost, $"Repel surrounding <color=#74F5FD>Blizzard</color>");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
+							Orchestrator.PlaySFX(SFX.TreeSpell);
 							acres.ForEach((Acre a) =>
 							{
 								a.RemoveDisaster(DisasterType.Blizzard);
@@ -174,6 +176,7 @@ public class Yggdrasil : MonoBehaviour
 						TooltipSystem.ShowText("Cast SUCCULENT SPLAT", spellCost, $"Repel surrounding <color=#FBEAA3>Drought</color>");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
+							Orchestrator.PlaySFX(SFX.TreeSpell);
 							acres.ForEach((Acre a) =>
 							{
 								a.RemoveDisaster(DisasterType.Drought);
@@ -186,6 +189,7 @@ public class Yggdrasil : MonoBehaviour
 						TooltipSystem.ShowText("Cast MANGROVE MELT", spellCost, $"Repel surrounding <color=#1475C0>Flood</color>");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
+							Orchestrator.PlaySFX(SFX.TreeSpell);
 							acres.ForEach((Acre a) =>
 							{
 								a.RemoveDisaster(DisasterType.Flood);
@@ -198,6 +202,7 @@ public class Yggdrasil : MonoBehaviour
 						TooltipSystem.ShowText("Cast RAINFOREST RUIN", spellCost, $"Repel surrounding <color=#E37840>Fire</color>");
 						if (Input.GetMouseButtonDown(0) && sunlight >= spellCost)
 						{
+							Orchestrator.PlaySFX(SFX.TreeSpell);
 							acres.ForEach((Acre a) =>
 							{
 								a.RemoveDisaster(DisasterType.Bushfire);
@@ -213,6 +218,8 @@ public class Yggdrasil : MonoBehaviour
 	void ToggleSelectedForest(ForestType forestType)
 	{
 		if (chronographer.finished) return;
+
+		Orchestrator.PlaySFX(SFX.TreeSwap);
 
 		TooltipSystem.Hide();
 		spellTilemap.ClearAllTiles();

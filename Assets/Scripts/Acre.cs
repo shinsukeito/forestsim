@@ -34,7 +34,7 @@ public class Acre
 
 		if (nextDisaster != DisasterType.None)
 		{
-			terraformer.Wreak(nextDisaster, x, y);
+			terraformer.Wreak(nextDisaster, x, y, true);
 			nextDisaster = DisasterType.None;
 		}
 	}
@@ -70,6 +70,8 @@ public class Acre
 	public void RemoveDisaster(DisasterType disasterType)
 	{
 		if (disaster == null || disaster.GetDisasterType() != disasterType) return;
+
+		Orchestrator.PlaySFX(SFX.TreeSpellHit);
 
 		disaster = null;
 		terraformer.EraseDisaster(x, y);
@@ -125,7 +127,7 @@ public class Acre
 		return terraformer.blizzardDamage;
 	}
 
-	
+
 
 	public float GetDroughtHinderModifier()
 	{

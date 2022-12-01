@@ -183,6 +183,8 @@ public class Forest
 
 		if (experience >= expPerLevel)
 		{
+			Orchestrator.PlaySFX(SFX.TreeGrow);
+
 			experience -= expPerLevel;
 			level++;
 
@@ -203,21 +205,25 @@ public class Forest
 					case DisasterType.Blizzard:
 						if (Random.Range(0, 100) <= acre.GetBlizzardYggdrasilDamageChance())
 						{
+							Orchestrator.PlaySFX(SFX.BlizzardDamage);
 							yggdrasil.ChangeHealth(-acre.GetBlizzardDamage());
 							return;
 						}
 						break;
 					case DisasterType.Bushfire:
+						Orchestrator.PlaySFX(SFX.FireDamage);
 						yggdrasil.ChangeHealth(-acre.GetBushfireDamage());
 						break;
 					case DisasterType.Drought:
 						if (Random.Range(0, 100) <= acre.GetDroughtDamageChance())
 						{
+							Orchestrator.PlaySFX(SFX.DroughtDamage);
 							yggdrasil.ChangeHealth(-acre.GetDroughtDamage());
 							return;
 						}
 						break;
 					case DisasterType.Flood:
+						Orchestrator.PlaySFX(SFX.FloodDamage);
 						yggdrasil.ChangeHealth(Mathf.RoundToInt(-acre.GetFloodDamage() * disaster.GetAge()));
 						break;
 				}

@@ -13,13 +13,53 @@ public enum BGM
 	Victory
 }
 
+public enum SFX
+{
+	UISelect,
+	UIHover,
+	TreeSwap,
+	TreePlant,
+	TreeSpell,
+	TreeSpellHit,
+	TreeGrow,
+	FireSpawn,
+	FireSpread,
+	FireDamage,
+	BlizzardSpawn,
+	BlizzardDamage,
+	FloodSpawn,
+	FloodDamage,
+	DroughtSpawn,
+	DroughtDamage
+}
+
+
 public class Orchestrator : MonoBehaviour
 {
 	public static Orchestrator current;
 
+	[Header("Music Events")]
 	public EventReference gameplayEvent;
 	public EventReference menuEvent;
 	public EventReference victoryEvent;
+
+	[Header("Sound Effect Events")]
+	public EventReference sfx_ui_select;
+	public EventReference sfx_ui_hover;
+	public EventReference sfx_tree_swap;
+	public EventReference sfx_tree_plant;
+	public EventReference sfx_tree_spell;
+	public EventReference sfx_tree_spell_hit;
+	public EventReference sfx_tree_grow;
+	public EventReference sfx_fire_spawn;
+	public EventReference sfx_fire_spread;
+	public EventReference sfx_fire_damage;
+	public EventReference sfx_blizzard_spawn;
+	public EventReference sfx_blizzard_damage;
+	public EventReference sfx_flood_spawn;
+	public EventReference sfx_flood_damage;
+	public EventReference sfx_drought_spawn;
+	public EventReference sfx_drought_damage;
 
 	private EventInstance gameplayEventInstance;
 	private EventInstance menuEventInstance;
@@ -93,6 +133,61 @@ public class Orchestrator : MonoBehaviour
 
 				current.gameplayEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 				current.menuEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+				break;
+		}
+	}
+
+	public static void PlaySFX(SFX sfx)
+	{
+		switch (sfx)
+		{
+			case SFX.UISelect:
+				PlayOnce(current.sfx_ui_select, current.bgmVolume);
+				break;
+			case SFX.UIHover:
+				PlayOnce(current.sfx_ui_hover, current.bgmVolume);
+				break;
+			case SFX.TreeSwap:
+				PlayOnce(current.sfx_tree_swap, current.bgmVolume);
+				break;
+			case SFX.TreePlant:
+				PlayOnce(current.sfx_tree_plant, current.bgmVolume);
+				break;
+			case SFX.TreeSpell:
+				PlayOnce(current.sfx_tree_spell, current.bgmVolume);
+				break;
+			case SFX.TreeSpellHit:
+				PlayOnce(current.sfx_tree_spell_hit, current.bgmVolume);
+				break;
+			case SFX.TreeGrow:
+				PlayOnce(current.sfx_tree_grow, current.bgmVolume);
+				break;
+			case SFX.FireSpawn:
+				PlayOnce(current.sfx_fire_spawn, current.bgmVolume);
+				break;
+			case SFX.FireSpread:
+				PlayOnce(current.sfx_fire_spread, current.bgmVolume);
+				break;
+			case SFX.FireDamage:
+				PlayOnce(current.sfx_fire_damage, current.bgmVolume);
+				break;
+			case SFX.BlizzardSpawn:
+				PlayOnce(current.sfx_blizzard_spawn, current.bgmVolume);
+				break;
+			case SFX.BlizzardDamage:
+				PlayOnce(current.sfx_blizzard_damage, current.bgmVolume);
+				break;
+			case SFX.FloodSpawn:
+				PlayOnce(current.sfx_flood_spawn, current.bgmVolume);
+				break;
+			case SFX.FloodDamage:
+				PlayOnce(current.sfx_flood_damage, current.bgmVolume);
+				break;
+			case SFX.DroughtSpawn:
+				PlayOnce(current.sfx_drought_spawn, current.bgmVolume);
+				break;
+			case SFX.DroughtDamage:
+				PlayOnce(current.sfx_drought_damage, current.bgmVolume);
 				break;
 		}
 	}
