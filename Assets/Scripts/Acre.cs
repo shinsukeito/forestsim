@@ -79,6 +79,17 @@ public class Acre
 		if (disaster == null || disaster.GetDisasterType() != disasterType) return false;
 		disaster = null;
 		terraformer.EraseDisaster(x, y);
+
+		// Remove surrounding pending bushfires:
+		if (disasterType == DisasterType.Bushfire)
+		{
+			var neighbours = GetNeighbours(1, false);
+			neighbours.ForEach((n) =>
+			{
+				n.nextDisaster = DisasterType.None;
+			});
+		}
+
 		return true;
 	}
 
