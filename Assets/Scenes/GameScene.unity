@@ -1156,183 +1156,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58bd8419137ddd64494333e76ac9571b, type: 3}
---- !u!1 &367360030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 367360032}
-  - component: {fileID: 367360031}
-  m_Layer: 0
-  m_Name: Orchestrator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &367360031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367360030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67af999625eedc34c8a528c318a5044e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameplayEvent:
-    Guid:
-      Data1: 1268042486
-      Data2: 1280601115
-      Data3: -1547991149
-      Data4: -1374448914
-    Path: event:/Music/music_gameplay
-  menuEvent:
-    Guid:
-      Data1: -295691051
-      Data2: 1296879266
-      Data3: 350989979
-      Data4: 2084598633
-    Path: event:/Music/music_menu
-  victoryEvent:
-    Guid:
-      Data1: 1744975138
-      Data2: 1324294975
-      Data3: 1406040729
-      Data4: -213682673
-    Path: event:/Music/music_victory
-  sfx_ui_select:
-    Guid:
-      Data1: -70274903
-      Data2: 1095640731
-      Data3: -1358683227
-      Data4: 1341741004
-    Path: event:/SFX/sfx_ui_select
-  sfx_ui_hover:
-    Guid:
-      Data1: 636361514
-      Data2: 1175895520
-      Data3: 1136451262
-      Data4: -1481272681
-    Path: event:/SFX/sfx_ui_hover
-  sfx_tree_swap:
-    Guid:
-      Data1: 1403535330
-      Data2: 1316745148
-      Data3: 778533782
-      Data4: 120028538
-    Path: event:/SFX/sfx_tree_swap
-  sfx_tree_plant:
-    Guid:
-      Data1: 720977971
-      Data2: 1086289897
-      Data3: 1915773612
-      Data4: 2017568744
-    Path: event:/SFX/sfx_tree_plant
-  sfx_tree_spell:
-    Guid:
-      Data1: -1019551523
-      Data2: 1224497766
-      Data3: 1031302019
-      Data4: -770559490
-    Path: event:/SFX/sfx_tree_spell
-  sfx_tree_spell_hit:
-    Guid:
-      Data1: 1695044099
-      Data2: 1085203225
-      Data3: -1316148824
-      Data4: -1611209805
-    Path: event:/SFX/sfx_tree_spell_hit
-  sfx_tree_grow:
-    Guid:
-      Data1: 1881482197
-      Data2: 1318272748
-      Data3: -2025929074
-      Data4: -806023768
-    Path: event:/SFX/sfx_tree_grow
-  sfx_fire_spawn:
-    Guid:
-      Data1: -1681229420
-      Data2: 1087849718
-      Data3: -1322649941
-      Data4: -7076904
-    Path: event:/SFX/sfx_fire_spawn
-  sfx_fire_spread:
-    Guid:
-      Data1: -468044568
-      Data2: 1164340986
-      Data3: -786721363
-      Data4: -2004043043
-    Path: event:/SFX/sfx_fire_spread
-  sfx_fire_damage:
-    Guid:
-      Data1: -677526476
-      Data2: 1078965021
-      Data3: -1930971222
-      Data4: 451519282
-    Path: event:/SFX/sfx_fire_damage
-  sfx_blizzard_spawn:
-    Guid:
-      Data1: -1129434863
-      Data2: 1233138190
-      Data3: -1587910253
-      Data4: 1372737401
-    Path: event:/SFX/sfx_blizzard_spawn
-  sfx_blizzard_damage:
-    Guid:
-      Data1: -47203701
-      Data2: 1205529871
-      Data3: -1544857971
-      Data4: 1971270524
-    Path: event:/SFX/sfx_blizzard_damage
-  sfx_flood_spawn:
-    Guid:
-      Data1: 1004831874
-      Data2: 1241697824
-      Data3: -1707482974
-      Data4: -752150107
-    Path: event:/SFX/sfx_flood_spawn
-  sfx_flood_damage:
-    Guid:
-      Data1: 190805973
-      Data2: 1291976950
-      Data3: 926033310
-      Data4: 642581440
-    Path: event:/SFX/sfx_flood_damage
-  sfx_drought_spawn:
-    Guid:
-      Data1: 1855002836
-      Data2: 1207903942
-      Data3: -1702113653
-      Data4: 1982139551
-    Path: event:/SFX/sfx_drought_spawn
-  sfx_drought_damage:
-    Guid:
-      Data1: 380143511
-      Data2: 1322513453
-      Data3: -1040225630
-      Data4: 1305505496
-    Path: event:/SFX/sfx_drought_damage
---- !u!4 &367360032
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367360030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 384.38995, y: 260.0021, z: -21.754717}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &371439794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,6 +2346,190 @@ MonoBehaviour:
   bushfireOverlayTile: {fileID: 11400000, guid: 4d0883d08a98dc44ea119ab2adfcc7e8, type: 2}
   droughtOverlayTile: {fileID: 11400000, guid: e871b4e8e0818ea4fb8bca85f1b08695, type: 2}
   floodOverlayTile: {fileID: 11400000, guid: 7a2bc25049005bf409751d0eb4b6ec09, type: 2}
+--- !u!1 &727696517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 727696519}
+  - component: {fileID: 727696518}
+  m_Layer: 0
+  m_Name: Orchestrator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &727696518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727696517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67af999625eedc34c8a528c318a5044e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathEvent:
+    Guid:
+      Data1: 128871402
+      Data2: 1074756507
+      Data3: 392579736
+      Data4: 457128830
+    Path: event:/Music/music_death
+  gameplayEvent:
+    Guid:
+      Data1: 1268042486
+      Data2: 1280601115
+      Data3: -1547991149
+      Data4: -1374448914
+    Path: event:/Music/music_gameplay
+  menuEvent:
+    Guid:
+      Data1: -295691051
+      Data2: 1296879266
+      Data3: 350989979
+      Data4: 2084598633
+    Path: event:/Music/music_menu
+  victoryEvent:
+    Guid:
+      Data1: 1744975138
+      Data2: 1324294975
+      Data3: 1406040729
+      Data4: -213682673
+    Path: event:/Music/music_victory
+  sfx_ui_select:
+    Guid:
+      Data1: -70274903
+      Data2: 1095640731
+      Data3: -1358683227
+      Data4: 1341741004
+    Path: event:/SFX/sfx_ui_select
+  sfx_ui_hover:
+    Guid:
+      Data1: 636361514
+      Data2: 1175895520
+      Data3: 1136451262
+      Data4: -1481272681
+    Path: event:/SFX/sfx_ui_hover
+  sfx_tree_swap:
+    Guid:
+      Data1: 1403535330
+      Data2: 1316745148
+      Data3: 778533782
+      Data4: 120028538
+    Path: event:/SFX/sfx_tree_swap
+  sfx_tree_plant:
+    Guid:
+      Data1: 720977971
+      Data2: 1086289897
+      Data3: 1915773612
+      Data4: 2017568744
+    Path: event:/SFX/sfx_tree_plant
+  sfx_tree_spell:
+    Guid:
+      Data1: -1019551523
+      Data2: 1224497766
+      Data3: 1031302019
+      Data4: -770559490
+    Path: event:/SFX/sfx_tree_spell
+  sfx_tree_spell_hit:
+    Guid:
+      Data1: 1695044099
+      Data2: 1085203225
+      Data3: -1316148824
+      Data4: -1611209805
+    Path: event:/SFX/sfx_tree_spell_hit
+  sfx_tree_grow:
+    Guid:
+      Data1: 1881482197
+      Data2: 1318272748
+      Data3: -2025929074
+      Data4: -806023768
+    Path: event:/SFX/sfx_tree_grow
+  sfx_fire_spawn:
+    Guid:
+      Data1: -1681229420
+      Data2: 1087849718
+      Data3: -1322649941
+      Data4: -7076904
+    Path: event:/SFX/sfx_fire_spawn
+  sfx_fire_spread:
+    Guid:
+      Data1: -468044568
+      Data2: 1164340986
+      Data3: -786721363
+      Data4: -2004043043
+    Path: event:/SFX/sfx_fire_spread
+  sfx_fire_damage:
+    Guid:
+      Data1: -677526476
+      Data2: 1078965021
+      Data3: -1930971222
+      Data4: 451519282
+    Path: event:/SFX/sfx_fire_damage
+  sfx_blizzard_spawn:
+    Guid:
+      Data1: -1129434863
+      Data2: 1233138190
+      Data3: -1587910253
+      Data4: 1372737401
+    Path: event:/SFX/sfx_blizzard_spawn
+  sfx_blizzard_damage:
+    Guid:
+      Data1: -47203701
+      Data2: 1205529871
+      Data3: -1544857971
+      Data4: 1971270524
+    Path: event:/SFX/sfx_blizzard_damage
+  sfx_flood_spawn:
+    Guid:
+      Data1: 1004831874
+      Data2: 1241697824
+      Data3: -1707482974
+      Data4: -752150107
+    Path: event:/SFX/sfx_flood_spawn
+  sfx_flood_damage:
+    Guid:
+      Data1: 190805973
+      Data2: 1291976950
+      Data3: 926033310
+      Data4: 642581440
+    Path: event:/SFX/sfx_flood_damage
+  sfx_drought_spawn:
+    Guid:
+      Data1: 1855002836
+      Data2: 1207903942
+      Data3: -1702113653
+      Data4: 1982139551
+    Path: event:/SFX/sfx_drought_spawn
+  sfx_drought_damage:
+    Guid:
+      Data1: 380143511
+      Data2: 1322513453
+      Data3: -1040225630
+      Data4: 1305505496
+    Path: event:/SFX/sfx_drought_damage
+--- !u!4 &727696519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727696517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 384.38995, y: 260.0021, z: -21.754717}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &831513042
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,8 +8,9 @@ using FMOD.Studio;
 public enum BGM
 {
 	None,
-	Menu,
+	Death,
 	Gameplay,
+	Menu,
 	Victory
 }
 
@@ -39,6 +40,7 @@ public class Orchestrator : MonoBehaviour
 	public static Orchestrator current;
 
 	[Header("Music Events")]
+	public EventReference deathEvent;
 	public EventReference gameplayEvent;
 	public EventReference menuEvent;
 	public EventReference victoryEvent;
@@ -65,6 +67,7 @@ public class Orchestrator : MonoBehaviour
 	private EventInstance menuEventInstance;
 
 	private float bgmVolume = 1;
+	private bool sfxEnabled = true;
 
 	void Awake()
 	{
@@ -116,6 +119,12 @@ public class Orchestrator : MonoBehaviour
 				current.menuEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 				break;
 
+			case BGM.Death:
+				PlayOnce(current.deathEvent, current.bgmVolume);
+
+				current.gameplayEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+				current.menuEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+				break;
 			case BGM.Gameplay:
 				current.gameplayEventInstance.getPlaybackState(out state);
 				if (state != PLAYBACK_STATE.PLAYING) current.gameplayEventInstance.start();

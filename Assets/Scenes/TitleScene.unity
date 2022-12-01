@@ -434,6 +434,13 @@ MonoBehaviour:
       Data3: -1547991149
       Data4: -1374448914
     Path: event:/Music/music_gameplay
+  deathEvent:
+    Guid:
+      Data1: 128871402
+      Data2: 1074756507
+      Data3: 392579736
+      Data4: 457128830
+    Path: event:/Music/music_death
   menuEvent:
     Guid:
       Data1: -295691051
