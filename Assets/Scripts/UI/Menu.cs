@@ -26,4 +26,11 @@ public class Menu : MonoBehaviour
 	{
 		Orchestrator.PlaySFX(SFX.UISelect);
 	}
+
+	public void ResetOrchestrator()
+	{
+		Orchestrator.SetSeason(Season.Fair);
+		Orchestrator.SetIntensity(0);
+		Orchestrator.SetYggdrasil(1f);
+	}
 }

@@ -102,9 +102,6 @@ public class Terraformer : MonoBehaviour
 	{
 		BigBang();
 		PaintWorld();
-
-		Orchestrator.SetIntensity(0);
-		Orchestrator.SetYggdrasil(1f);
 	}
 
 	// Update is called once per frame
