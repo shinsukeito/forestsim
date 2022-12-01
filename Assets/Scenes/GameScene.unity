@@ -738,8 +738,8 @@ MonoBehaviour:
   cost: 100
   text: 'SWAMPY: medium health, medium sunlight gen
 
-    Repels <color=#1475C0>the
-    Rains</color> when activated'
+    Repels <color=#1475C0>flood</color>
+    when activated'
 --- !u!114 &180516916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4858,8 +4858,8 @@ MonoBehaviour:
   cost: 100
   text: 'HARDY: extreme health, low sunlight gen, grows on barren
 
-    Repels <color=#FBEAA3>the
-    Famine</color> when activated'
+    Repels <color=#FBEAA3>drought</color>
+    when activated'
 --- !u!114 &1379929143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6164,7 +6164,7 @@ MonoBehaviour:
   cost: 100
   text: 'HUMID: low health, high sunlight gen
 
-    Repels <color=#E37840>the Burns</color>
+    Repels <color=#E37840>fire</color>
     when activated'
 --- !u!114 &1887777571
 MonoBehaviour:
@@ -6342,7 +6342,7 @@ MonoBehaviour:
   cost: 100
   text: 'HUMID: low health, high sunlight gen
 
-    Repels <color=#74F5FD>the Frosts</color>
+    Repels <color=#74F5FD>blizzards</color>
     when activated'
 --- !u!114 &2005224509
 MonoBehaviour:
