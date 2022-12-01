@@ -24,7 +24,7 @@ public class Yggdrasil : MonoBehaviour
 
 	[Header("Configurations")]
 	public int sunlight = 0;
-	public int[] startingSunlight = { 600, 400, 400 };
+	public int[] startingSunlight = { 1000, 500, 400 };
 	public int commenceSunlight = 100;
 	public int forestCost = 100;
 	public int expPerGrowth = 3;

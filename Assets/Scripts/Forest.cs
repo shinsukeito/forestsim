@@ -30,32 +30,32 @@ public class Forest
 	// Forest stats:
 	ForestStats borealStats = new ForestStats(
 		3,
-		new int[3] { 25, 50, 50 },
-		new int[3] { 9, 14, 14 },
+		new int[3] { 35, 50, 50 },
+		new int[3] { 4, 5, 5 },
 		new int[3] { 0, 1, 2 },
 		new int[3] { 25, 50, 50 }
 	);
 
 	ForestStats bushlandStats = new ForestStats(
 		3,
-		new int[3] { 35, 60, 60 },
-		new int[3] { 4, 5, 5 },
+		new int[3] { 40, 60, 60 },
+		new int[3] { 2, 2, 2 },
 		new int[3] { 0, 1, 2 },
 		new int[3] { 25, 50, 50 }
 	);
 
 	ForestStats mangroveStats = new ForestStats(
 		3,
-		new int[3] { 25, 40, 40 },
-		new int[3] { 5, 7, 7 },
+		new int[3] { 35, 40, 40 },
+		new int[3] { 2, 3, 3 },
 		new int[3] { 0, 1, 2 },
 		new int[3] { 25, 50, 50 }
 	);
 
 	ForestStats rainforestStats = new ForestStats(
 		3,
-		new int[3] { 20, 35, 35 },
-		new int[3] { 6, 9, 9 },
+		new int[3] { 30, 40, 40 },
+		new int[3] { 3, 4, 4 },
 		new int[3] { 0, 1, 2 },
 		new int[3] { 25, 50, 50 }
 	);
@@ -124,7 +124,7 @@ public class Forest
 			case 0:
 				return "Sapling";
 			case 1:
-				return "Young";
+				return "Stout";
 			case 2:
 				return "Stout";
 		}

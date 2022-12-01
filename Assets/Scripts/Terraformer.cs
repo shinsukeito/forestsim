@@ -30,14 +30,14 @@ public class Terraformer : MonoBehaviour
 	public int riverCount = 3;
 
 	[Header("Disaster Configuration")]
-	public int bushfireExtinguishChance = 25;
-	public int bushfireDamage = 5;
+	public int bushfireExtinguishChance = 40;
+	public int bushfireDamage = 6;
 
 	public int blizzardRadius = 2;
-	public int blizzardDamage = 20;
-	public int blizzardYggdrasilDamageChance = 15;
-	public int[] blizzardHinderChance = new int[] { 70, 50, 50 };
-	public int[] blizzardDestroyChance = new int[] { 40, 30, 30 };
+	public int blizzardDamage = 15;
+	public int blizzardYggdrasilDamageChance = 10;
+	public int[] blizzardHinderChance = new int[] { 65, 45, 45 };
+	public int[] blizzardDestroyChance = new int[] { 35, 25, 25 };
 
 	public int droughtRadius = 2;
 	public int droughtDamageChance = 90;
