@@ -33,12 +33,14 @@ public class Terraformer : MonoBehaviour
 	public int bushfireExtinguishChance = 40;
 	public int bushfireDamage = 6;
 
+	public int[] blizzardStartingRadius = new int[] { 1, 2, 4 };
 	public int blizzardRadius = 2;
 	public int blizzardDamage = 15;
 	public int blizzardYggdrasilDamageChance = 10;
 	public int[] blizzardHinderChance = new int[] { 65, 45, 45 };
 	public int[] blizzardDestroyChance = new int[] { 35, 25, 25 };
 
+	public int[] droughtStartingRadius = new int[] { 1, 2, 4 };
 	public int droughtRadius = 2;
 	public int droughtDamageChance = 90;
 	public int droughtDamage = 2;
@@ -66,6 +68,7 @@ public class Terraformer : MonoBehaviour
 	public TileBase bushfireTile;
 	public TileBase droughtTile;
 	public TileBase floodTile;
+
 	[Header("Disaster Overlay Tiles")]
 	public TileBase blizzardOverlayTile;
 	public TileBase bushfireOverlayTile;
@@ -83,16 +86,22 @@ public class Terraformer : MonoBehaviour
 			case GameDifficulty.Easy:
 				mapWidth = 16;
 				mapHeight = 12;
+				blizzardRadius = blizzardStartingRadius[0];
+				droughtRadius = droughtStartingRadius[0];
 				break;
 
 			case GameDifficulty.Normal:
 				mapWidth = 20;
 				mapHeight = 16;
+				blizzardRadius = blizzardStartingRadius[1];
+				droughtRadius = droughtStartingRadius[1];
 				break;
 
 			case GameDifficulty.Hard:
 				mapWidth = 24;
 				mapHeight = 20;
+				blizzardRadius = blizzardStartingRadius[2];
+				droughtRadius = droughtStartingRadius[2];
 				break;
 		}
 	}
