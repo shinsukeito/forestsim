@@ -2305,7 +2305,7 @@ MonoBehaviour:
   riverCount: 2
   bushfireExtinguishChance: 50
   bushfireDamage: 6
-  blizzardStartingRadius: 010000000200000004000000
+  blizzardStartingRadius: 010000000200000003000000
   blizzardRadius: 2
   blizzardDamage: 15
   blizzardYggdrasilDamageChance: 15
@@ -2778,7 +2778,7 @@ MonoBehaviour:
   rainforestButton: {fileID: 1887777568}
   buttonSelectedColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
   sunlight: 0
-  startingSunlight: e8030000f401000090010000
+  startingSunlight: 20030000f4010000f4010000
   commenceSunlight: 100
   forestCost: 100
   expPerGrowth: 3

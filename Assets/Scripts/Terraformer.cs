@@ -33,7 +33,7 @@ public class Terraformer : MonoBehaviour
 	public int bushfireExtinguishChance = 50;
 	public int bushfireDamage = 6;
 
-	public int[] blizzardStartingRadius = new int[] { 1, 2, 4 };
+	public int[] blizzardStartingRadius = new int[] { 1, 2, 3 };
 	public int blizzardRadius = 2;
 	public int blizzardDamage = 15;
 	public int blizzardYggdrasilDamageChance = 10;
