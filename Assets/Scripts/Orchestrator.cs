@@ -67,7 +67,6 @@ public class Orchestrator : MonoBehaviour
 	private EventInstance menuEventInstance;
 
 	private float bgmVolume = 1;
-	private bool sfxEnabled = true;
 
 	void Awake()
 	{

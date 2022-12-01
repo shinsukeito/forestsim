@@ -67,11 +67,11 @@ public class Acre
 		terraformer.EraseForest(x, y);
 	}
 
-	public void RemoveDisaster(DisasterType disasterType)
+	public void RemoveDisaster(DisasterType disasterType, bool spell = false)
 	{
 		if (disaster == null || disaster.GetDisasterType() != disasterType) return;
 
-		Orchestrator.PlaySFX(SFX.TreeSpellHit);
+		if (spell) Orchestrator.PlaySFX(SFX.TreeSpellHit);
 
 		disaster = null;
 		terraformer.EraseDisaster(x, y);

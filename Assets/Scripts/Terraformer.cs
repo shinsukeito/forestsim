@@ -553,6 +553,8 @@ public class Terraformer : MonoBehaviour
 				targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
 				target = targets[Random.Range(0, targets.Count)];
 
+				Orchestrator.PlaySFX(SFX.BlizzardSpawn);
+
 				targets = GetAcresInCircle(target.x, target.y, blizzardRadius);
 				targets.ForEach((a) =>
 				{
@@ -564,6 +566,8 @@ public class Terraformer : MonoBehaviour
 			case Season.Dry:
 				targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
 				target = targets[Random.Range(0, targets.Count)];
+
+				Orchestrator.PlaySFX(SFX.DroughtSpawn);
 
 				targets = GetAcresInCircle(target.x, target.y, droughtRadius);
 				targets.ForEach((a) =>
@@ -577,6 +581,8 @@ public class Terraformer : MonoBehaviour
 				targets = GetAcresOfType(new List<FieldType>() { FieldType.Field, FieldType.Barren });
 				target = targets[Random.Range(0, targets.Count)];
 
+				Orchestrator.PlaySFX(SFX.FireSpawn);
+
 				Wreak(DisasterType.Bushfire, target.x, target.y);
 				break;
 
@@ -584,6 +590,9 @@ public class Terraformer : MonoBehaviour
 				targets = new List<Acre>();
 
 				List<Acre> rivers = GetAcresOfType(new List<FieldType>() { FieldType.River });
+
+				Orchestrator.PlaySFX(SFX.FloodSpawn);
+
 				rivers.ForEach((r) =>
 				{
 					List<Acre> neighbours = r.GetNeighbours(floodRadius, true);
@@ -634,20 +643,10 @@ public class Terraformer : MonoBehaviour
 		Acre acre = map[x, y];
 		switch (disasterType)
 		{
-			case DisasterType.Blizzard:
-				Orchestrator.PlaySFX(SFX.BlizzardSpawn);
-				break;
 			case DisasterType.Bushfire:
 				if (acre.fieldType == FieldType.Ocean || acre.fieldType == FieldType.River) return;
 				if (acre.disaster != null && acre.disaster.GetDisasterType() == DisasterType.Bushfire) return;
 				if (chain) Orchestrator.PlaySFX(SFX.FireSpread);
-				else Orchestrator.PlaySFX(SFX.FireSpawn);
-				break;
-			case DisasterType.Drought:
-				Orchestrator.PlaySFX(SFX.DroughtSpawn);
-				break;
-			case DisasterType.Flood:
-				Orchestrator.PlaySFX(SFX.FloodSpawn);
 				break;
 		}
 
