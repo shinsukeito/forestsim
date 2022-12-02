@@ -6162,7 +6162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Plant RAINFOREST
   cost: 100
-  text: 'SUNLIT: high health, extreme sunlight gen
+  text: 'HUMID: low health, high sunlight gen
 
     Repels <color=#E37840>fire</color>
     when activated'
@@ -6340,7 +6340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Plant BOREAL FOREST
   cost: 100
-  text: 'HUMID: low health, high sunlight gen
+  text: 'SUNLIT: high health, extreme sunlight gen
 
     Repels <color=#74F5FD>blizzards</color>
     when activated'
