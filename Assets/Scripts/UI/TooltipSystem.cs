@@ -17,6 +17,10 @@ public class TooltipSystem : MonoBehaviour
 
 	public RectTransform rect;
 
+	private string title;
+	private int cost;
+	private string text;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -27,7 +31,6 @@ public class TooltipSystem : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
 		Vector2 position = Input.mousePosition;
 		float px = 0;
 		float py = -0.1f;
@@ -55,26 +58,35 @@ public class TooltipSystem : MonoBehaviour
 
 	public static void ShowText(string title, int cost, string text)
 	{
-		current.tooltip.SetActive(true);
-		current.textTitle.SetText(title);
-		current.textTooltip.SetText(text);
-
-		if (cost != 0)
-		{
-			current.textCost.gameObject.SetActive(true);
-			current.sunlightIcon.gameObject.SetActive(true);
-			current.textCost.SetText(cost.ToString());
-		}
-		else
-		{
-			current.textCost.gameObject.SetActive(false);
-			current.sunlightIcon.gameObject.SetActive(false);
-			current.textCost.SetText(cost.ToString());
-		}
+		current.title = title;
+		current.cost = cost;
+		current.text = text;
+		current.Invoke("Appear", 0.75f);
 	}
 
 	public static void Hide()
 	{
 		current.tooltip.SetActive(false);
+		current.CancelInvoke("Appear");
+	}
+
+	void Appear()
+	{
+		current.tooltip.SetActive(true);
+		current.textTitle.SetText(current.title);
+		current.textTooltip.SetText(current.text);
+
+		if (current.cost != 0)
+		{
+			current.textCost.gameObject.SetActive(true);
+			current.sunlightIcon.gameObject.SetActive(true);
+			current.textCost.SetText(current.cost.ToString());
+		}
+		else
+		{
+			current.textCost.gameObject.SetActive(false);
+			current.sunlightIcon.gameObject.SetActive(false);
+			current.textCost.SetText(current.cost.ToString());
+		}
 	}
 }
