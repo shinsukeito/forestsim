@@ -117,7 +117,7 @@ public class Yggdrasil : MonoBehaviour
 						SetSunlight(sunlight - forestCost);
 
 					if (sunlight < forestCost)
-						selectedForestType = ForestType.None;
+						ToggleSelectedForest(ForestType.None);
 				}
 			}
 			// Forest Spell:
